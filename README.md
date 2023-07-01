@@ -22,7 +22,11 @@ TCat
 Tprime
 
 
+
 MATLAB: Create a desktop shortcut for Matlab and change it so that it start in the GitHub directory (e.g., C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023). The specific directory may differ by computer.
+
+
+
 
 # FUN EXCITING DEMOS!!! 
 How to run Abhi's demo on how to analyze brain oscillations associated with Parkinson's disease and levodopa-induced dyskinesia.
