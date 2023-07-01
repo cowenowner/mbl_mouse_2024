@@ -1,0 +1,258 @@
+[Thd 24532 CPU 8 12/16/22 11:53:13.335] Cmdline: CatGT -dir=G:/Data/Transcranial_Optogenetics/Mouse5/1 -run=mouse_bank0_run2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,2,2.5,0 -xa=0,0,2,2,2.5,0 -xa=0,0,3,2,2.5,0 -xa=0,0,4,2,2.5,0 -xa=0,0,5,2,2.5,0 -xa=0,0,6,2,2.5,0 -xa=0,0,7,2,2.5,0 -xd=0,0,384,6,500
+[Thd 24532 CPU 13 12/16/22 11:53:23.843] 
+[Thd 20204 CPU 8 12/16/22 12:47:08.420] Cmdline: CatGT -dir=G:/Data/Transcranial_Optogenetics/Mouse5/1 -run=mouse_bank0_run2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,2,2.5,0 -xa=0,0,2,2,2.5,0 -xa=0,0,3,2,2.5,0 -xa=0,0,4,2,2.5,0 -xa=0,0,5,2,2.5,0 -xa=0,0,6,2,2.5,0 -xa=0,0,7,2,2.5,0 -xd=0,0,384,6,500
+[Thd 20204 CPU 4 12/16/22 12:47:19.308] 
+[Thd 9848 CPU 9 12/16/22 15:19:23.155] Cmdline: CatGT -dir=G:/Data/Transcranial_Optogenetics/Mouse5/1 -run=mouse_bank0_run2 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;1,41,137,163,191,233,256,261,266,279:280,285,372,376} -xd=0,0,384,6,500
+[Thd 9848 CPU 17 12/16/22 15:21:03.113] 
+[Thd 20120 CPU 8 12/16/22 17:49:56.538] Cmdline: CatGT -dir=G:/Data/Transcranial_Optogenetics/Mouse5/1 -run=mouse_bank0_run1 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,2,2.5,0 -xa=0,0,2,2,2.5,0 -xa=0,0,3,2,2.5,0 -xa=0,0,4,2,2.5,0 -xa=0,0,5,2,2.5,0 -xa=0,0,6,2,2.5,0 -xa=0,0,7,2,2.5,0 -xd=0,0,384,6,500
+[Thd 20120 CPU 8 12/16/22 17:49:58.377] 
+[Thd 25432 CPU 4 12/16/22 17:49:58.433] Cmdline: CatGT -dir=G:/Data/Transcranial_Optogenetics/Mouse5/1 -run=mouse_bank0_run1 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;1,36,191,233,256,261,266,279:280,285,372,376} -xd=0,0,384,6,500
+[Thd 25432 CPU 5 12/16/22 18:02:18.353] 
+[Thd 11592 CPU 8 12/16/22 20:07:59.178] Cmdline: CatGT -dir=G:/Data/Transcranial_Optogenetics/Mouse5/1 -run=mouse_bank0_run1 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;1,36,191,233,256,261,266,279:280,285,372,376} -xd=0,0,384,6,500
+[Thd 11592 CPU 12 12/16/22 20:08:58.574] 
+[Thd 24340 CPU 8 12/16/22 20:08:59.908] Cmdline: CatGT -dir=G:/Data/Transcranial_Optogenetics/Mouse5/1 -run=mouse_bank0_run2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,2,2.5,0 -xa=0,0,2,2,2.5,0 -xa=0,0,3,2,2.5,0 -xa=0,0,4,2,2.5,0 -xa=0,0,5,2,2.5,0 -xa=0,0,6,2,2.5,0 -xa=0,0,7,2,2.5,0 -xd=0,0,384,6,500
+[Thd 24340 CPU 12 12/16/22 20:09:01.653] 
+[Thd 14756 CPU 6 12/16/22 20:09:01.704] Cmdline: CatGT -dir=G:/Data/Transcranial_Optogenetics/Mouse5/1 -run=mouse_bank0_run2 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;1,41,137,163,191,194,233,256,261,266,279:280,285,372,376} -xd=0,0,384,6,500
+[Thd 14756 CPU 8 12/16/22 20:21:35.372] 
+[Thd 29444 CPU 4 12/16/22 22:00:21.528] Cmdline: CatGT -dir=G:/Data/Transcranial_Optogenetics/Mouse5/1 -run=mouse_bank0_run2 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;1,41,137,163,191,194,233,256,261,266,279:280,285,372,376} -xd=0,0,384,6,500
+[Thd 29444 CPU 8 12/16/22 22:01:51.040] 
+[Thd 1192 CPU 2 4/10/23 17:58:22.147] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10831 -run=mPFC_L23_vHC_AP1 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 1192 CPU 2 4/10/23 17:58:27.833] 
+[Thd 3024 CPU 2 4/10/23 17:58:49.080] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10831 -run=mPFC_L23_vHC_AP1 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 3024 CPU 7 4/10/23 17:58:50.081] 
+[Thd 8876 CPU 4 4/10/23 17:59:45.989] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10831 -run=mPFC_L23_vHC_AP1 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 8876 CPU 7 4/10/23 17:59:46.901] 
+[Thd 11864 CPU 6 4/11/23 10:39:40.637] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L5_vHC_ML1 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 11864 CPU 7 4/11/23 10:40:20.340] 
+[Thd 6396 CPU 0 4/11/23 10:40:20.373] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L5_vHC_ML1 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;133,191} -xd=0,0,384,6,500
+[Thd 6396 CPU 2 4/11/23 10:44:52.408] 
+[Thd 292 CPU 7 4/11/23 10:44:52.468] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L23_vHC_ML2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 292 CPU 2 4/11/23 10:44:58.274] 
+[Thd 11644 CPU 2 4/11/23 10:59:27.002] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L5_vHC_AP2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 11644 CPU 3 4/11/23 10:59:30.663] 
+[Thd 948 CPU 0 4/11/23 10:59:30.751] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L5_vHC_AP2 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;133,191} -xd=0,0,384,6,500
+[Thd 948 CPU 4 4/11/23 11:01:33.392] 
+[Thd 10632 CPU 4 4/11/23 11:03:11.728] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L23_vHC_AP1 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 10632 CPU 6 4/11/23 11:03:15.189] 
+[Thd 6200 CPU 2 4/11/23 11:03:15.284] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L23_vHC_AP1 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;133,191} -xd=0,0,384,6,500
+[Thd 6200 CPU 2 4/11/23 11:05:19.571] 
+[Thd 1144 CPU 3 4/11/23 11:05:19.628] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L23_vHC_AP1 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;133,191} -xd=0,0,384,6,500
+[Thd 1144 CPU 2 4/11/23 11:37:47.621] 
+[Thd 9660 CPU 2 4/11/23 11:37:47.744] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L23_vHC_ML2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 9660 CPU 0 4/11/23 11:37:53.399] 
+[Thd 10400 CPU 2 4/11/23 11:37:53.468] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L23_vHC_ML2 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;133,191} -xd=0,0,384,6,500
+[Thd 10400 CPU 2 4/11/23 11:40:54.562] 
+[Thd 10224 CPU 2 4/11/23 12:41:24.050] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L23_vHC_AP1 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 10224 CPU 7 4/11/23 12:41:27.483] 
+[Thd 5008 CPU 2 4/11/23 12:41:27.617] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10819 -run=mPFC_L23_vHC_AP1 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;133,191} -xd=0,0,384,6,500
+[Thd 5008 CPU 2 4/11/23 12:43:37.786] 
+[Thd 3912 CPU 0 4/15/23 18:34:52.333] Cmdline: CatGT -dir=E:/Acute_DANA/Kilosorted/Rat405 -run=91322_DANA_7000uM_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 3912 CPU 5 4/15/23 18:35:08.376] 
+[Thd 11904 CPU 2 4/15/23 18:35:08.396] Cmdline: CatGT -dir=E:/Acute_DANA/Kilosorted/Rat405 -run=91322_DANA_7000uM_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;133,191} -xd=0,0,384,6,500
+[Thd 10108 CPU 7 4/15/23 18:35:54.674] Cmdline: CatGT -dir=E:/AcuteDANA/Kilosorted/Rat405 -run=91322_DANA_7000uM_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 10108 CPU 7 4/15/23 18:35:54.675] Meta file not found 'E:/AcuteDANA/Kilosorted/Rat405/91322_DANA_7000uM_bank0_g0/91322_DANA_7000uM_bank0_g0_t0.nidq.meta'.
+[Thd 10108 CPU 7 4/15/23 18:35:54.675] 
+[Thd 6712 CPU 1 4/15/23 18:35:54.706] Cmdline: CatGT -dir=E:/AcuteDANA/Kilosorted/Rat405 -run=91322_DANA_7000uM_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;133,191} -xd=0,0,384,6,500
+[Thd 6712 CPU 1 4/15/23 18:35:54.707] Meta file not found 'E:/AcuteDANA/Kilosorted/Rat405/91322_DANA_7000uM_bank0_g0/91322_DANA_7000uM_bank0_g0_t0.nidq.meta'.
+[Thd 6712 CPU 4 4/15/23 18:35:54.707] 
+[Thd 6536 CPU 2 4/15/23 18:36:43.931] Cmdline: CatGT -dir=E:/AcuteDANA/Kilosorted/Rat405 -run=91322_DANA_7000uM_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 6536 CPU 2 4/15/23 18:36:45.762] 
+[Thd 7980 CPU 2 4/15/23 18:36:45.785] Cmdline: CatGT -dir=E:/AcuteDANA/Kilosorted/Rat405 -run=91322_DANA_7000uM_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;133,191} -xd=0,0,384,6,500
+[Thd 7980 CPU 2 4/15/23 20:35:38.803] 
+[Thd 3032 CPU 2 4/16/23 17:26:03.558] Cmdline: CatGT -dir=G:/Data/DANA_NAc/Rat411 -run=1112022_DANA_REAL -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 3032 CPU 2 4/16/23 17:27:02.027] 
+[Thd 11704 CPU 2 4/16/23 17:27:02.147] Cmdline: CatGT -dir=G:/Data/DANA_NAc/Rat411 -run=1112022_DANA_REAL -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;14,65,96,133,212,230,340} -xd=0,0,384,6,500
+[Thd 11704 CPU 2 4/16/23 22:22:19.589] 
+[Thd 9664 CPU 2 4/21/23 18:25:19.310] Cmdline: CatGT -dir=C:/SGL_DATA/Acute_DANA/Rat438 -run=42123_DANA_WE_6400uM_Bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 9664 CPU 2 4/21/23 18:25:23.038] 
+[Thd 5448 CPU 2 4/21/23 18:25:23.088] Cmdline: CatGT -dir=C:/SGL_DATA/Acute_DANA/Rat438 -run=42123_DANA_WE_6400uM_Bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 5448 CPU 2 4/21/23 19:34:30.507] 
+[Thd 11124 CPU 2 4/24/23 10:04:15.829] Cmdline: CatGT -dir=C:/SGL_DATA/Acute_DANA/Rat438 -run=42123_DANA_WE_6400uM_Bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 11124 CPU 2 4/24/23 10:04:19.611] 
+[Thd 5496 CPU 7 4/24/23 10:06:16.370] Cmdline: CatGT -dir=C:/SGL_DATA/Acute_DANA/Rat438 -run=42123_DANA_WE_6400uM_Bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 5496 CPU 3 4/24/23 10:06:18.422] 
+[Thd 13588 CPU 2 5/01/23 16:31:23.138] Cmdline: CatGT -dir=C:/SGL_DATA/Acute_DANA/Rat439 -run=42823_DANA_WE_6600uM_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 13588 CPU 0 5/01/23 16:31:27.083] 
+[Thd 13804 CPU 2 5/01/23 16:31:27.187] Cmdline: CatGT -dir=C:/SGL_DATA/Acute_DANA/Rat439 -run=42823_DANA_WE_6600uM_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,84,103,134,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 13804 CPU 2 5/01/23 17:43:25.196] 
+[Thd 1980 CPU 7 5/02/23 17:56:40.514] Cmdline: CatGT -dir=C:/SGL_DATA/Acute_DANA/Rat439 -run=42823_DANA_WE_6600uM_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 1980 CPU 2 5/02/23 17:56:44.292] 
+[Thd 8244 CPU 2 5/02/23 17:56:44.340] Cmdline: CatGT -dir=C:/SGL_DATA/Acute_DANA/Rat439 -run=42823_DANA_WE_6600uM_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,84,103,134,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 8244 CPU 3 5/02/23 19:10:45.964] 
+[Thd 13256 CPU 2 5/04/23 15:35:13.451] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10840 -run=mPFC_L23 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 13256 CPU 2 5/04/23 15:35:14.555] 
+[Thd 10788 CPU 5 5/04/23 15:35:14.595] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10840 -run=mPFC_L23 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,84,103,134,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 10788 CPU 2 5/04/23 15:55:02.331] 
+[Thd 13140 CPU 2 5/05/23 01:04:01.786] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10840 -run=mPFC_L5 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 13140 CPU 7 5/05/23 01:04:02.778] 
+[Thd 3140 CPU 4 5/05/23 01:04:02.858] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10840 -run=mPFC_L5 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,84,103,134,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 3140 CPU 2 5/05/23 01:30:32.198] 
+[Thd 10892 CPU 7 5/05/23 08:13:27.427] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10840 -run=mPFC_L5_BurstStim -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,3,2,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,3,2,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,3,2,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,3,2,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,3,2,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,3,2,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=3
+[Thd 10892 CPU 0 5/05/23 08:13:28.364] 
+[Thd 5032 CPU 6 5/05/23 08:13:28.450] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/vHC_StimCoordinate_test/10840 -run=mPFC_L5_BurstStim -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,84,103,134,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 5032 CPU 2 5/05/23 08:35:54.639] 
+[Thd 13276 CPU 1 5/05/23 15:27:42.648] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10840 -run=mPFC_L23 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 13276 CPU 3 5/05/23 15:27:53.806] 
+[Thd 4512 CPU 7 5/05/23 15:27:53.926] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10840 -run=mPFC_L23 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,84,103,134,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 4512 CPU 2 5/05/23 16:08:47.305] 
+[Thd 12464 CPU 4 5/05/23 16:08:48.375] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10840 -run=mPFC_L5 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 12464 CPU 2 5/05/23 16:08:57.565] 
+[Thd 3136 CPU 2 5/05/23 16:08:57.615] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10840 -run=mPFC_L5 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,84,103,134,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 3136 CPU 3 5/05/23 16:47:38.895] 
+[Thd 8644 CPU 0 5/05/23 16:47:40.465] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10840 -run=mPFC_L5_BurstStim -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,4,3,2,0 -xia=0,0,4,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 8644 CPU 5 5/05/23 16:47:52.025] 
+[Thd 1344 CPU 1 5/05/23 16:47:52.095] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10840 -run=mPFC_L5_BurstStim -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,84,103,134,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 1344 CPU 7 5/05/23 17:18:39.238] 
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] Error: Missing -run.
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] 
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] *** ERROR: MISSING CRITICAL PARAMETERS ***
+
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] ------------------------
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] Purpose:
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] + Optionally join trials with given run_name and index ranges [ga,gb] [ta,tb]...
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] + ...Or run on any individual file.
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] + Optionally apply demultiplexing corrections.
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] + Optionally apply band-pass and global CAR filters.
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] + Optionally edit out saturation artifacts.
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] + Optionally extract tables of sync waveform edge times to drive TPrime.
+[Thd 1324 CPU 2 5/10/23 09:29:09.696] + Optionally extract tables of other nonneural event times to be aligned with spikes.
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] + Optionally join the above outputs across different runs (supercat feature).
+
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] Output:
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] + Results are placed next to source, named like this, with t-index = tcat:
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] +    path/run_name_g5_tcat.imec1.ap.bin.
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] + Errors and run messages are appended to CatGT.log in the current working directory.
+
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] Usage:
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] >CatGT -dir=data_dir -run=run_name -g=ga,gb -t=ta,tb <which streams> [ options ]
+
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] Which streams:
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -ni                      ;required to process ni stream
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -ob                      ;required to process ob streams
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -ap                      ;required to process ap streams
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -lf                      ;required to process lf streams
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -obx=0,3:5               ;if -ob process these Oneboxes
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -prb_3A                  ;if -ap or -lf process 3A-style probe files, e.g. run_name_g0_t0.imec.ap.bin
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -prb=0,3:5               ;if -ap or -lf AND !prb_3A process these probes
+
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] Options:
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -no_run_fld              ;older data, or data files relocated without a run folder
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -prb_fld                 ;use folder-per-probe organization
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -prb_miss_ok             ;instead of stopping, silently skip missing probes
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -gtlist={gj,tja,tjb}     ;override {-g,-t} giving each listed g-index its own t-range
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -t=cat                   ;extract events from CatGT output files (instead of -t=ta,tb)
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -exported                ;apply FileViewer 'exported' tag to in/output filenames
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -t_miss_ok               ;instead of stopping, zero-fill if trial missing
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -zerofillmax=500         ;set a maximum zero-fill span (millisec)
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -startsecs=120.0         ;skip this initial span of each input stream (float seconds)
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -maxsecs=7.5             ;set a maximum output file length (float seconds)
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -apfilter=Typ,N,Fhi,Flo  ;apply ap band-pass filter of given {type, order, corners(float Hz)}
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -lffilter=Typ,N,Fhi,Flo  ;apply lf band-pass filter of given {type, order, corners(float Hz)}
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -no_tshift               ;DO NOT time-align channels to account for ADC multiplexing
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -loccar=2,8              ;apply ap local CAR annulus (exclude radius, include radius)
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -gblcar                  ;apply ap global CAR filter over all channels
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -gfix=0.40,0.10,0.02     ;rmv ap artifacts: ||amp(mV)||, ||slope(mV/sample)||, ||noise(mV)||
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -chnexcl={prb;chans}     ;this probe, exclude listed chans from ap loccar, gblcar, gfix
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -xa=0,0,2,3.0,4.5,25     ;extract pulse signal from analog chan (js,ip,word,thresh1(V),thresh2(V),millisec)
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -xd=2,0,384,6,500        ;extract pulse signal from digital chan (js,ip,word,bit,millisec)
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -xia=0,0,2,3.0,4.5,2     ;inverted version of xa
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -xid=2,0,384,6,50        ;inverted version of xd
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -bf=0,0,8,2,4,3          ;extract numeric bit-field from digital chan (js,ip,word,startbit,nbits,inarow)
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -inarow=5                ;extractor {xa,xd,xia,xid} antibounce stay high/low sample count
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -no_auto_sync            ;disable the automatic extraction of sync edges in all streams
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -save=2,0,5,20:60        ;save subset of probe chans (js,ip1,ip2,chan-list)
+[Thd 1324 CPU 2 5/10/23 09:29:09.704] -pass1_force_ni_ob_bin   ;write pass one ni/ob binary tcat file even if not changed
+[Thd 1324 CPU 2 5/10/23 09:29:09.712] -supercat={dir,run_ga}   ;concatenate existing output files across runs (see ReadMe)
+[Thd 1324 CPU 2 5/10/23 09:29:09.712] -supercat_trim_edges     ;supercat after trimming each stream to matched sync edges
+[Thd 1324 CPU 2 5/10/23 09:29:09.712] -supercat_skip_ni_ob_bin ;do not supercat ni/ob binary files
+[Thd 1324 CPU 2 5/10/23 09:29:09.712] -dest=path               ;alternate path for output files (must exist)
+[Thd 1324 CPU 2 5/10/23 09:29:09.712] -out_prb_fld             ;if using -dest, create output subfolder per probe
+[Thd 1324 CPU 2 5/10/23 09:29:09.712] ------------------------
+
+[Thd 1324 CPU 2 5/10/23 09:29:09.712] 
+[Thd 6088 CPU 2 5/11/23 10:55:08.682] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L23 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 6088 CPU 2 5/11/23 10:55:11.525] 
+[Thd 6472 CPU 4 5/11/23 10:55:11.611] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L23 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 6472 CPU 2 5/11/23 10:56:57.792] 
+[Thd 7544 CPU 2 5/11/23 10:56:57.903] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L23 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 7544 CPU 2 5/11/23 11:22:34.128] 
+[Thd 5928 CPU 2 5/11/23 14:59:19.651] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 5928 CPU 2 5/11/23 14:59:23.559] 
+[Thd 6992 CPU 6 5/11/23 14:59:23.671] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 6992 CPU 2 5/11/23 15:01:21.398] 
+[Thd 6152 CPU 2 5/11/23 15:01:21.527] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 6152 CPU 2 5/11/23 15:29:34.521] 
+[Thd 1864 CPU 6 5/12/23 07:01:23.863] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 1864 CPU 2 5/12/23 07:01:27.756] 
+[Thd 3152 CPU 2 5/12/23 07:01:27.845] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 9324 CPU 4 5/12/23 07:01:37.447] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 9324 CPU 3 5/12/23 07:01:37.712] 
+[Thd 5244 CPU 2 5/12/23 07:01:37.732] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 5244 CPU 2 5/12/23 07:03:33.782] 
+[Thd 7212 CPU 6 5/12/23 07:03:33.896] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 7212 CPU 2 5/12/23 07:31:39.506] 
+[Thd 5172 CPU 4 5/13/23 12:21:11.183] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5__Burst_stim -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 5172 CPU 2 5/13/23 12:21:11.193] Meta file not found 'F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857/mPFC_L5__Burst_stim_g0/mPFC_L5__Burst_stim_g0_t0.nidq.meta'.
+[Thd 5172 CPU 2 5/13/23 12:21:11.193] 
+[Thd 4836 CPU 2 5/13/23 12:21:11.244] Cmdline: CatGT -dir=F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857 -run=mPFC_L5__Burst_stim -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 4836 CPU 2 5/13/23 12:21:11.245] Meta file not found 'F:/Data/vHPC_stim_mPFC_excitability_project/SinglePulseStim/10857/mPFC_L5__Burst_stim_g0/mPFC_L5__Burst_stim_g0_t0.nidq.meta'.
+[Thd 4836 CPU 2 5/13/23 12:21:11.246] 
+[Thd 6072 CPU 2 5/17/23 12:40:10.379] Cmdline: CatGT -dir=C:/SGL_DATA/430_GH_session1 -run=430_S2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,0.8,0.5,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,0.8,0.5,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,0.8,0.5,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,0.8,0.5,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,0.8,0.5,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 6072 CPU 3 5/17/23 12:40:13.869] 
+[Thd 9848 CPU 0 5/17/23 12:40:13.903] Cmdline: CatGT -dir=C:/SGL_DATA/430_GH_session1 -run=430_S2 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -xd=0,0,384,6,500
+[Thd 9848 CPU 6 5/17/23 12:43:20.701] 
+[Thd 10820 CPU 2 5/17/23 12:43:20.972] Cmdline: CatGT -dir=C:/SGL_DATA/430_GH_session1 -run=430_S2 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -xd=0,0,384,6,500
+[Thd 10820 CPU 2 5/17/23 13:31:09.569] 
+[Thd 3556 CPU 2 5/18/23 17:14:20.771] Cmdline: CatGT -dir=E:/NP_Time_Cells -run=430_S3 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,0.8,0.5,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,0.8,0.5,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,0.8,0.5,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,0.8,0.5,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,0.8,0.5,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 3556 CPU 0 5/18/23 17:14:33.319] 
+[Thd 8900 CPU 2 5/18/23 17:14:33.421] Cmdline: CatGT -dir=E:/NP_Time_Cells -run=430_S3 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -xd=0,0,384,6,500
+[Thd 8900 CPU 2 5/18/23 17:20:08.670] 
+[Thd 11764 CPU 1 5/18/23 17:20:09.718] Cmdline: CatGT -dir=E:/NP_Time_Cells -run=430_S3 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -xd=0,0,384,6,500
+[Thd 11764 CPU 2 5/18/23 18:39:29.074] 
+[Thd 7804 CPU 2 5/19/23 10:50:19.760] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10850 -run=mPFC_L5_part2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 7804 CPU 2 5/19/23 10:50:20.121] 
+[Thd 11068 CPU 3 5/19/23 10:50:26.658] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10850 -run=mPFC_L5_part2 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 11068 CPU 2 5/19/23 10:50:50.468] 
+[Thd 2160 CPU 2 5/19/23 11:12:10.805] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10850 -run=mPFC_L5_part2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 2160 CPU 2 5/19/23 11:12:10.911] 
+[Thd 5552 CPU 7 5/19/23 11:38:00.782] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10850 -run=mPFC_L5_part2 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 5552 CPU 2 5/19/23 11:38:00.915] 
+[Thd 10012 CPU 2 5/19/23 11:38:00.963] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10850 -run=mPFC_L5_part2 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 10012 CPU 2 5/19/23 11:38:22.677] 
+[Thd 5024 CPU 2 5/19/23 11:39:26.639] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10850 -run=mPFC_L5_part2 -g=1 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 5024 CPU 7 5/19/23 11:39:54.396] 
+[Thd 3464 CPU 7 5/19/23 11:42:14.979] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10850 -run=mPFC_L5_part2 -g=1 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,42,84,103,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 12568 CPU 2 5/23/23 08:16:05.231] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10847 -run=mPFC_L23_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 12568 CPU 2 5/23/23 08:16:05.946] 
+[Thd 7272 CPU 4 5/23/23 14:17:55.061] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L5_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 7272 CPU 2 5/23/23 14:17:55.746] 
+[Thd 7516 CPU 2 5/24/23 19:32:53.431] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L23_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 7516 CPU 4 5/24/23 19:32:54.329] 
+[Thd 5124 CPU 2 5/24/23 19:32:54.399] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L23_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 5124 CPU 2 5/24/23 19:33:58.776] 
+[Thd 10032 CPU 2 5/24/23 19:33:58.893] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L23_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 10032 CPU 2 5/24/23 19:51:32.838] 
+[Thd 11388 CPU 2 5/25/23 00:22:40.997] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L5_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 11388 CPU 4 5/25/23 00:22:41.986] 
+[Thd 1764 CPU 6 5/25/23 00:22:42.086] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L5_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 1764 CPU 2 5/25/23 00:23:45.424] 
+[Thd 12532 CPU 2 5/25/23 00:23:45.562] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L5_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 12532 CPU 2 5/25/23 00:40:29.632] 
+[Thd 11728 CPU 4 5/25/23 04:48:48.340] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L5_BurstStim_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 11728 CPU 2 5/25/23 04:48:48.989] 
+[Thd 7104 CPU 2 5/25/23 04:48:49.069] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L5_BurstStim_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -lf -prb=0 -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 7104 CPU 2 5/25/23 04:49:37.350] 
+[Thd 7180 CPU 2 5/25/23 04:49:37.410] Cmdline: CatGT -dir=C:/SGL_DATA/vHPC_stim_mPFC_excitability_project/10858 -run=mPFC_L5_BurstStim_bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 7180 CPU 2 5/25/23 05:01:02.079] 
+[Thd 16224 CPU 6 5/31/23 10:56:53.223] Cmdline: CatGT -dir=D:/RawData_Backup_DANA/Rat438 -run=42123_DANA_WE_6400uM_Bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,0.8,0.5,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,0.8,0.5,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,0.8,0.5,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,0.8,0.5,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,0.8,0.5,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 16224 CPU 12 5/31/23 10:57:12.322] 
+[Thd 8676 CPU 12 5/31/23 10:57:12.412] Cmdline: CatGT -dir=D:/RawData_Backup_DANA/Rat438 -run=42123_DANA_WE_6400uM_Bank0 -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;12,36,42,84,103,160,183,191,205:206,226,240,248,329,340,352} -xd=0,0,384,6,500
+[Thd 8676 CPU 12 5/31/23 12:19:33.649] 
+[Thd 16304 CPU 12 5/31/23 14:34:31.914] Cmdline: CatGT -dir=D:/denoised_DANA/Rat420 -run=129022_DANA_MFB_85-00uM_WE_6500uM_bank0 -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,0.8,0.5,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,0.8,0.5,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,0.8,0.5,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,0.8,0.5,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,0.8,0.5,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 16304 CPU 8 5/31/23 14:34:42.371] 
+[Thd 2740 CPU 12 6/02/23 11:09:51.134] Cmdline: CatGT -dir=D:/denoised_DANA/Rat411 -run=1112022_DANA_REAL -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,0.8,0.5,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,0.8,0.5,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,0.8,0.5,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,0.8,0.5,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,0.8,0.5,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 2740 CPU 13 6/02/23 11:10:00.397] 
+[Thd 9736 CPU 12 6/02/23 11:10:37.128] Cmdline: CatGT -dir=D:/denoised_DANA/Rat411 -run=1112022_DANA_REAL -g=0 -t=0 -prb_fld -ni -prb=0 -xa=0,0,1,0.8,0.5,0 -xia=0,0,1,-3,-2,0 -xa=0,0,2,0.8,0.5,0 -xia=0,0,2,-3,-2,0 -xa=0,0,3,0.8,0.5,0 -xia=0,0,3,-3,-2,0 -xa=0,0,4,0.8,0.5,0 -xia=0,0,4,-3,-2,0 -xa=0,0,5,0.8,0.5,0 -xia=0,0,5,-3,-2,0 -xa=0,0,6,0.8,0.5,0 -xia=0,0,6,-3,-2,0 -xa=0,0,7,0.8,0.5,0 -xia=0,0,7,-3,-2,0 -xd=0,0,384,6,500 -inarow=2
+[Thd 9736 CPU 12 6/02/23 11:10:37.935] 
+[Thd 13020 CPU 8 6/02/23 11:10:37.955] Cmdline: CatGT -dir=D:/denoised_DANA/Rat411 -run=1112022_DANA_REAL -g=0 -t=0 -prb_fld -t_miss_ok -ni -ap -prb=0 -gblcar -chnexcl={0;25,96,122,133,192,212,230,340} -xd=0,0,384,6,500
+[Thd 13020 CPU 13 6/02/23 12:18:10.983] 

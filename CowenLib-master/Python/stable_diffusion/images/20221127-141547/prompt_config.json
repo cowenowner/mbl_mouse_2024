@@ -1,0 +1,24 @@
+{
+  "prompt": "blueberry spaghetti",
+  "guidance_scale": 7.5,
+  "eta": 0.0,
+  "num_inference_steps": 50,
+  "upsample": false,
+  "height": 512,
+  "width": 512,
+  "scheduler": {
+    "num_train_timesteps": 1000,
+    "beta_start": 0.00085,
+    "beta_end": 0.012,
+    "beta_schedule": "scaled_linear",
+    "trained_betas": null,
+    "skip_prk_steps": true,
+    "set_alpha_to_one": false,
+    "steps_offset": 1,
+    "_class_name": "PNDMScheduler",
+    "_diffusers_version": "0.6.0"
+  },
+  "tiled": false,
+  "diffusers_version": "0.6.0",
+  "device_name": "NVIDIA GeForce GTX 1070"
+}
