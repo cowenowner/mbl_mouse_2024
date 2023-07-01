@@ -15,3 +15,6 @@ Put these in the C:\ folder (not a subfolder)
 SpikeGLX
 TCat
 Tprime
+
+
+MATLAB: Create a desktop shortcut for Matlab and change it so that it start in the GitHub directory (e.g., C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023). The specific directory may differ by computer.
