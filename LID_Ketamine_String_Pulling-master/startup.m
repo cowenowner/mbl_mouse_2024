@@ -11,7 +11,7 @@ format short g
 addpath(genpath(pwd))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-cowenlibdir = fullfile(pwd,'..','CowenLib');
+cowenlibdir = fullfile(pwd,'..','CowenLib-master');
 
 if exist(cowenlibdir,'dir')
     addpath(genpath(cowenlibdir))
