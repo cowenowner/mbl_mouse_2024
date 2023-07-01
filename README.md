@@ -3,13 +3,16 @@ Code for the Woods Hole MBL 2023 mouse course
 
 INSTALL:
 (students should not have to worry about this)
+
+Create a C:\Temp\Analysis_results folder
+
 Analysis computers should have the following installed...
 
 GitHub Desktop
 Anaconda
-phy using the environment.yml file on the cortex/phy github site (takes about 1hr)
+phy using the environment.yml file on the cortex/phy github site (takes about 1hr) - run as administrator
 Matlab
-Kilosort2.5
+Kilosort2.5 along with Visual Studio C++ 2019 professional - just install the Desktop C++ development version.
 
 Github for : mbl_mouse_2023
 
