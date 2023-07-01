@@ -35,7 +35,7 @@ PRM_TEMP_FOLDER_BASE = 'E:\neuropixels_vHC_stim\Denoised'; % This needs to be a 
 PRM_CREATE_TCAT_FILE = false; % make false if you already created this file on a previous run to save some time.
 PRM_CREATE_LF_FILE=false; %make false if you don't want to run the LF files. Saves time
 PRM_COPY_FILES=false; %If you want a copy of the tcat files copied from the Base dir to denoising/kilosort dir
-PRM_CREATE_CHANNELMAP=false; %Will generate a new channel map if you are using a custom config
+PRM_CREATE_CHANNELMAP=true; %Will generate a new channel map if you are using a custom config
 PRM_RUN_DENOISE=true;
 PRM_RUN_KILOSORT=false; %DONNOT RUN
 
