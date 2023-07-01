@@ -1,0 +1,117 @@
+
+> D <-D_long %>% filter(Day == 'Day 0' & condition %in% c('V', 'K', 'KP')) 
+> print(TukeyHSD(aov(AIMS ~ condition, data = D), conf.level=.95))
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = AIMS ~ condition, data = D)
+
+$condition
+           diff        lwr       upr     p adj
+K-V  -6.9117647 -14.130552 0.3070225 0.0631634
+KP-V -6.0588235 -13.277611 1.1599636 0.1159984
+KP-K  0.8529412  -6.365846 8.0717283 0.9560261
+
+> D <-D_long %>% filter(Day == 'Day 0' & condition %in% c('V', 'K', 'KL')) 
+> print(TukeyHSD(aov(AIMS ~ condition, data = D), conf.level=.95))
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = AIMS ~ condition, data = D)
+
+$condition
+          diff        lwr       upr     p adj
+K-V  -6.911765 -13.609012 -0.214517 0.0417793
+KL-V -9.215686 -16.577583 -1.853789 0.0110220
+KL-K -2.303922  -9.665819  5.057975 0.7294601
+
+> D <- D_long %>% filter(Day == 'Day 0' & condition %in% c('V', 'P', 'L'))
+> print(TukeyHSD(aov(AIMS ~ condition, data = D), conf.level=.95))
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = AIMS ~ condition, data = D)
+
+$condition
+         diff         lwr        upr     p adj
+P-V  10.73529   0.1815928 21.2889954 0.0454235
+L-V  -1.67402 -13.2750931  9.9270539 0.9347089
+L-P -12.40931 -24.0103872 -0.8082402 0.0336597
+
+> D <-D_long %>% filter(Day == 'Day 7' & condition %in% c('V', 'K', 'KP')) 
+> print(TukeyHSD(aov(AIMS ~ condition, data = D), conf.level=.95))
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = AIMS ~ condition, data = D)
+
+$condition
+           diff        lwr        upr     p adj
+K-V  -18.323529 -31.260201 -5.3868583 0.0035627
+KP-V -12.500000 -25.436671  0.4366711 0.0602272
+KP-K   5.823529  -7.113142 18.7602005 0.5256385
+
+> D <-D_long %>% filter(Day == 'Day 7' & condition %in% c('V', 'K', 'KL')) 
+> print(TukeyHSD(aov(AIMS ~ condition, data = D), conf.level=.95))
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = AIMS ~ condition, data = D)
+
+$condition
+           diff       lwr        upr     p adj
+K-V  -18.323529 -29.97287  -6.674184 0.0012178
+KL-V -25.031863 -37.83731 -12.226412 0.0000679
+KL-K  -6.708333 -19.51378   6.097118 0.4186644
+
+> D <- D_long %>% filter(Day == 'Day 7' & condition %in% c('V', 'P', 'L'))
+> print(TukeyHSD(aov(AIMS ~ condition, data = D), conf.level=.95))
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = AIMS ~ condition, data = D)
+
+$condition
+          diff        lwr       upr     p adj
+P-V   5.029412  -6.295655 16.354479 0.5326885
+L-V -16.281863 -28.730854 -3.832872 0.0076506
+L-P -21.311275 -33.760265 -8.862284 0.0004374
+
+> D <-D_long %>% filter(Day == 'Day 14' & condition %in% c('V', 'K', 'KP')) 
+> print(TukeyHSD(aov(AIMS ~ condition, data = D), conf.level=.95))
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = AIMS ~ condition, data = D)
+
+$condition
+           diff         lwr       upr     p adj
+K-V  -14.970588 -27.0357807 -2.905396 0.0116563
+KP-V  -2.705882 -14.7710748  9.359310 0.8508240
+KP-K  12.264706   0.1995135 24.329898 0.0455645
+
+> D <-D_long %>% filter(Day == 'Day 14' & condition %in% c('V', 'K', 'KL')) 
+> print(TukeyHSD(aov(AIMS ~ condition, data = D), conf.level=.95))
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = AIMS ~ condition, data = D)
+
+$condition
+           diff       lwr       upr     p adj
+K-V  -14.970588 -26.52120 -3.419974 0.0082679
+KL-V -19.286765 -31.98369 -6.589842 0.0017937
+KL-K  -4.316176 -17.01310  8.380746 0.6896081
+
+> D <- D_long %>% filter(Day == 'Day 14' & condition %in% c('V', 'P', 'L'))
+> print(TukeyHSD(aov(AIMS ~ condition, data = D), conf.level=.95))
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = AIMS ~ condition, data = D)
+
+$condition
+         diff        lwr       upr     p adj
+P-V  2.588235  -9.023916 14.200387 0.8515563
+L-V -6.328431 -19.092998  6.436135 0.4576187
+L-P -8.916667 -21.681233  3.847900 0.2184684

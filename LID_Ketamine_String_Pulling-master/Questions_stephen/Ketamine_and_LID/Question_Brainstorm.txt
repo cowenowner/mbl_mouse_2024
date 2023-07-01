@@ -1,0 +1,19 @@
+Does ketamine change:
+
+Burstiness of neurons? Use a few measures: LV first.
+
+Can you segment neurons by autocorr just like you can with firing rate? Does cell type predict this? Say width and peak to trough ratioN?
+
+Sparsity? Does ketamine change this?
+
+Spike PSDs. How do they change?
+
+Bootstrap the distance measure to get confidence intervals to determine the degree of state change.
+
+Correlate the degree of state change with the degree of movement change - could be a confound but needs to be accounted for. We will need to look for periods of similar movement when the animla was no on ketamine.
+
+Some measure of entropy and compression - like the stuff I did with Abbott - does this change as a function of ketamine? I bet things get more entropic.
+
+regression to predict 
+
+STRING PULLING:
