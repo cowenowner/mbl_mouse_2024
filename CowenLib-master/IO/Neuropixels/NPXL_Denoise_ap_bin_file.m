@@ -19,10 +19,11 @@ function NPXL_Denoise_ap_bin_file(varargin)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Cowen 2022
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-PRM_NEUROPIXEL_UTILS_DIR = fullfile(Git_dir,'neuropixel-utils'); % if this works for you, go for it
-% Otherwise, do this if you do not have the folder.
-% PRM_NEUROPIXEL_UTILS_DIR = 'C:\Users\cowen\Documents\GitHub\neuropixel-utils';
-addpath(PRM_NEUROPIXEL_UTILS_DIR)
+% The utils directory is now in CowenLib 
+% PRM_NEUROPIXEL_UTILS_DIR = fullfile(Git_dir,'neuropixel-utils'); % if this works for you, go for it
+% % Otherwise, do this if you do not have the folder.
+% % PRM_NEUROPIXEL_UTILS_DIR = 'C:\Users\cowen\Documents\GitHub\neuropixel-utils';
+% addpath(PRM_NEUROPIXEL_UTILS_DIR)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Things that will change with each dataset
 %
 PRM_BIN_FNAME = [];
