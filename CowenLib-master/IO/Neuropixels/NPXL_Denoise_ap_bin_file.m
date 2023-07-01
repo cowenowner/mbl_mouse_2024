@@ -67,7 +67,7 @@ PRM_DATA_DIR = fileparts(PRM_BIN_FNAME);
 blocksize_recs = 30000*60*blocksize_min;
 
 % Read in dta and the meta file.
-imec = Neuropixel.ImecDataset(PRM_BIN_FNAME, 'channelMap',CHANNEL_MAP_FILE);
+imec = Neuropixel.ImecDataset({PRM_BIN_FNAME}, 'channelMap',CHANNEL_MAP_FILE);
 extraMeta.processing_function = [];
 [channelInds, channelIds] = imec.lookup_channelIds(imec.channelIds);
 hrs = (double(imec.nSamplesAP)/30000)/3600;

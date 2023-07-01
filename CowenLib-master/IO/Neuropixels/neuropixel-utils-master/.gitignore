@@ -1,8 +1,0 @@
-*~
-.DS_Store
-.ipynb_checkpoints
-*.asv
-# MkDocs documentation
-site/
-
-
