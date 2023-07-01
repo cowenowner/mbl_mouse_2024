@@ -4,7 +4,7 @@
 %% Local field potential analysis; data collected from a Dyskinetic animal 
 % Motor cortex and dorsomedial striatum regions from both hemispheres
 
-%****** Make sure to run the script with the session data in teh current
+%****** Make sure to run the script with the session data in the current
 %folder ******
 %% Initiallize variables 
 fqs = 1:.5:170; % a vector of frequencies to look at using power spectral density or spectrogram plots
