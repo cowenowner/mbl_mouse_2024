@@ -1,6 +1,8 @@
 # mbl_mouse_2023
- Code for the Woods Hole MBL 2023 mouse course
+Code for the Woods Hole MBL 2023 mouse course
 
+INSTALL:
+(students should not have to worry about this)
 Analysis computers should have the following installed...
 
 GitHub Desktop
@@ -15,3 +17,14 @@ Put these in the C:\ folder (not a subfolder)
 SpikeGLX
 TCat
 Tprime
+
+
+MATLAB: Create a desktop shortcut for Matlab and change it so that it start in the GitHub directory (e.g., C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023). The specific directory may differ by computer.
+
+# FUN EXCITING DEMOS!!! 
+How to run Abhi's demo on how to analyze brain oscillations associated with Parkinson's disease and levodopa-induced dyskinesia.
+
+1. Open the MATLAB icon named Abhi_Demo: This will load the paths you will need to run the demo.
+2. Open the script called Demo_NSB: You can do this by typing "edit Demo_NSB" on the command line or double click on the matlab file that can be found here C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023\LID_Ketamine_String_Pulling-master
+3. Change the current folder (the top left window in MATLAB most of the time) by clicking on the icon that looks like a folder with a little green arrow (right above the current folder). Change the current folder to the data directory which is: E:\Data_Demo_Abhi\09
+4. Now just run the Demo_NSB script(Green arrow or command line))! It will generate some figures showing dyskinesia associated and ketamien associated oscillations in the spectrogram and power spectral density figures.
