@@ -135,24 +135,23 @@ end
 % First few steps are loading and restricting data
 filename = LFPfile{2}; 
 LFP = LK_Load_and_Clean_LFP_Abhi('',filename{1});
-IXI = LFP.t_uS > TIMES.IntervalUsec(2,1) & LFP.t_uS < TIMES.IntervalUsec(2,2); 
-L = []; 
-L = LFP.LFP(IXI);
+ixi = LFP.t_uS > TIMES.IntervalUsec(2,1) & LFP.t_uS < TIMES.IntervalUsec(2,2); 
+L = LFP.LFP(ixi);
 
 F = SPEC_create_filters('gamma_80', LFP.sFreq); % create an 80 Hz filter
-L_filt = filtfilt(F{1},L); % filter signal
-pow = abs(hilbert(L_filt));
-angle = angle(hilbert(L_filt));
+L_f = filtfilt(F{1},L); % filter signal
+pow = abs(hilbert(L_f)); % get the power envelope
+ang = angle(hilbert(L_f)); % convert to radians
 
-IX = false(length(L));
+IX = false(length(L),1);
 IX(1:500) = true;
 
 figure
-plot(L(1:500))
+plot(L(IX))
 hold on
-plot(L_filt(1:500),'LineWidth',2)
-plot(pow(1:500),'LineWidth',3)
-plot(angle(1:500),'LineWidth',3)
+plot(L_f(IX),'LineWidth',2)
+plot(pow(IX),'LineWidth',3)
+plot(ang(IX),'LineWidth',3)
 legend('Raw Signal', 'Filtered', 'Hilbert', 'Angle')
 xlabel('Sample points (sfreq 500)')
 title('Extracted features from the lfp signal')
