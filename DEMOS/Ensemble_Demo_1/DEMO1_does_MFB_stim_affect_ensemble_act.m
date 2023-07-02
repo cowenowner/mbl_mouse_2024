@@ -332,6 +332,20 @@ xlabel('min')
 hold on
 plot(Q_small_uS/60e6,sc(:,2))
 legend('PC1','PC2')
+%% Cluster plots
+% You can also visually check to see if there are 'clusters' of states in
+% the data by making a scatter plot of the first few dimensions. 
+figure
+subplot(2,2,1)
+plot(sc(:,1),sc(:,2),'.'); xlabel('PC1');ylabel('PC2')
+subplot(2,2,2)
+plot(sc(:,2),sc(:,3),'.'); xlabel('PC2');ylabel('PC3')
+subplot(2,2,3)
+plot(sc(:,3),sc(:,4),'.'); xlabel('PC3');ylabel('PC4')
+subplot(2,2,4)
+plot(sc(:,1),sc(:,3),'.'); xlabel('PC1');ylabel('PC3')
+% These look crazy BTW.
+
 % for kicks, try the above with the big binned Q matrix (500 ms bin)
 
 %% Now suppose we would like to identify 'discete' or categorical states or 'clusters' in this high-dimensional data. How could we do this? There are MANY ways
@@ -362,6 +376,11 @@ subplot(2,1,2)
 bar(mean(mean_pop_vec,2))
 axis tight
 ylabel('mean rate')
+
+% Let's put our clusters back in PC space...
+figure
+gscatter(sc(:,1),sc(:,2),C); xlabel('PC1');ylabel('PC2')
+
 %
 % I think that the first state is the most common according to the histogram. 
 % Is there anything special about this state?
