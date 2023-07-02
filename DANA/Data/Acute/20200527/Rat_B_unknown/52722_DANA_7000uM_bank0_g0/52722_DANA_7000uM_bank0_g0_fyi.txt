@@ -1,5 +1,0 @@
-outpath_probe0=F:/Data/Acute_neuropixels/DANA_NAc/Rat_B_unknown/52722_DANA_7000uM_bank0_g0/52722_DANA_7000uM_bank0_g0_imec0
-outpath_top=F:/Data/Acute_neuropixels/DANA_NAc/Rat_B_unknown/52722_DANA_7000uM_bank0_g0
-supercat_element={F:/Data/Acute_neuropixels/DANA_NAc/Rat_B_unknown,52722_DANA_7000uM_bank0_g0}
-sync_imec0=F:/Data/Acute_neuropixels/DANA_NAc/Rat_B_unknown/52722_DANA_7000uM_bank0_g0/52722_DANA_7000uM_bank0_g0_imec0/52722_DANA_7000uM_bank0_g0_tcat.imec0.ap.xd_384_6_500.txt
-sync_ni=F:/Data/Acute_neuropixels/DANA_NAc/Rat_B_unknown/52722_DANA_7000uM_bank0_g0/52722_DANA_7000uM_bank0_g0_tcat.nidq.xa_0_500.txt
