@@ -1,2 +1,2 @@
-addpath(genpath(fullfile('.','CowenLib-master')))
+addpath(genpath(fullfile('.','CowenLib')))
 disp('Started Matlab for MBL Mouse')
