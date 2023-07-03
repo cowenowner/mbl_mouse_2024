@@ -16,7 +16,7 @@
 % The issue is that neural circuits and individual neurons are adaptable
 % and can habituate to predictable stimuli. Why wouldn't this be the case
 % for brain stimulation? We asked that question but more specifically, we
-% asked wheter variable inter-pulse intervals with statistics that resumble
+% asked wheter variable inter-pulse intervals with statistics that resemble
 % 'bursts' would be the most effective at evoking dopamine release and
 % neural ensemble activity, even if the mean stimulation frequeny is held
 % constant. For example...
