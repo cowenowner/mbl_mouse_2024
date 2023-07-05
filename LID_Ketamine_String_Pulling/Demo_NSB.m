@@ -155,7 +155,4 @@ plot(ang(IX),'LineWidth',3)
 legend('Raw Signal', 'Filtered', 'Hilbert', 'Angle')
 xlabel('Sample points (sfreq 500)')
 title('Extracted features from the lfp signal')
-
-    
-    
-    
+  
