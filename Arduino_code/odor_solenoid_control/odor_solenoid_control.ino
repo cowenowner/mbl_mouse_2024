@@ -20,6 +20,8 @@ void setup() {
 void loop() {
   for (int i = 0;i<n_solenoids;i++){
     Serial.print("Sol ");
+    Serial.print(i);
+    Serial.print(", ");
     Serial.println(solenoid_pins[i]);
     digitalWrite(solenoid_pins[i], HIGH);
     delay(port_open_time_ms);                      // wait 
