@@ -318,7 +318,8 @@ ylabel('n coincident events')
 % via dot product to each time slice of your neuron x time matrix to create
 % the new dimension. The sc matrix is a new matrix with each column
 % representing the lower dimensional version of your neuron x time matrix.
-[pc,sc,lat] = pca(Qsmallbin);
+[pc,sc,lat] = pca(zscore(Qsmallbin)); % for kicks, try this section without 
+% first zscoring the data. Weird things happen. Why?
 figure
 subplot(1,3,1);imagesc(pc);xlabel('pc num')
 subplot(1,3,2);imagesc(sc);ylabel('time')
@@ -352,7 +353,7 @@ plot(sc(:,1),sc(:,3),'.'); xlabel('PC1');ylabel('PC3')
 % let's start with the simplest or at least the most common: kmeans.
 % Since I will murder the explanation, please google kmeans or ask ChatGPT.
 n_clusters = 5;
-C = kmeans(Qsmallbin,n_clusters);
+C = kmeans(zscore(Qsmallbin),n_clusters);
 % C indicates the cluster identity for each time slice (population vector)
 % in the Q matrix. It is a number from 1:n_clusters
 figure
