@@ -1,4 +1,4 @@
-lfp_bin_file_path = 'C:\LFPAnalysis_20230706\HC101_23242_tcat\HC101_23242_g0_tcat.imec0.lf.bin';
+lfp_bin_file_path = 'Z:\NSB_2023\03 Mouse\LFPAnalysis_20230706\HC101_23242_tcat\HC101_23242_g0_tcat.imec0.lf.bin';
 all_channels = 1:385;
 [path_name, tmp] = fileparts(lfp_bin_file_path);
 lfp_fname = [tmp '.bin'];
