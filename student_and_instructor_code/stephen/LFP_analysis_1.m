@@ -23,6 +23,7 @@ LFP.data_uV = LFP.data_uV*1e6;
 LFP.data_uV = LFP.data_uV' -  movmean(LFP.data_uV',round(LFP.sFreq)*1.5);
 LFP.data_uV = LFP.data_uV';
 
+
 ABV = mean(abs(LFP.data_uV),2,'omitnan');
 BAD_CH_IX =  ABV > 300 | ABV < 50;
 LFP.data_uV(BAD_CH_IX,:) = nan;
