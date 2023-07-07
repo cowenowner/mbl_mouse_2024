@@ -26,10 +26,12 @@ clearvars; close all; fclose all;
 % Change variables here for your analysis.
 
 %%DataDirs
-PRM_RAT_ROOT='E:\NS&B_Mouse\23241\01';
-PRM_RAT_SUBDIRS={'realtest101_23241_g0'};
-PRM_BAD_CHANNEL0_LIST = [0 1 2 3 4 5 25 29 52 53 81 85 114 115 117 132 161 176 177 208 253 224 298 307 349 382]; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
-PRM_TEMP_FOLDER_BASE = 'E:\NS&B_Mouse\Denoised'; % This needs to be a SSD.
+PRM_RAT_ROOT='E:\NSB_Mouse\23242';
+PRM_RAT_SUBDIRS={'HC101_23242_g0'};
+PRM_BAD_CHANNEL0_LIST = [0 1 4 5 14 25 29 52 53 54 60 69 73 81 85 91 114 115 116 120 142 145 ...
+    161 176 177 184 208 224 253 294 298 302 349 382]; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
+PRM_TEMP_FOLDER_BASE = 'E:\neuropixels_vHC_stim\Denoised'; % This needs to be a SSD.
+
 
 %Functions to run
 PRM_CREATE_TCAT_FILE = true; % make false if you already created this file on a previous run to save some time.
