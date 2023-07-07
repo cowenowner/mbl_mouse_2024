@@ -16,7 +16,7 @@
 % The issue is that neural circuits and individual neurons are adaptable
 % and can habituate to predictable stimuli. Why wouldn't this be the case
 % for brain stimulation? We asked that question but more specifically, we
-% asked wheter variable inter-pulse intervals with statistics that resumble
+% asked wheter variable inter-pulse intervals with statistics that resemble
 % 'bursts' would be the most effective at evoking dopamine release and
 % neural ensemble activity, even if the mean stimulation frequeny is held
 % constant. For example...
@@ -93,7 +93,7 @@ filename = 'DANA_rat445_01.mat'; % Assumes that this file is in the directory wi
 % Parameters to play with...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ? What is a vector, matrix, cell array, structure, boolean?
-big_binsize_ms = 1000; % Binsize for spike x time matrices.
+big_binsize_ms = 500; % Binsize for spike x time matrices.
 small_binsize_ms = 20; % Binsize for spike x time matrices.
 % ? What do you think would be a good choice of bin size.
 PLOT_IT = true; % If you don't want to plot and just want to process 
@@ -117,7 +117,8 @@ load(filename);
 %%
 T_uS = {SP.t_uS}; % This converts the timestamp list for each cell into a more easy to use cell array.
 WV = [SP.WaveformBest]'; % Waveform shapes for each neuron. This could indicate cell type.
-
+SampRate = 30000;
+Time_msec = 1000*(0:81)/SampRate;
 % Now that the data is loaded, make sure that it looks pretty. This uses my
 % plot_raster() function. Feel free to use it if you like it.
 figure; plot_raster(T_uS,[],'time_divisor',60e6);xlabel('minutes')
@@ -182,7 +183,7 @@ title('log norm')
 
 %% Let's get a visualization of network-level interactions in the form of 
 % correlations between cell pairs.
-R = corr(Q); 
+[R,PvalR] = corr(Q); 
 % ?What are the units of R?
 figure
 subplot(1,2,1)
@@ -318,8 +319,7 @@ ylabel('n coincident events')
 % via dot product to each time slice of your neuron x time matrix to create
 % the new dimension. The sc matrix is a new matrix with each column
 % representing the lower dimensional version of your neuron x time matrix.
-[pc,sc,lat] = pca(zscore(Qsmallbin)); % for kicks, try this section without 
-% first zscoring the data. Weird things happen. Why?
+[pc,sc,lat] = pca(Qsmallbin);
 figure
 subplot(1,3,1);imagesc(pc);xlabel('pc num')
 subplot(1,3,2);imagesc(sc);ylabel('time')
@@ -353,7 +353,7 @@ plot(sc(:,1),sc(:,3),'.'); xlabel('PC1');ylabel('PC3')
 % let's start with the simplest or at least the most common: kmeans.
 % Since I will murder the explanation, please google kmeans or ask ChatGPT.
 n_clusters = 5;
-C = kmeans(zscore(Qsmallbin),n_clusters);
+C = kmeans(Qsmallbin,n_clusters);
 % C indicates the cluster identity for each time slice (population vector)
 % in the Q matrix. It is a number from 1:n_clusters
 figure
