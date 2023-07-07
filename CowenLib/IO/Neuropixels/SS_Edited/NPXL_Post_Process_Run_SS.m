@@ -26,17 +26,17 @@ clearvars; close all; fclose all;
 % Change variables here for your analysis.
 
 %%DataDirs
-PRM_RAT_ROOT='E:\neuropixels_vHC_stim';
-PRM_RAT_SUBDIRS={'mPFC_L5_bank0_g0'};
-PRM_BAD_CHANNEL0_LIST = [12 36 42 84 103 134 183 160 191 205 206 240 248 226 329 340 352]; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
-PRM_TEMP_FOLDER_BASE = 'E:\neuropixels_vHC_stim\Denoised'; % This needs to be a SSD.
+PRM_RAT_ROOT='E:\NS&B_Mouse\23241\01';
+PRM_RAT_SUBDIRS={'realtest101_23241_g0'};
+PRM_BAD_CHANNEL0_LIST = [0 1 2 3 4 5 25 29 52 53 81 85 114 115 117 132 161 176 177 208 253 224 298 307 349 382]; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
+PRM_TEMP_FOLDER_BASE = 'E:\NS&B_Mouse\Denoised'; % This needs to be a SSD.
 
 %Functions to run
-PRM_CREATE_TCAT_FILE = false; % make false if you already created this file on a previous run to save some time.
-PRM_CREATE_LF_FILE=false; %make false if you don't want to run the LF files. Saves time
+PRM_CREATE_TCAT_FILE = true; % make false if you already created this file on a previous run to save some time.
+PRM_CREATE_LF_FILE=true; %make false if you don't want to run the LF files. Saves time
 PRM_COPY_FILES=false; %If you want a copy of the tcat files copied from the Base dir to denoising/kilosort dir
-PRM_CREATE_CHANNELMAP=true; %Will generate a new channel map if you are using a custom config
-PRM_RUN_DENOISE=true;
+PRM_CREATE_CHANNELMAP=false; %Will generate a new channel map if you are using a custom config
+PRM_RUN_DENOISE=false;
 PRM_RUN_KILOSORT=false; %DONNOT RUN
 
 %Note if you run Channel Map make sure the meta file is in the same

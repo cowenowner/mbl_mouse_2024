@@ -7,7 +7,7 @@ function [LFP] = NPXL_Extract_LFP(lfp_bin_file_path, start_rec, n_samples )
 % channels = 1:10:384;
 %%
 start_rec = 0;
-n_samples = length;
+n_samples = LFP.time_sec_of_recording; 
  lfp_bin_file_path = fullfile(pwd,'realtest101_23241_g0_tcat.imec0.lf.bin');
 [path_name, tmp] = fileparts(lfp_bin_file_path);
 lfp_fname = [tmp '.bin'];
@@ -33,10 +33,12 @@ bits_to_mV = n_bits/(v_range*1000) % this can't be right - this has to be in the
 %
 figure
 subplot(2,1,1)
-imagesc(LFP.data); colorbar
+imagesc(LFP.time_sec_of_recording/60,[],LFP.data); colorbar
 subplot(2,1,2)
-imagesc(diff(LFP.data,2,1)); colorbar % CSD  - assumes linear ordering.
+imagesc(LFP.time_sec_of_recording/60,[],diff(LFP.data,2,1)); colorbar % CSD  - assumes linear ordering.
 caxis([-100 100])
+
+figure; imagesc(Tus,TBL.neuropixels_depth_uM,LFP.data)
 % here is the reading code - will probably have to modify manually... 
 %             nChan = str2double(meta.nSavedChans);
 % 

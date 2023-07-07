@@ -117,7 +117,8 @@ if PRM_CREATE_CHANNELMAP
     tcat_meta_file_name=regexp(tcat_meta_file,'((?<=imec0\\).*(?=.meta))','match');
     tcat_meta_file_name=strrep(tcat_meta_file_name,'.ap','.ap.meta');
 
-    [PRM_chanMapFile,PRM_chanMapPath]=SGLXMetaToCoords_SS('metaName',tcat_meta_file_name{1},'metaFilePath',AP_FILE_DIR);
+    %[PRM_chanMapFile,PRM_chanMapPath]=SGLXMetaToCoords_SS('metaName',tcat_meta_file_name{1},'metaFilePath',AP_FILE_DIR);
+    [PRM_chanMapFile,PRM_chanMapPath]=SGLXMetaToCoords_SS('metaName',tcat_meta_file_name{1},'path',AP_FILE_DIR);
     PRM_CHANNEL_MAP_FILE=fullfile(PRM_chanMapPath,PRM_chanMapFile);
     fprintf('Channel Map created in location  %s \n', PRM_CHANNEL_MAP_FILE)
 end
