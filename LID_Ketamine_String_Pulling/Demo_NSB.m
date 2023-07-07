@@ -9,7 +9,7 @@
 %% Initiallize variables 
 fqs = 1:.5:170; % a vector of frequencies to look at using power spectral density or spectrogram plots
 
-%% Load stuff
+% Load stuff
 % load basic files: like injection times: E, depths of the tetrodes:DEPTHS
 % META data that has some important bit to uV coversion info
 [GP,E,EVT,SP,RHD,META,DEPTHS,TS] = LK_Load_Important_Things();
