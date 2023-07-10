@@ -1,4 +1,12 @@
 %% load the data
+% NOTE: this requires cowenlablibcode
+%
+% git clone https://github.com/cowenowner/mbl_mouse_2023
+%
+% then set a clean path (I use a MATLAB Favorite):
+%
+% restoredefaultpath;
+% addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\mbl_mouse_2023\CowenLib'));
 lfp_bin_file_path = 'C:\data-temp\Neuropixels_HC_23242\HC101_23242_g0\HC101_23242_g0_imec0\HC101_23242_g0_tcat.imec0.lf.bin';
 all_channels = 1:385; nCh = all_channels(end);
 
@@ -6,7 +14,7 @@ all_channels = 1:385; nCh = all_channels(end);
 lfp_fname = [tmp '.bin'];
 meta_fname = strrep(lfp_fname,'.lf.bin','.lf.meta');
 
-epoch_time = 600; % in s, from end of session
+epoch_time = 1800; % in s, from end of session
 
 obj = SGLX_Class;
 LFP.meta = obj.ReadMeta(meta_fname,path_name);
@@ -55,7 +63,21 @@ depths = [SP(:).neuropixels_depth_uM];
 [~, sort_idx] = sort(depths, 'descend');
 SP = SP(sort_idx);
 
+%% load events (??)
+
+evt_fn = 'C:\data-temp\Neuropixels_HC_23242\HC101_23242_g0\synced_HC101_23242_g0_tcat.nidq.xa_6_0.txt';
+evt_t = textread(evt_fn);
+evt_t = evt_t(evt_t > (LFP.duration_of_recording_sec - epoch_time));
+
 %% make mvdmlab data structures (change path)
+% NOTE: this requires the vandermeerlab codebase
+%
+% git clone https://github.com/vandermeerlab/vandermeerlab
+%
+% then set a clean path (I use a MATLAB Favorite):
+%
+% restoredefaultpath;
+% addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\vandermeerlab\code-matlab\shared'));
 
 % first choose channels to use -- these are good for our first hippcampal
 % recording with the manually presented odors
@@ -83,21 +105,19 @@ for iC = nCells:-1:1
 
 end
 
+% make events struct
+evt_ts = ts;
+evt_ts.t{1} = evt_t;
+evt_ts.label{1} = 'TTL';
+
 %% set up plot
-% NOTE: this requires the vandermeerlab codebase
-%
-% git clone https://github.com/vandermeerlab/vandermeerlab
-%
-% then set a clean path (I use a MATLAB Favorite):
-%
-% restoredefaultpath;
-% addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\vandermeerlab\code-matlab\shared'));
 
 cfg_mr = [];
 cfg_mr.lfpHeight = 15;
 cfg_mr.lfpSpacing = 5;
 cfg_mr.lfpWidth = 0.5;
 cfg_mr.lfpColor = 'k';
+cfg_mr.evt = evt_ts;
 
 % arrange LFPs to plot in the way MultiRaster() expects
 numLFP = size(myLFPf.data, 1);
