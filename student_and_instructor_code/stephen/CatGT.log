@@ -1,0 +1,45 @@
+[Thd 2208 CPU 2 7/10/23 11:18:04.690] Cmdline: CatGT -dir=C:/Data/NSandB_course2023 -run=HC101_23242 -g=0 -t=0 -ni -xia=0,0,6,3,2,0
+[Thd 2208 CPU 6 7/10/23 11:18:05.302] 
+[Thd 15200 CPU 4 7/10/23 11:19:40.444] Cmdline: CatGT -dir=C:/Data/NSandB_course2023 -run=HC101_23242 -g=0 -t=0 -ni -xia=0,0,6,1.3,1,0
+[Thd 15200 CPU 11 7/10/23 11:19:41.062] 
+[Thd 19660 CPU 4 7/10/23 12:50:36.431] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,0.016,0.008,0 -inarow=40
+[Thd 19660 CPU 6 7/10/23 12:50:37.044] 
+[Thd 3652 CPU 6 7/10/23 15:16:33.786] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,1.016,1.008,0 -inarow=40
+[Thd 3652 CPU 6 7/10/23 15:16:33.786] Meta file not found 'D:/NSB_Mouse/23242/02_7_7_23/HC_2_Neuro2.0_g0/HC_2_Neuro2.0_g0_t0.nidq.meta'.
+[Thd 3652 CPU 6 7/10/23 15:16:33.786] 
+[Thd 3064 CPU 2 7/10/23 15:18:28.594] Unknown option or wrong param count for option 'run=HC_2_Neuro2.0'.
+[Thd 3064 CPU 2 7/10/23 15:18:28.594] 
+[Thd 21976 CPU 6 7/10/23 15:18:36.298] Unknown option or wrong param count for option 'run=HC_2_Neuro2.0'.
+[Thd 21976 CPU 6 7/10/23 15:18:36.298] 
+[Thd 2620 CPU 8 7/10/23 15:21:13.909] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xa=0,0,4,-0.09,-0.08,0 -inarow=10
+[Thd 2620 CPU 6 7/10/23 15:21:16.254] 
+[Thd 20932 CPU 6 7/10/23 15:21:41.752] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xa=0,0,4,-0.09,-0.08,0 -inarow=10
+[Thd 20932 CPU 6 7/10/23 15:21:42.182] 
+[Thd 23488 CPU 2 7/10/23 15:23:35.453] Unknown option or wrong param count for option 'run=HC_2_Neuro2.0'.
+[Thd 23488 CPU 2 7/10/23 15:23:35.454] 
+[Thd 5792 CPU 6 7/10/23 15:23:59.111] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,-0.09,-0.08,0 -inarow=10
+[Thd 5792 CPU 6 7/10/23 15:23:59.680] 
+[Thd 4288 CPU 7 7/10/23 15:25:39.923] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,1.59,1.08,0 -inarow=14
+[Thd 4288 CPU 6 7/10/23 15:25:40.353] 
+[Thd 20320 CPU 6 7/10/23 15:27:22.228] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,1.59,1.08,0 -inarow=14
+[Thd 20320 CPU 6 7/10/23 15:27:22.648] 
+[Thd 19540 CPU 6 7/10/23 15:29:29.852] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,0.5,0.4,0 -inarow=14
+[Thd 19540 CPU 4 7/10/23 15:29:30.392] 
+[Thd 21148 CPU 6 7/10/23 15:30:34.681] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,0.2,0.1,0 -inarow=1
+[Thd 21148 CPU 6 7/10/23 15:30:35.175] 
+[Thd 10556 CPU 2 7/10/23 15:30:45.616] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,0.02,0.01,0 -inarow=1
+[Thd 10556 CPU 5 7/10/23 15:30:57.153] 
+[Thd 4944 CPU 4 7/10/23 15:31:41.375] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,-0.2,-0.1,0 -inarow=1
+[Thd 4944 CPU 6 7/10/23 15:31:41.896] 
+[Thd 7332 CPU 2 7/10/23 15:32:20.351] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,-0.5,-0.3,0 -inarow=22
+[Thd 7332 CPU 6 7/10/23 15:32:20.823] 
+[Thd 15004 CPU 3 7/10/23 15:33:39.725] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,-0.5,-0.3,0 -inarow=52
+[Thd 15004 CPU 7 7/10/23 15:33:40.367] 
+[Thd 1948 CPU 10 7/10/23 15:34:01.125] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,4,-0.5,-0.3,0 -inarow=52
+[Thd 1948 CPU 6 7/10/23 15:34:01.426] 
+[Thd 18608 CPU 5 7/10/23 15:47:38.748] Cmdline: CatGT -dir=C:/Data/NSandB_course2023 -run=HC101_23242 -g=0 -t=0 -ni -xia=0,0,6,-1.3,-1,0
+[Thd 18608 CPU 5 7/10/23 15:47:39.045] 
+[Thd 5232 CPU 6 7/10/23 15:50:22.512] Cmdline: CatGT -dir=D:/NSB_Mouse/23242/02_7_7_23 -run=HC_2_Neuro2.0 -g=0 -t=0 -ni -xia=0,0,6,-0.5,-0.3,0 -inarow=52
+[Thd 5232 CPU 7 7/10/23 15:50:22.995] 
+[Thd 19952 CPU 6 7/10/23 16:13:44.043] Cmdline: CatGT -dir=C:/Data/NSandB_course2023 -run=HC101_23242 -g=0 -t=0 -ni -xia=0,0,6,-1.3,-1,0
+[Thd 19952 CPU 6 7/10/23 16:13:44.344] 
