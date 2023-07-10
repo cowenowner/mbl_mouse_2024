@@ -1,4 +1,4 @@
-lfp_bin_file_path = 'C:\LFPAnalysis_20230706\HC101_23242_tcat\HC101_23242_g0.imec0.lf.bin';
+lfp_bin_file_path = 'C:\LFPAnalysis_20230706\HC101_23242_tcat\HC101_23242_g0_tcat.imec0.lf.bin';
 all_channels = 1:385;
 [path_name, tmp] = fileparts(lfp_bin_file_path);
 lfp_fname = [tmp '.bin'];
@@ -11,11 +11,11 @@ LFP.sFreq = str2double(LFP.meta.imSampRate);
 LFP.nFileSamp = str2double(LFP.meta.fileSizeBytes) / (2 * LFP.nChan);
 LFP.duration_of_recording_sec = LFP.nFileSamp/LFP.sFreq;
 
-mua_filt = designfilt('bandpassiir','FilterOrder',14, 'HalfPowerFrequency1',1,'HalfPowerFrequency2',4,'SampleRate',LFP.sFreq);
-
-freqz(mua_filt);
-n_samples = end_rec - start_rec + 1;
-LFP.start_rec = start_rec;
+mua_filt = designfilt('bandpassiir','FilterOrder',14, 'HalfPowerFrequency1',500,'HalfPowerFrequency2',1200,'SampleRate',LFP.sFreq);
+vstr_channels_ix = 0:150;
+% freqz(mua_filt)
+n_samples = LFP.nFileSamp;
+start_rec = 0;
 
 % read the data. The last rec is typically the sync pulse.
 [LFP.data_uV,LFP.meta] = obj.ReadBinVolts(start_rec,n_samples,LFP.meta ,lfp_fname,path_name); %(samp0, nSamp, meta, binName, path)
@@ -27,10 +27,10 @@ ABV = mean(abs(LFP.data_uV),2,'omitnan');
 BAD_CH_IX =  ABV > 300 | ABV < 50;
 LFP.data_uV(BAD_CH_IX,:) = nan;
 
-LFP.t_uSec = 1e6*(linspace(start_rec, end_rec, Cols(LFP.data_uV))./LFP.sFreq)';
+LFP.t_uSec = 1e6*(linspace(start_rec, LFP.nFileSamp, Cols(LFP.data_uV))./LFP.sFreq)';
 
 % Median re-reference
 LFP.data_uV = LFP.data_uV - median(LFP.data_uV,1,'omitnan');
 % Restrict to just the channels of interest
-LFP.data_uV = LFP.data_uV(hpc_channels_ix,:);
+LFP_vSTR = LFP.data_uV;
 LFP.sFreq
