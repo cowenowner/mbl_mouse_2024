@@ -7,8 +7,8 @@ function [LFP] = NPXL_Extract_LFP(lfp_bin_file_path, start_rec, n_samples )
 % channels = 1:10:384;
 %%
 start_rec = 0;
-n_samples = LFP.time_sec_of_recording; 
- lfp_bin_file_path = fullfile(pwd,'realtest101_23241_g0_tcat.imec0.lf.bin');
+
+ lfp_bin_file_path = fullfile(pwd,'realtest101_23241_g0_t0.imec0.lf.bin');
 [path_name, tmp] = fileparts(lfp_bin_file_path);
 lfp_fname = [tmp '.bin'];
 meta_fname = strrep(lfp_fname,'.lf.bin','.lf.meta');
@@ -22,8 +22,9 @@ LFP.time_sec_of_recording = LFP.nFileSamp/LFP.sFreq;
 %LFP.meta = meta;
 LFP.start_rec = start_rec;
 % read the data. The last rec is typically the sync pulse.
+n_samples = LFP.nFileSamp; 
 LFP.data = obj.ReadBin(start_rec,n_samples,LFP.meta ,lfp_fname,path_name); %(samp0, nSamp, meta, binName, path)
-LFP.data = int16(LFP.data ); % only a range of +/- 512 bits whcih make sense since 10bit a/d 2^10 = 1024
+LFP.data = int16(LFP.data ); % only a range of +/- 512 bits whcih make sense since 10bit a/d 2^10 = 1024 
 % What is the conversion factor?
 v_range = 2*str2double(LFP.meta.imAiRangeMax);
 n_bits = 1024;
@@ -33,9 +34,9 @@ bits_to_mV = n_bits/(v_range*1000) % this can't be right - this has to be in the
 %
 figure
 subplot(2,1,1)
-imagesc(LFP.time_sec_of_recording/60,[],LFP.data); colorbar
+imagesc((LFP.nFileSamp/2500),[],LFP.data(1:10:end,:)); colorbar
 subplot(2,1,2)
-imagesc(LFP.time_sec_of_recording/60,[],diff(LFP.data,2,1)); colorbar % CSD  - assumes linear ordering.
+imagesc(LFP.nFileSamp/2500,[],diff(LFP.data,2,1)); colorbar % CSD  - assumes linear ordering.
 caxis([-100 100])
 
 figure; imagesc(Tus,TBL.neuropixels_depth_uM,LFP.data)
