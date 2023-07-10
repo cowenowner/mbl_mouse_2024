@@ -32,6 +32,7 @@ PRM_BAD_CHANNEL0_LIST = [0 1 4 5 14 25 29 52 53 54 60 69 73 81 85 91 114 115 116
     161 176 177 184 208 224 253 294 298 302 349 382]; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
 PRM_TEMP_FOLDER_BASE = 'E:\neuropixels_vHC_stim\Denoised'; % This needs to be a SSD.
 
+
 %Functions to run
 PRM_CREATE_TCAT_FILE = true; % make false if you already created this file on a previous run to save some time.
 PRM_CREATE_LF_FILE=true; %make false if you don't want to run the LF files. Saves time

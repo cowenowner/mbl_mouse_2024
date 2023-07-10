@@ -6,9 +6,9 @@ function [LFP] = NPXL_Extract_LFP(lfp_bin_file_path, start_rec, n_samples )
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % channels = 1:10:384;
 %%
-% start_rec = 0;
-% n_samples = 100000;
-% lfp_bin_file_path = fullfile(pwd,'vHP_DV7pt2_mPFC_DV7_tetrodeconfig_g0_t0.imec1.lf.bin');
+start_rec = 0;
+n_samples = length;
+ lfp_bin_file_path = fullfile(pwd,'realtest101_23241_g0_tcat.imec0.lf.bin');
 [path_name, tmp] = fileparts(lfp_bin_file_path);
 lfp_fname = [tmp '.bin'];
 meta_fname = strrep(lfp_fname,'.lf.bin','.lf.meta');

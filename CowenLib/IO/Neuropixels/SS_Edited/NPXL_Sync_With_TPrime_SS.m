@@ -8,7 +8,7 @@ function [status,cmdout] = NPXL_Sync_With_TPrime_SS(varargin)
 PRM_ROOT_DATA_DIR = pwd; % assume you are running in the current directory. This directory should end in _g0.
 % for example: F:\Data\DANA_NAc_Acute\Rat411\1112022_DANA_REAL_g0
 PRM_TPRIME_DIR = 'C:\TPrime-win';
-PRM_AlignSpikes=false; %This will run a check on spikes after kilosort/phy
+PRM_AlignSpikes=true; %This will run a check on spikes after kilosort/phy
 EVT_Channels=[];
 EVT_Channel_Names=[];
 
