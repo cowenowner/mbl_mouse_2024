@@ -16,12 +16,3 @@ for i = 1:length(totalspk) %For every timepoint in the spike time dataset
     totalspk(i) = sum(output); % Add up the spikes within these timepoints
 end
 totalspk = totalspk'; %Invert so is column, not row 
-
-
-
-%% Creating a function 
-
-%function [out1,out2, ..., outN] = myfun(in1,in2,in3, ..., inN)
-
-
-
