@@ -7,7 +7,7 @@
 %
 % restoredefaultpath;
 % addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\mbl_mouse_2023\CowenLib'));
-lfp_bin_file_path = 'C:\data-temp\Neuropixels_HC_23242\HC101_23242_g0\HC101_23242_g0_imec0\HC101_23242_g0_tcat.imec0.lf.bin';
+lfp_bin_file_path = 'C:\Users\Administrator\Desktop\preprocessed\HC101_23242_g0_tcat.imec0.lf.bin';
 all_channels = 1:385; nCh = all_channels(end);
 
 [path_name, tmp] = fileparts(lfp_bin_file_path);
@@ -72,12 +72,8 @@ evt_t = evt_t(evt_t > (LFP.duration_of_recording_sec - epoch_time));
 %% make mvdmlab data structures (change path)
 % NOTE: this requires the vandermeerlab codebase
 %
-% git clone https://github.com/vandermeerlab/vandermeerlab
-%
-% then set a clean path (I use a MATLAB Favorite):
-%
-% restoredefaultpath;
-% addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\vandermeerlab\code-matlab\shared'));
+restoredefaultpath;
+addpath(genpath('C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023\vandermeerlab\code-matlab\shared'));
 
 % first choose channels to use -- these are good for our first hippcampal
 % recording with the manually presented odors
@@ -111,10 +107,9 @@ evt_ts.t{1} = evt_t;
 evt_ts.label{1} = 'TTL';
 
 %% set up plot
-
 cfg_mr = [];
-cfg_mr.lfpHeight = 15;
-cfg_mr.lfpSpacing = 5;
+cfg_mr.lfpHeight = 20;
+cfg_mr.lfpSpacing = 4;
 cfg_mr.lfpWidth = 0.5;
 cfg_mr.lfpColor = 'k';
 cfg_mr.evt = evt_ts;
