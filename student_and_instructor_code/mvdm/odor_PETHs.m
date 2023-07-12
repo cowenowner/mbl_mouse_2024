@@ -1,4 +1,5 @@
 %% multi-unit activity (sum of all spikes over time)
+% assumes data has been loaded, as in plot_HC_depth_profile_2.m
 cfg_MUA = [];
 cfg_MUA.tvec = lfp_tsd.tvec'; % timebase to compute MUA on
 MUA = getMUA(cfg_MUA, S);
