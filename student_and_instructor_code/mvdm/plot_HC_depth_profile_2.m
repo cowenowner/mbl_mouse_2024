@@ -12,7 +12,7 @@ plot(lfp_tsd.usr.xcoord, lfp_tsd.usr.ycoord, '.');
 title('channelmap')
 
 % 277 309 527 559 are the x-coords
-keep_idx = find(lfp_tsd.usr.xcoord == 309);
+keep_idx = find(lfp_tsd.usr.xcoord == 277);
 depths = lfp_tsd.usr.ycoord(keep_idx);
 [sorted_depths, sort_idx] = sort(depths, 'descend');
 keep_idx = keep_idx(sort_idx); % idxs of column, sorted by depth
@@ -25,7 +25,7 @@ lfp_tsd.usr.ycoord = lfp_tsd.usr.ycoord(keep_idx);
 cfg_mr = [];
 
 cfg_f = [];
-cfg_f.f = [1 475];
+cfg_f.f = [1 300];
 
 chan_list = 1:3:size(lfp_tsd.data, 1);
 for iCh = 1:length(chan_list)
@@ -57,14 +57,23 @@ end
 
 %% evt
 cfg_mr.evt = [];
-cfg_mr.evt = SelectTS([], evt, 1);
+cfg_mr.evt = evt;
+%cfg_mr.evt = SelectTS([], evt, 1);
 %cfg_mr.evt{2} = SelectTS([], evt, 2);
 %cfg_mr.evt{3} = SelectTS([], evt, 3);
 
 %% plot
-cfg_mr.lfpHeight = 20;
-cfg_mr.lfpSpacing = 4;
+cfg_mr.lfpHeight = 15;
+cfg_mr.lfpSpacing = 5;
+cfg_mr.lfpMax = 20;
 cfg_mr.lfpWidth = 0.5;
-cfg_mr.lfpColor = 'k';
+cfg_mr.spkColor = 'w';
 
 MultiRaster(cfg_mr, S)
+
+set(gca, 'Color', [0 0 0]);
+set(gca, 'XColor', [1 1 1]);
+set(gca, 'YColor', [1 1 1]);
+set(gcf, 'Color', [0 0 0]);
+set(gca, 'YTick', [])
+ylabel('')

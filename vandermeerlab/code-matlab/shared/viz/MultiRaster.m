@@ -273,7 +273,7 @@ switch plotMode
                 lower_val = (-iLFP .* cfg.lfpSpacing) - cfg.lfpHeight;
                 upper_val = (-iLFP .* cfg.lfpSpacing) + cfg.lfpHeight;
                 
-                lfp.data = rescale(lfp.data,lower_val,upper_val);
+                lfp.data = rescaleM(lfp.data,lower_val,upper_val);
                 %h.LFP(iLFP) = plot(lfp.tvec,lfp.data,'Color',cmap(iLFP,:),'LineWidth',cfg.lfpWidth);
                 h.LFP(iLFP) = reduce_plot(lfp.tvec,lfp.data,'Color',cmap(iLFP,:),'LineWidth',cfg.lfpWidth);
             end
@@ -287,7 +287,7 @@ switch plotMode
             lower_val = (-iLFP .* cfg.lfpSpacing) - cfg.lfpHeight;
             upper_val = (-iLFP .* cfg.lfpSpacing) + cfg.lfpHeight;
             
-            lfp.data = rescale(lfp.data,lower_val,upper_val);
+            lfp.data = rescaleM(lfp.data,lower_val,upper_val);
             %h.LFP = plot(lfp.tvec,lfp.data,'Color',cfg.lfpColor,'LineWidth',cfg.lfpWidth);
             h.LFP = reduce_plot(lfp.tvec,lfp.data,'Color',cfg.lfpColor,'LineWidth',cfg.lfpWidth);
         end
@@ -311,7 +311,7 @@ switch plotMode
                 lower_val = (-iLFP .* cfg.lfpSpacing) - cfg.lfpHeight;
                 upper_val = (-iLFP .* cfg.lfpSpacing) + cfg.lfpHeight;
                 
-                lfp.data = rescale(lfp.data,lower_val,upper_val);
+                lfp.data = rescaleM(lfp.data,lower_val,upper_val);
                 %h.LFP(iLFP) = plot(lfp.tvec,lfp.data,'Color',cmap(iLFP,:),'LineWidth',cfg.lfpWidth);
                 h.LFP(iLFP) = reduce_plot(lfp.tvec,lfp.data,'Color',cmap(iLFP,:),'LineWidth',cfg.lfpWidth);
             end
@@ -325,7 +325,7 @@ switch plotMode
             lower_val = (-iLFP .* cfg.lfpSpacing) - cfg.lfpHeight;
             upper_val = (-iLFP .* cfg.lfpSpacing) + cfg.lfpHeight;
             
-            lfp.data = rescale(lfp.data,lower_val,upper_val);
+            lfp.data = rescaleM(lfp.data,lower_val,upper_val);
             %h.LFP = plot(lfp.tvec,lfp.data,'Color',cfg.lfpColor,'LineWidth',cfg.lfpWidth);
             h.LFP = reduce_plot(lfp.tvec,lfp.data,'Color',cfg.lfpColor,'LineWidth',cfg.lfpWidth);
         end
@@ -354,7 +354,7 @@ switch plotMode
                 lower_val = (-iLFP .* cfg.lfpSpacing) - cfg.lfpHeight;
             upper_val = (-iLFP .* cfg.lfpSpacing) + cfg.lfpHeight;
                 
-                lfp.data = rescale(lfp.data,lower_val,upper_val);
+                lfp.data = rescaleM(lfp.data,lower_val,upper_val);
                 h.LFP(iLFP) = PlotTSDfromIV(cfg_temp,cfg.evt,lfp);
             end
         else
@@ -367,7 +367,7 @@ switch plotMode
             lower_val = (-iLFP .* cfg.lfpSpacing) - cfg.lfpHeight;
             upper_val = (-iLFP .* cfg.lfpSpacing) + cfg.lfpHeight;
             
-            lfp.data = rescale(lfp.data,lower_val,upper_val);
+            lfp.data = rescaleM(lfp.data,lower_val,upper_val);
             h = PlotTSDfromIV(cfg_temp,cfg.evt,lfp);
         end
         ylims = get(gca,'YLim'); ylims(1) = lower_val;
@@ -434,4 +434,27 @@ plotmodes = {'spikes only','ts events','iv events','ts + iv events','lfp','lfp +
 h.plotMode = plotmodes{plotMode};
 % out.plot = h;
 if exist('hS','var'); h.S = hS; end
+end
+
+function data_out = rescaleM(data_in, lower_val, upper_val)
+% rescale data linearly but ensure mean is halfway between lower_val and
+% upper_val
+
+data_in = data_in - nanmean(data_in);
+
+plus_range = max(data_in);
+minus_range = -min(data_in);
+
+rescale_mean = mean([lower_val upper_val]);
+rescale_range = upper_val - rescale_mean;
+
+if plus_range > minus_range
+    scale_factor = plus_range ./ rescale_range;
+else
+    scale_factor = minus_range ./ rescale_range;
+end
+
+data_out = rescale_mean + data_in ./ scale_factor;
+fprintf('LFP scale factor %.2f.\n', scale_factor);
+
 end
