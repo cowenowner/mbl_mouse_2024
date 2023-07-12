@@ -53,9 +53,12 @@ function h = MultiRaster(cfg_in,S)
 %           Color specifier for lfp signal. Can be 1x3 vector of RGB values [1 0 0], or a string 
 %           specifying the short name of a color ('r').
 %
-%       cfg.lfpHeight - default 5 
+%       cfg.lfpHeight - default 15 
 %           The height of the lfp from maximum to minium in y-axis units. Vertically 
 %           stretches the lfp to improve visibility of oscillations. lfp + iv mode only. 
+%
+%       cfg.lfpSpacing - default 15 
+%           Distance between LFPs. 
 %
 %       cfg.lfpWidth - default 1
 %           Line thickness for LFP. Implemented in some modes but not others.
