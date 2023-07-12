@@ -117,6 +117,10 @@ load(filename);
 %%
 T_uS = {SP.t_uS}; % This converts the timestamp list for each cell into a more easy to use cell array.
 WV = [SP.WaveformBest]'; % Waveform shapes for each neuron. This could indicate cell type.
+%THINK ABOUT THIS
+%Specifically, how to get the "best waveform", which is the most negative
+%value in the MV-> MWV struct
+
 
 % Now that the data is loaded, make sure that it looks pretty. This uses my
 % plot_raster() function. Feel free to use it if you like it.
