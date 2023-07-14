@@ -1,18 +1,18 @@
 %% multi-unit activity (sum of all spikes over time)
 % assumes data has been loaded, as in plot_HC_depth_profile_2.m
-cfg_MUA = [];
+cfg_MUA = []; 
 cfg_MUA.tvec = lfp_tsd.tvec'; % timebase to compute MUA on
-MUA = getMUA(cfg_MUA, S);
+MUA = getMUA(cfg_MUA, SP);
 
-figure; 
-subplot(121)
-plot(MUA)
-title('raw MUA (spks/s)')
+figure; % Create a figure
+subplot(121) %Create a subplot of channel 121
+plot(MUA) %Plot MUA
+title('raw MUA (spks/s)') %Add a title 
 
-subplot(122)
-MUAz = zscore_tsd(MUA);
-plot(MUAz)
-title('z-scored MUA (a.u.)');
+subplot(122) %Create a subplot of channel 122
+MUAz = zscore_tsd(MUA); %Create a variable that produces the zscore
+plot(MUAz) %Plot the zscore
+title('z-scored MUA (a.u.)'); %Add a title 
 
 
 %% event-triggered MUA

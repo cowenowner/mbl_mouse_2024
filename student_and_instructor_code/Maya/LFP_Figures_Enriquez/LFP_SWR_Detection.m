@@ -2,13 +2,18 @@
 % Question: Is the number of SWRs correlated to stimulus presentation?
 
 %% Load the Data
+% Command summary goes here
+restoredefaultpath;
+addpath(genpath('C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023\vandermeerlab\code-matlab\shared'));
+addpath('C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023\student_and_instructor_code\mvdm');
 addpath(genpath('C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023\student_and_instructor_code\Maya\LFP_Figures_Enriquez'));%For Functions
 
-datadir = ('C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023\student_and_instructor_code\Maya\LFP_Figures_Enriquez');
+datadir = ('C:\data\02_7_7_23\preprocessed');
 
 load(fullfile(datadir,'AllSpikes.mat')); % Load in experiment data
 load(fullfile(datadir,'odor_events.mat')); %Load in odor presentation times
 load(fullfile(datadir,'probe_depths.mat')); %Load in probe depths
+load(fullfile(datadir,'LFPs.mat')); %Load in probe depths
 
 %% Create event time vectors
 %Create a vector containing presentation time of odor 1, 2 and 3
@@ -23,8 +28,8 @@ event_time3 = evt.t{3};
 % NOTE: this requires cowenlablibcode
 % git clone https://github.com/cowenowner/mbl_mouse_2023
 
-addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\mbl_mouse_2023\CowenLib'));
-lfp_bin_file_path = 'C:\Users\Administrator\Desktop\preprocessed'; %%Add filepath with ".lf.bin" suffix here; will bring in the .lf.meta too
+addpath(genpath('C:\Users\Administrator\Documents\GitHub\mbl_mouse_2023\CowenLib'));
+lfp_bin_file_path = 'C:\Users\Administrator\Desktop\preprocessed\HC101_23242_g0_tcat.imec0.lf.bin'; %%Add filepath with ".lf.bin" suffix here; will bring in the .lf.meta too
 all_channels = 1:385; nCh = all_channels(end);
 
 [path_name, tmp] = fileparts(lfp_bin_file_path);
@@ -58,10 +63,15 @@ for iCh = all_channels(end):-1:1
 end
 LFP.sFreq = LFP.sFreq / cfg.decimate_factor;
 
+%%here
 % create new vector of timestamps for each LFP sample
 LFP.tvec = 0:size(LFP.data, 2)-1; LFP.tvec = LFP.tvec / LFP.sFreq;
 LFP.tvec = -LFP.tvec + LFP.duration_of_recording_sec;
 LFP.tvec = LFP.tvec(end:-1:1);
+
+% convert a given LFP channel to mvdmlab datatype ("tsd")
+% make time-stamped data (tsd) for LFPs
+
 
 % load spikes
 nCells = length(SP);
@@ -70,7 +80,7 @@ nCells = length(SP);
 for iC = 1:nCells
 
     SP(iC).t = SP(iC).t_uS * 10^-6;
-    SP(iC).t = SP(iC).t(SP(iC).t > (LFP.duration_of_recording_sec - epoch_time));
+    %SP(iC).t = SP(iC).t(SP(iC).t > (LFP.duration_of_recording_sec - epoch_time));
 
 end
 
@@ -90,7 +100,7 @@ cfg_plot.chan_list = 43:5:350;
 
 % make time-stamped data (tsd) for LFPs
 myLFP = tsd;
-myLFP.tvec = LFP.tvec;
+%myLFP.tvec = LFP.tvec; %%Throw's error, should not need?
 myLFP.data = LFP.data(cfg_plot.chan_list,:);
 for iLFP = 1:size(myLFP.data, 1)
     myLFP.cfg.hdr{iLFP}.Fs = LFP.sFreq;
