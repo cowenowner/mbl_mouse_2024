@@ -23,7 +23,7 @@ if nargin < 4
     skip_every_n_ch = 0;
 end
 if nargin < 5
-    fast_and_dirty = 0;
+    fast_and_dirty = 0; % if true, no downsampling, only load ever n recs
 end
 
 blocksz = 40e8; % For chunking the data to save memory. Adjust if ncessary.
@@ -53,12 +53,7 @@ end
 if fast_and_dirty % Do it all at once with no low pass (so aliasing issues). Great for small files, not so good for anyting > 30 minutes.
     disp('Doing it fast and dirty')
     for iCh = chans
-        LFP.Channel = iCh; % the meta file starts with 0 based
-        LFP.Channel0 = iCh-1; % the meta file starts with 0 based
-        % The above assumes that the order of samplng of the data is the
-        % same as the channel list in the meta file so that I can map one
-        % with the other, but some of my results don't seem to map on to
-        % this.
+        LFP.Channel = iCh;
         v = single(m.Data(iCh:(n_ch * decimation_factor):end));
         v = v - median(v(1:100:end));
         v(abs(v)>1000) = 0;
