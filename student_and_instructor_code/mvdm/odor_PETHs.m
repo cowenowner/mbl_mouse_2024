@@ -43,13 +43,15 @@ ylabel('z-scored MUA')
 vline(0,':');
 
 %% some single-unit PETHs
-for iC = 1:9
+nCells = length(S.t);
+for iC = 1:nCells
 
     this_S = SelectTS([], S, iC); % select only the current cell
     MUA = getMUA(cfg_MUA, this_S); % "MUA" for one cell is just that cell's firing rate
     MUAz = zscore_tsd(MUA);
 
-    subplot(3,3,iC)
+    figure(floor(iC/9) + 1)
+    subplot(3,3,mod(iC-1, 9) + 1);
 
     for iCue = 1:3
         this_out = TSDpeth(cfg_peth, MUAz, cue_evt(iCue)); hold on;
