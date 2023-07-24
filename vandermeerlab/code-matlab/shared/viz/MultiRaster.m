@@ -261,8 +261,12 @@ switch plotMode
         numLFP = length(cfg.lfp);  
         
         if numLFP > 1
-            cmap = linspecer(numLFP);
-            
+            if isfield(cfg, 'lfpColor')
+                cmap = cfg.lfpColor;
+            else
+                cmap = linspecer(numLFP);
+            end
+
             for iLFP = 1:numLFP
                 lfp = cfg.lfp(iLFP);
                 
@@ -299,7 +303,11 @@ switch plotMode
         numLFP = length(cfg.lfp);  
         
         if numLFP > 1
-            cmap = linspecer(numLFP);
+            if isfield(cfg, 'lfpColor')
+                cmap = cfg.lfpColor;
+            else
+                cmap = linspecer(numLFP);
+            end
             
             for iLFP = 1:numLFP
                 lfp = cfg.lfp(iLFP);
@@ -342,7 +350,11 @@ switch plotMode
         numLFP = length(cfg.lfp);  
         
         if numLFP > 1
-            cmap = linspecer(numLFP);
+            if isfield(cfg, 'lfpColor')
+                cmap = cfg.lfpColor;
+            else
+                cmap = linspecer(numLFP);
+            end
             
             for iLFP = 1:numLFP
                 lfp = cfg.lfp(iLFP);

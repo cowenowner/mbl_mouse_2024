@@ -10,7 +10,7 @@ cfg.true_isi = [4.5 5.5]; % ISIs in this range are true trials
 cfg.code_isi = [0.05 0.1]; % odor identity coding pulses
 
 %% load
-fn = FindFile('*.txt'); % TTL pulse times that Stephen extracted with his magical CatGT command
+fn = FindFile('scowen*.txt'); % TTL pulse times that Stephen extracted with his magical CatGT command
 evt_t = textread(fn);
 
 % remove line noise

@@ -50,7 +50,7 @@ for iC = 1:nCells
     MUA = getMUA(cfg_MUA, this_S); % "MUA" for one cell is just that cell's firing rate
     MUAz = zscore_tsd(MUA);
 
-    figure(floor(iC/9) + 1)
+    figure(1 + floor((iC-1)/9));
     subplot(3,3,mod(iC-1, 9) + 1);
 
     for iCue = 1:3
