@@ -1,7 +1,9 @@
 %% depth profile for Neuropixels 2.0 data
-addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\mbl_mouse_2023\vandermeerlab\code-matlab\shared'));
+%addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\mbl_mouse_2023\vandermeerlab\code-matlab\shared'));
+addpath(genpath('C:\Users\mvdm\Documents\GitHub\mbl_mouse_2023\vandermeerlab\code-matlab\shared'));
 
-cd('C:\data-temp\HC_2_Neuro2_g0\preprocessed');
+%cd('C:\data-temp\HC_2_Neuro2_g0\preprocessed');
+cd('C:\Users\mvdm\Dropbox (Dartmouth College)\projects\odor-decoding\preprocessed');
 load AllSpikes;
 load odor_events;
 
@@ -25,7 +27,6 @@ clear SP;
 
 
 %% MUA-peth
-
 cfg_Q = []; cfg_Q.smooth = 'gauss'; cfg_Q.gausswin_sd = 0.05;
 Q = MakeQfromS(cfg_Q, S);
 
@@ -58,3 +59,24 @@ xlabel('Time from cue onset (s)')
 ylabel('z-scored MUA')
 
 vline(0,':');
+
+%%
+param.mua_threshold = 0.5; % MUA must exceed this z-score to count
+param.twin = [0 1]; % MUA threshold crossing must occur in this window relative to cue onset
+
+cfg = [];
+cfg.method = 'raw'; cfg.minlen = 0;
+cfg.threshold = param.mua_threshold;
+mua_thr_iv = TSDtoIV(cfg, MUA);
+
+%% now make IVs for each trial and keep only those that overlap with the mua threshold crossings
+for iC = 1:3
+    this_evt = cue_evt(iC);
+    this_iv = iv(param.twin(1) + this_evt.t{1}, param.twin(2) + this_evt.t{1});
+    [~, keep_idx] = IntersectIV([], this_iv, mua_thr_iv);
+    
+    accepted_evt(iC) = this_evt;
+    accepted_evt(iC).t{1} = accepted_evt(iC).t{1}(keep_idx);
+end
+
+%% then use kept trials to build encoding model
