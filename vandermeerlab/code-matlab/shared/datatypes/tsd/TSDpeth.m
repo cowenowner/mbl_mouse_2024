@@ -52,7 +52,7 @@ if ~CheckTSD(tsd_in)
     error('Incorrectly formed tsd input.');
 end
 
-nDim = length(size(tsd_in));
+nDim = sum(size(tsd_in.data) > 1);
 
 if nDim > 2
     error('More than 2 dimensions in TSD input not yet supported.');
@@ -152,5 +152,5 @@ end
 
 % average and package
 out = tsd;
-out.data = sq(nanmean(out_data, 1))';
+out.data = sq(nanmean(out_data, 1)); if nDim == 2, out.data = out.data'; end
 out.tvec = out_tvec;
