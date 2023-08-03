@@ -1,4 +1,5 @@
-%% load the data
+%% adding cross-validation to decoding
+% load the data
 addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\mbl_mouse_2023\vandermeerlab\code-matlab\shared'));
 %addpath(genpath('C:\Users\mvdm\Documents\GitHub\mbl_mouse_2023\vandermeerlab\code-matlab\shared'));
 
@@ -65,43 +66,76 @@ ylabel('z-scored MUA')
 
 vline(0,':');
 
+%% rearrange events as table
+[evt_times, evt_labels] = TSToTable(evt);
+tstart = evt_times + cfg_peth.window(1); tend = evt_times + cfg_peth.window(2);
+remove_idx = tstart < MUA.tvec(1) | tend > MUA.tvec(end);
+evt_times(remove_idx) = []; evt_labels(remove_idx) = [];
+
 %% construct Q-mat with event codes
 cfg_Q = [];
-cfg_Q.dt = 0.05;
-cfg_Q.boxcar_size = 7;
+cfg_Q.dt = 0.25;
+%cfg_Q.boxcar_size = 7;
 
 peth_edges = -1:cfg_Q.dt:2; % in s, relative to cues
 peth_centers = peth_edges(1:end-1)+cfg_Q.dt/2;
 nBins = length(peth_edges) - 1;
 
 big_Q = []; big_Q_bin = []; big_Q_trial = []; big_Q_cue = []; big_Q_tvec = [];
-tc = [];
-for iC = 1:3
-    
-    tc{iC} = zeros(nCells,nBins);
 
-    nEvt = length(cue_evt(iC).t{1});
-    for iEvt = 1:nEvt
+nEvt = length(evt_times);
+for iEvt = 1:nEvt
 
-    cfg_Q.tvec_edges = peth_edges + cue_evt(iC).t{1}(iEvt);
+    cfg_Q.tvec_edges = peth_edges + evt_times(iEvt);
     this_Q = MakeQfromS(cfg_Q, S);
 
     big_Q = cat(2, big_Q, this_Q.data);
     big_Q_bin = cat(2, big_Q_bin, 1:nBins);
     big_Q_trial = cat(2, big_Q_trial, iEvt.*ones(1, nBins));
-    big_Q_cue = cat(2, big_Q_cue, iC.*ones(1, nBins));
+    big_Q_cue = cat(2, big_Q_cue, evt_labels(iEvt).*ones(1, nBins));
     big_Q_tvec = cat(2, big_Q_tvec, cfg_Q.tvec_edges(1:end-1)+cfg_Q.dt/2);
 
-    tc{iC} = tc{iC} + this_Q.data;
-
-    end
-
-    tc{iC} = tc{iC} ./ nEvt; % ensure this is average firing rate
 end
 
 big_Q_tsd = tsd;
-big_Q_tsd.data = big_Q;
-big_Q_tsd.tvec = big_Q_tvec;
+big_Q_tsd.data = big_Q; big_Q_tsd.tvec = big_Q_tvec;
+big_Q_tsd.usr.bin = big_Q_bin; big_Q_tsd.usr.trial = big_Q_trial; big_Q_tsd.usr.cue = big_Q_cue;
+
+%% create trial test/train partitions
+C = cvpartition(nEvt, 'LeaveOut');
+
+p_map = nan(size(big_Q_tsd,tvec)); % output variable
+
+for iP = C.NumTestSets:-1:1
+
+    % training: construct tuning curves
+    this_train_trial = find(C.training(iP));
+    keep = ismember(big_Q_tsd.usr.trial, this_train_trial);
+    this_train_Q = SelectTSD([], big_Q_tsd, keep);
+
+    tc = QtoTC_byCue(this_train_Q);
+
+    % testing: decode
+    this_test_trial = find(C.test(iP));
+    keep = ismember(big_Q_tsd.usr.trial, this_test_trial);
+    this_test_Q = SelectTSD([], big_Q_tsd, keep);
+
+    for iBin = 1:nBins
+    tc_decode = cat(2, tc{1}(:, iBin), tc{2}(:, iBin), tc{3}(:, iBin));
+
+    cfg_dec = [];
+    p = DecodeZ(cfg_dec, this_test_Q, tc_decode);
+    [~, p_map(keep)] = max(p.data, [], 1); % find bin with highest probability
+
+    % now where to put this? this is really only one data point -- that for
+    % this partition (trial) and bin!
+
+    
+
+    end % over bins
+
+end % over partitions
+
 %% format TC and decode
 %iBin = 4;
 
