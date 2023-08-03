@@ -41,6 +41,7 @@ cfg_def.subplotdim = [10 8];
 cfg_def.bgcol = 'k';
 cfg_def.fgcol = 'r';
 cfg_def.MarkerSize = 10;
+cfg_def.Marker = '-';
 cfg_def.iv_only = 0; % if 1, don't plot tsd
 cfg_def.title = [];
 
@@ -86,7 +87,7 @@ switch cfg.display
         h.LFP_iv = nan(size(tstart_idx));
         for iI = 1:length(tstart_idx)
         
-            h.LFP_iv(iI) = plot(tsd_in.tvec(tstart_idx(iI):tend_idx(iI)),temp_data(tstart_idx(iI):tend_idx(iI)),'Color', cfg.fgcol,'MarkerSize',cfg.MarkerSize);
+            h.LFP_iv(iI) = plot(tsd_in.tvec(tstart_idx(iI):tend_idx(iI)),temp_data(tstart_idx(iI):tend_idx(iI)),'Color', cfg.fgcol,'MarkerSize',cfg.MarkerSize,'Marker',cfg.Marker);
             %h.LFP_iv(iI) = reduce_plot(tsd_in.tvec(tstart_idx(iI):tend_idx(iI)),temp_data(tstart_idx(iI):tend_idx(iI)),cfg.fgcol,'MarkerSize',cfg.MarkerSize);
             
         end

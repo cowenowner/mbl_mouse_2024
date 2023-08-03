@@ -1,5 +1,5 @@
-function iv1 = IntersectIV(cfg_in,iv1,iv2)
-% function iv = IntersectIV(cfg,iv1,iv2)
+function [iv1, keep] = IntersectIV(cfg_in,iv1,iv2)
+% function [iv, keep_idx] = IntersectIV(cfg,iv1,iv2)
 %
 % keep only those iv1's that include a piece of iv2
 %
@@ -61,6 +61,7 @@ end
 
 iv1.tstart = iv1.tstart(logical(keep));
 iv1.tend = iv1.tend(logical(keep));
+keep = find(keep);
 
 % housekeeping
 iv1.cfg.history.mfun = cat(1,iv1.cfg.history.mfun,mfun);

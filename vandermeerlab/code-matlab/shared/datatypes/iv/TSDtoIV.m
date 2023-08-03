@@ -102,7 +102,7 @@ up_t(merge_idx+1) = [];
 
 % remove too short
 iv_len = down_t-up_t;
-keep_idx = iv_len > cfg.minlen;
+keep_idx = iv_len >= cfg.minlen;
 
 iv_out.tstart = up_t(keep_idx);
 iv_out.tend = down_t(keep_idx);
