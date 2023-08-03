@@ -52,8 +52,10 @@ if ~CheckTSD(tsd_in)
     error('Incorrectly formed tsd input.');
 end
 
-if size(tsd_in.data,1) > 1
-    error('More than 1 dimension in TSD input not yet supported.');
+nDim = sum(size(tsd_in.data) > 1);
+
+if nDim > 2
+    error('More than 2 dimensions in TSD input not yet supported.');
 end
 
 if ~isfield(t_in,'type') % assume raw times
@@ -83,7 +85,24 @@ else
     end
 end
 
+% check that iv's don't exceed bounds of data
+early_PETH_idx = this_iv.tstart < tsd_in.tvec(1);
+if sum(early_PETH_idx) > 0
+    warning('%d preceding PETH(s) removed.', sum(early_PETH_idx));
+    this_iv.tstart = this_iv.tstart(~early_PETH_idx);
+    this_iv.tend = this_iv.tend(~early_PETH_idx);
+end
+
+late_PETH_idx = this_iv.tend > tsd_in.tvec(end);
+if sum(late_PETH_idx) > 0
+    warning('%d exceeding PETH(s) removed.', sum(late_PETH_idx));
+    this_iv.tstart = this_iv.tstart(~late_PETH_idx);
+    this_iv.tend = this_iv.tend(~late_PETH_idx);
+end
+
 nT = length(this_iv.tstart);
+
+
 
 switch cfg.mode
     
@@ -97,10 +116,18 @@ switch cfg.mode
            error('Raw mode requires equal tsd samples for each trial.');
         end
         
-        for iT = nT:-1:1 % slow! could be vectorized
-        
-            out_data(iT,:) = tsd_in.data(start_idx(iT):end_idx(iT)); % need to generalize to 2-D
-            
+        % 1-D
+        switch nDim
+            case 1
+                for iT = nT:-1:1 % slow! could be vectorized
+                    out_data(iT,:) = tsd_in.data(start_idx(iT):end_idx(iT));
+                end
+
+                % 2-D
+            case 2
+                for iT = nT:-1:1 % slow! could be vectorized
+                    out_data(iT,:,:) = tsd_in.data(:, start_idx(iT):end_idx(iT))';
+                end
         end
         out_tvec = tsd_in.tvec(start_idx(1):end_idx(1));
         out_tvec = out_tvec-nanmean(out_tvec); % this is an approximation -- depends on exact spacing of input tsd
@@ -125,5 +152,5 @@ end
 
 % average and package
 out = tsd;
-out.data = nanmean(out_data);
+out.data = sq(nanmean(out_data, 1)); if nDim == 2, out.data = out.data'; end
 out.tvec = out_tvec;

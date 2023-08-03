@@ -29,6 +29,12 @@ figure;
 
 cols = 'rgb';
 for iC = 1:3
+
+    % remove illegal events
+    tstart = cue_evt(iC).t{1} + cfg_peth.window(1); tend = cue_evt(iC).t{1} + cfg_peth.window(2);
+    remove_idx = tstart < MUAz.tvec(1) | tend > MUAz.tvec(end);
+    cue_evt(iC).t{1}(remove_idx) = [];
+
     out = TSDpeth(cfg_peth, MUAz, cue_evt(iC));
     h(iC) = plot(out, 'Color', cols(iC), 'LineWidth', 2);
     hold on;
