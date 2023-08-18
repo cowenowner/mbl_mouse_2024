@@ -1,6 +1,7 @@
 %% adding cross-validation to decoding
 % load the data
 addpath(genpath('C:\Users\mvdmlab\Documents\GitHub\mbl_mouse_2023\vandermeerlab\code-matlab\shared'));
+addpath('C:\Users\mvdmlab\Documents\GitHub\mbl_mouse_2023\student_and_instructor_code\mvdm');
 %addpath(genpath('C:\Users\mvdm\Documents\GitHub\mbl_mouse_2023\vandermeerlab\code-matlab\shared'));
 
 cd('C:\data-temp\HC_2_Neuro2_g0\preprocessed');
@@ -74,8 +75,8 @@ evt_times(remove_idx) = []; evt_labels(remove_idx) = [];
 
 %% construct Q-mat with event codes
 cfg_Q = [];
-cfg_Q.dt = 0.25;
-%cfg_Q.boxcar_size = 7;
+cfg_Q.dt = 0.05;
+cfg_Q.boxcar_size = 7;
 
 peth_edges = -1:cfg_Q.dt:2; % in s, relative to cues
 peth_centers = peth_edges(1:end-1)+cfg_Q.dt/2;
@@ -104,52 +105,41 @@ big_Q_tsd.usr.bin = big_Q_bin; big_Q_tsd.usr.trial = big_Q_trial; big_Q_tsd.usr.
 %% create trial test/train partitions
 C = cvpartition(nEvt, 'LeaveOut');
 
-p_map = nan(size(big_Q_tsd,tvec)); % output variable
+p_map = nan(size(big_Q_tsd.tvec)); % output variable
 
 for iP = C.NumTestSets:-1:1
 
     % training: construct tuning curves
     this_train_trial = find(C.training(iP));
-    keep = ismember(big_Q_tsd.usr.trial, this_train_trial);
+    keep = find(ismember(big_Q_tsd.usr.trial, this_train_trial));
     this_train_Q = SelectTSD([], big_Q_tsd, keep);
 
     tc = QtoTC_byCue(this_train_Q);
 
     % testing: decode
     this_test_trial = find(C.test(iP));
-    keep = ismember(big_Q_tsd.usr.trial, this_test_trial);
+    keep = find(ismember(big_Q_tsd.usr.trial, this_test_trial));
     this_test_Q = SelectTSD([], big_Q_tsd, keep);
 
     for iBin = 1:nBins
-    tc_decode = cat(2, tc{1}(:, iBin), tc{2}(:, iBin), tc{3}(:, iBin));
+        tc_decode = cat(2, tc{1}(:, iBin), tc{2}(:, iBin), tc{3}(:, iBin));
 
-    cfg_dec = [];
-    p = DecodeZ(cfg_dec, this_test_Q, tc_decode);
-    [~, p_map(keep)] = max(p.data, [], 1); % find bin with highest probability
-
-    % now where to put this? this is really only one data point -- that for
-    % this partition (trial) and bin!
-
-    
+        cfg_dec = [];
+        p = DecodeZ(cfg_dec, this_test_Q, tc_decode);
+        [~, p_map(keep(iBin))] = max(p.data(:, iBin)); % find bin with highest probability
 
     end % over bins
 
 end % over partitions
 
-%% format TC and decode
+%% analyze results
 %iBin = 4;
 
 clear dec_acc dec_accCue
 for iBin = 1:nBins
 
-    tc_decode = cat(2, tc{1}(:, iBin), tc{2}(:, iBin), tc{3}(:, iBin));
-
-    cfg_dec = [];
-    p = DecodeZ(cfg_dec, big_Q_tsd, tc_decode);
-    [~, p_map] = max(p.data, [], 1); % find bin with highest probability
-
-    bins_to_compare = find(big_Q_bin == iBin);
-    cm = confusionmat(p_map(bins_to_compare), big_Q_cue(bins_to_compare));
+    bins_to_compare = find(big_Q_tsd.usr.bin == iBin);
+    cm = confusionmat(p_map(bins_to_compare), big_Q_tsd.usr.cue(bins_to_compare));
     cm = cm ./ repmat(sum(cm), [3 1]);
 
     dec_acc(iBin) = mean(diag(cm));
@@ -157,9 +147,9 @@ for iBin = 1:nBins
         dec_accCue{iC}(iBin) = cm(iC, iC);
     end
 
-    subplot(8, 8, iBin)
-    imagesc(cm); colorbar; set(gca, 'TickDir', 'out');
-    title(sprintf('%.1fs %.1f%%', peth_centers(iBin), dec_acc(iBin)*100));
+    %subplot(8, 8, iBin)
+    %imagesc(cm); colorbar; set(gca, 'TickDir', 'out');
+    %title(sprintf('%.1fs %.1f%%', peth_centers(iBin), dec_acc(iBin)*100));
 
 end
 
@@ -177,6 +167,59 @@ set(gca, 'FontSize', 18, 'TickDir', 'out')
 vline(0, 'k'); 
 hline(0.33, ':r');
 ylabel('decoding accuracy'); xlabel('time from cue (s)')
+
+%% now decode all data
+[max_val, max_ind] = max(dec_acc) % find which time bin to use for decoding
+
+tc = QtoTC_byCue(big_Q_tsd);
+tc_decode = cat(2, tc{1}(:, max_ind), tc{2}(:, max_ind), tc{3}(:, max_ind));
+
+cfg_Q = [];
+cfg_Q.dt = 0.025;
+Q_decode = MakeQfromS(cfg_Q, S);
+
+cfg_dec = [];
+p = DecodeZ(cfg_dec, Q_decode, tc_decode);
+
+%% set up LFPs for plotting
+load LFPs;
+
+keep_idx = find(lfp_tsd.usr.xcoord == 277);
+depths = lfp_tsd.usr.ycoord(keep_idx);
+[sorted_depths, sort_idx] = sort(depths, 'descend');
+keep_idx = keep_idx(sort_idx); % idxs of column, sorted by depth
+
+lfp_tsd.data = lfp_tsd.data(keep_idx, :);
+lfp_tsd.usr.xcoord = lfp_tsd.usr.xcoord(keep_idx);
+lfp_tsd.usr.ycoord = lfp_tsd.usr.ycoord(keep_idx);
+
+cfg_mr = [];
+
+cfg_f = [];
+cfg_f.f = [1 300];
+
+chan_list = 1:3:size(lfp_tsd.data, 1);
+for iCh = 1:length(chan_list)
+
+    this_lfp = lfp_tsd;
+    this_lfp.data = this_lfp.data(chan_list(iCh), :);
+    
+    cfg_mr.lfp(iCh) = FilterLFP(cfg_f, this_lfp);
+
+end
+
+MultiRaster(cfg_mr, S);
+
+p1 = tsd(p.tvec, p.data(1,:));
+p2 = tsd(p.tvec, p.data(2,:));
+p3 = tsd(p.tvec, p.data(3,:));
+
+ph(1) = plot(p1.tvec, p1.data*10, 'r');
+ph(2) = plot(p2.tvec, p2.data*10, 'g');
+ph(3) = plot(p3.tvec, p3.data*10, 'b');
+
+%%
+%%% OUTTAKES %%%
 
 %%
 param.mua_threshold = 0.5; % MUA must exceed this z-score to count
