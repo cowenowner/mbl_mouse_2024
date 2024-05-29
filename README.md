@@ -1,5 +1,5 @@
-# mbl_mouse_2023
-Code for the Woods Hole MBL 2023 mouse course
+# mbl_mouse_2024
+Code for the Woods Hole MBL 2024 mouse course. In inherits a lot from the previous 2023 course.
 
 ## INSTALL:
 (students should not have to worry about this as it should only need to be done once per computer)
