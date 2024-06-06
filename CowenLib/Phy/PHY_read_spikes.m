@@ -1,14 +1,14 @@
 function [SP, INFO] = PHY_read_spikes(data_dir,sFreq, groups_to_load)
 % Reads spikes from the output of Phy. Stores them in a structure SP
 %
-% Cowen 2022
+% COWEN 2023 - Replaced loading the synced_spike_seconds.npy with
+% spike_seconds.npy as the syncing was not required - mistake as this is
+% already being done with the event files.
+%
 SP = []; % empty in case no spikes are found.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if nargin < 1
     data_dir = pwd;
-end
-if nargin < 2
-    sFreq = 30000;
 end
 if nargin < 3
     groups_to_load = {'good'}; % you can also include mua.
@@ -28,8 +28,8 @@ if ~exist(fullfile(data_dir,'probe_depths.mat'),'file')
 else
     load(fullfile(data_dir,'probe_depths.mat'),'tip_depth_mm');
 end
-if ~exist(fullfile(data_dir,'synced_spike_seconds.npy'),'file')
-    error(' You need to sync with TPrime before running to get synced_spike_seconds.npy')
+if ~exist(fullfile(data_dir,'spike_seconds.npy'),'file')
+    error('No spike_seconds.npy file found')
 end
 
 C = readNPY(fullfile(data_dir,'spike_clusters.npy'));
@@ -37,17 +37,16 @@ AMP = readNPY(fullfile(data_dir,'amplitudes.npy'));
 % The 'synced_spike_seconds.npy' is produced by running
 % NPXL_Sync_With_TPrime. You sadly need to do this to guarantee that the
 % spike times are truly aligned.
-T_usec = readNPY(fullfile(data_dir,'synced_spike_seconds.npy'));
+T_usec = readNPY(fullfile(data_dir,'spike_seconds.npy'));
 T_usec = T_usec*1e6;
 if any(diff(T_usec)<0)
-    disp('WARNING: synced_spike_seconds is not in the correct order. Probably due to Tprime. Will attempt to correct.')
+    disp('WARNING: spike_seconds is not in the correct order. Will attempt to correct.')
     sum(diff(T_usec)<0)
     % Correcting: This should fix all of the issues.
     [T_usec_sorted, six] = sort(T_usec); 
     C = C(six);
     AMP = AMP(six);
 end
-
 
 TPLT = readNPY(fullfile(data_dir,'templates.npy'));
 TPLTind = readNPY(fullfile(data_dir,'templates_ind.npy')); % I don't think I need this, but need to be careful.
@@ -81,7 +80,6 @@ for iG = 1:length(groups_to_load)
         t_uS = T_usec(SPK_IX);
         amp = single(AMP(SPK_IX));
         
-
         if any(diff(t_uS) <=0)
             disp('WARNING: out of order or duplicate timestamps')
             % find these timestamps in SPK_IX and remove 
@@ -96,7 +94,7 @@ for iG = 1:length(groups_to_load)
         SP(cnt).PHYLabel = CI.group{row_ix};
         SP(cnt).amp = CI.amp(row_ix);
         SP(cnt).amp_all = amp;
-        SP(cnt).template_index0 = CI.ch(row_ix); % this is the index to the template for this cluster (I am 99% certain of this).
+        SP(cnt).template_index0 = CI.ch(row_ix); % this is the index to the template for this cluster (I am 87% certain of this).
         SP(cnt).depth_on_probe = CI.depth(row_ix);
         SP(cnt).depth_of_probe_tip_uM = tip_depth_mm*1000;
         SP(cnt).neuropixels_depth_uM = tip_depth_mm*1000 - CI.depth(row_ix); % THis is only appropriate for neuropixels. 1000 converts depth from uM to mm.

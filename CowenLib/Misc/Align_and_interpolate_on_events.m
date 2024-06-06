@@ -28,9 +28,11 @@ for iA = 1:length(align_events)
     for iC = 1:Cols(M)
         V = MM(:,iC);
         BADIX = isnan(V) | isinf(V);
+        if sum(BADIX) >1
         if fill_nans_with_interpolants
             C = Count_contiguous(BADIX);
             non_interp_IX = C >= n_contig_for_interp;
+        end
         end
         if sum(~BADIX) > 5
             m(:,iC) = interp1(newx(~BADIX),V(~BADIX),new_x_zero_is_center,'linear'); % pchip does a better job - does not create the -infinity issue (log(0)

@@ -1,5 +1,19 @@
 function BRST = Burst_analysis(t_msec,burst_detect_method)
 % Cotterill, E., & Eglen, S. J. (2019). Burst Detection Methods. Advances in Neurobiology, 22, 185–206. https://doi.org/10.1007/978-3-030-11135-9_8
+% Testing
+% [t] = Burst_pulse_train_of_given_LV(2, 0:.2:1.6, 80, 120);
+% [t] = Burst_pulse_train_of_given_LV(4, 0:.2:1.6, 480, 2120);
+% Burst_analysis(t{1}*1000,'LogISIPasquale')
+% ISI = [gamrnd(1/10,17,2000,1);  gamrnd(1,14,2000,1)]/15;
+% ISI = ISI(randperm(length(ISI)));
+% ISI(ISI<.002) = [];
+% ISI = randmixexp(5,8,1,12120)'; 
+% ISI(ISI<.002) = [];
+% figure(1);histogram(log10(ISI));
+% t = cumsum(ISI); figure(2); plot_raster(t)
+% Burst_analysis(t*1000,'LogISIPasquale')
+%
+% Cowen 2023
 if nargin < 2
     burst_detect_method = 'LogISIPasquale'; %GraceAndBunny
     %     burst_detect_method = 'GraceAndBunny'; %GraceAndBunny
@@ -26,7 +40,7 @@ BRST.HistISI_ctrs_ms = x_ms;
 Hsmth = sgolayfilt(BRST.HistISI,3,9); % Actually pasquale uses a loewess filter but not sure this would do any better. Could try.
 Hsmth(Hsmth < 0) = 0;
 % HsmthL = loess(1:length(BRST.HistISI), BRST.HistISI,1:length(BRST.HistISI),.5,2); % Actually pasquale uses a loewess filter but not sure this would do any better. Could try.
-
+BRST.HistISIsmth = Hsmth;
 th = max(Hsmth)/5;
 IXmax = islocalmax(Hsmth) & Hsmth > th;
 IXmin = islocalmin(Hsmth);
@@ -67,9 +81,9 @@ switch burst_detect_method
         % this method seems to kill too many good bursts.. I tried
         % Pasquale's code - not really happy wiht it but needs some more
         % testing.
-        BRST.MinPeakMs = 150;
-        BRST.maxISImaxTh = 1000;
-        BRST.VoidThresh = 0.7;
+        BRST.MinPeakMs = 100; % This is what is the minimum peak cutoff used in Pasquale and also Cotterril. 
+        BRST.maxISImaxTh = 1000; % note in Cotterill or Pasquale - but seemed reasonable. Maybe omit.
+        BRST.VoidThresh = 0.7; % defined in pasquale
         if 0
             new_ts_ms = round(t_msec*1000);
             sp = sparse(1,new_ts_ms,1);
@@ -103,14 +117,33 @@ switch burst_detect_method
                 void(iP) = 1-(minval/sqrt(pk1_count*pk2_count));
             end
             if any(void >= BRST.VoidThresh)
+                % This implements The smallest ISImini for
+                % which void(i) > 0.7 is set as the threshold for the maximum
+                % ISI in a burst, maxI SI (see Fig. 4)
                 [~,mxix] = max(void);
                 pk2_ISI = BRST.PeakISIs(other_peaks_ix(mxix));
                 XIX = x_ms > pk1_ISI & x_ms < pk2_ISI;
                 IX = min(Hsmth(XIX)) == Hsmth & XIX;
                 ix = find(IX);
                 BRST.BurstThreshMsec = x_ms(ix(1));
+                BRST.pk1_ISI = pk1_ISI; % peak before
+                BRST.pk2_ISI = pk2_ISI; % peak after.
+            end
+  
+            % Pasquale: I just noticed
+            % from the Cotterill paper that this
+            % implementation might have missed the last condition: If no
+            % point with a void value above 0.7 is found, or if max ISI >
+            % MCV, bursts are detected using MCV as the threshold for the
+            % maximum ISI in a burst and then extended to include spikes
+            % within maxISI of the beginning or end of each of these
+            % bursts.
+
+            if isempty(void) || min(void) < BRST.VoidThresh || isempty(BRST.BurstThreshMsec)
+                % disp("NO THRESH FOUND!")
+                BRST.BurstThreshMsec = BRST.MinPeakMs; % should be a min, not a peaK?
                 BRST.pk1_ISI = pk1_ISI;
-                BRST.pk2_ISI = pk2_ISI;
+                BRST.pk2_ISI = [];
             end
             
         end
@@ -180,8 +213,16 @@ if ~isempty(BRST.BurstThreshMsec) && BRST.BurstThreshMsec < BRST.MaxBurstISIms
     BRST.PortionSpikesInBurst = sum(BRST.nPerBurst)/length(t_msec);
     BRST.MeanBurstDurationMsec = mean(BRST.BurstDursMsec);
 else
-    %     disp('no burst thresh determined')
     BRST.BurstThreshMsec = [];
+
+    if 0
+    figure(102)
+    plot(x_ms,BRST.HistISI);
+    hold on
+    plot(x_ms,BRST.HistISIsmth)
+    set(gca,'XScale','log')
+    title('No bursts detected')
+    end
     return
 end
 %%
@@ -190,6 +231,8 @@ if nargout == 0
     subplot(2,3,1)
     plot(x_ms,BRST.HistISI);
     %     set(gca,'XTickLAbel',round(10.^BRST.HistISI_logms_x(1:end-1))))
+    hold on
+    plot(x_ms,BRST.HistISIsmth)
     set(gca,'XScale','log')
     plot_vert_line_at_zero(BRST.BurstThreshMsec)
     % yyaxis right

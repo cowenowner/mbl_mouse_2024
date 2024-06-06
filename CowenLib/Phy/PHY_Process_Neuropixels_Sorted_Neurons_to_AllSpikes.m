@@ -29,8 +29,8 @@ end
 obj = SGLX_Class;
 meta = obj.ReadMeta(meta_file(1).name,phy_dir);
 sFreq = str2double(meta.imSampRate); % MAKE SURE THAT THIS IS THE TRUE RATE!!!!
-if sFreq == round(sFreq)
-    disp('WARNING: The sample rate in your ap.meta file is exactly 30000. THIS IS NOT THE TRUE RATE. Run the calibration tool and update the .meta file.')
+if sFreq == 30000
+    disp('WARNING: The sample rate in your ap.meta file is exactly 30000. THIS IS NOT THE TRUE RATE. Run the calibration tool in SPikeGLX and update the .meta file yourself. https://billkarsh.github.io/SpikeGLX/help/syncEdges/Sync_edges/')
 end
 
 SP = PHY_read_spikes(phy_dir,sFreq,{'good'}); % This is from cluster_info.txv. The last col is the group which is the user-specified rating (green rows in phy).

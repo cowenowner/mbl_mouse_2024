@@ -1,8 +1,12 @@
-function h = plot_linked_lines_diff_plot(M)
+function h = plot_linked_lines_diff_plot(M,clr)
 % A linked line difference plot.
 % INPUT: A 2 column matrix where the first column is linked to values in
 % the second column.
-hh = plot([ones(size(M(:,1))) ones(size(M(:,1)))+1]',[M(:,1) M(:,2)]','.-','MarkerSize',28,'LineWidth',1,'Color','k');
+if nargin < 2
+    clr = [0 0 0];
+end
+
+hh = plot([ones(size(M(:,1))) ones(size(M(:,1)))+1]',[M(:,1) M(:,2)]','.-','MarkerSize',28,'LineWidth',1,'Color',clr);
 a = axis;
 a(1) = .75;
 a(2) = 2.25;

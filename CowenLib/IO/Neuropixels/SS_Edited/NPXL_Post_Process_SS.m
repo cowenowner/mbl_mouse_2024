@@ -1,4 +1,4 @@
-function NPXL_Post_Process(varargin)
+function NPXL_Post_Process_SS(varargin)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%EVT.
 % TO KNOW:
 % You should probably run this function through NPXL_Post_Process_Run.m
@@ -35,6 +35,9 @@ function NPXL_Post_Process(varargin)
 PRM_ROOT_DATA_DIR = pwd; % assume you are running in the current directory. This directory should end in _g0.
 PRM_BAD_CHANNEL0_LIST = []; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
 PRM_TEMP_FOLDER_LOCATION = 'C:\Temp\SpikeSorting';
+%Probe Type
+PRM_NP2=false; %default is NP1
+
 
 %Which Commands to run
 PRM_CREATE_TCAT_FILE = true; % make false if you already created this file on a previous run to save some time.
@@ -42,9 +45,14 @@ PRM_CREATE_LF_FILE=true;
 PRM_COPY_FILES=true;
 PRM_CREATE_CHANNELMAP=true; 
 PRM_RUN_DENOISE=true;
-PRM_RUN_KILOSORT=true;
+PRM_RUN_OVERSTRIKE=false;
+PRM_RUN_REM_NOISE=false;
+PRM_RUN_KILOSORT=false;
 
-
+%OVerstrike parameters
+PRM_STIM_FILE_EXT='*.xa_5_0.txt'; %This uses stim files from the xa stream of ch5 (after catGT runs) 
+zero_time_win_in_s=0.002;%  Removes a 2 ms window post stim as default
+PRM_CAGE_TIMES=[]; %in seconds to remove any values within this time window
 %Cat GT Parameters for events
 PRM_EVENT_CHANNELS=[5]; %Analog Signal on Channel 5
 PRM_XA_Duration = [0]; %Duration of analog pulse 0 will extract everything
@@ -75,16 +83,30 @@ NPXL_Extract_Events_With_CatGT_SS('PRM_ROOT_DATA_DIR', PRM_ROOT_DATA_DIR,...
         'PRM_INAROW',PRM_INAROW,...
         'PRM_XA_THR1',PRM_XA_THR1,...
         'PRM_XA_THR2',PRM_XA_THR2);
-
+%%
  if PRM_CREATE_LF_FILE
-     NPXL_Process_LF_With_CatGT('PRM_ROOT_DATA_DIR', PRM_ROOT_DATA_DIR,...
-      'PRM_BAD_CHANNEL0_LIST', PRM_BAD_CHANNEL0_LIST)
+     if PRM_NP2
+         [tcat_lf_file]=NPXL_Process_LF_With_CatGT_NP2('PRM_ROOT_DATA_DIR', PRM_ROOT_DATA_DIR,...
+             'PRM_BAD_CHANNEL0_LIST', PRM_BAD_CHANNEL0_LIST);
+     else
+         [tcat_lf_file]= NPXL_Process_LF_With_CatGT('PRM_ROOT_DATA_DIR', PRM_ROOT_DATA_DIR,...
+             'PRM_BAD_CHANNEL0_LIST', PRM_BAD_CHANNEL0_LIST);
+     end
  end
-
+%%
 if PRM_CREATE_TCAT_FILE
     disp('Running CatGT. Might take a while.')
-    [tcat_ap_file] = NPXL_Process_AP_With_CatGT('PRM_ROOT_DATA_DIR', PRM_ROOT_DATA_DIR, ...
-        'PRM_BAD_CHANNEL0_LIST', PRM_BAD_CHANNEL0_LIST);
+    if PRM_NP2
+        if PRM_CREATE_LF_FILE == false
+            [tcat_ap_file] = NPXL_Process_AP_With_CatGT_NP2('PRM_ROOT_DATA_DIR', PRM_ROOT_DATA_DIR, ...
+                'PRM_BAD_CHANNEL0_LIST', PRM_BAD_CHANNEL0_LIST);
+        else
+            tcat_ap_file=strrep(tcat_lf_file,'lf','ap');
+        end
+    else
+        [tcat_ap_file] = NPXL_Process_AP_With_CatGT('PRM_ROOT_DATA_DIR', PRM_ROOT_DATA_DIR, ...
+            'PRM_BAD_CHANNEL0_LIST', PRM_BAD_CHANNEL0_LIST);
+    end
 else
     % assume that it already exists. Get the fname
     d = dir(fullfile(AP_FILE_DIR,'*tcat*.ap.bin'));
@@ -100,6 +122,7 @@ tcat_meta_file = strrep(tcat_ap_file,'.ap.bin','.ap.meta');
     [~,n,ext] = fileparts(tcat_ap_file);
     dest_ap_fname = fullfile(PRM_TEMP_FOLDER_LOCATION,[ 'denoise_' n ext] );
     dest_meta_fname = strrep(dest_ap_fname,'.ap.bin','.ap.meta');
+%%    
 if PRM_COPY_FILES
     % Copy to the SSD or temp dir for cleaning and spike sorting.
     disp('Copying ap.bin to temp directory for processing.')
@@ -117,18 +140,23 @@ if PRM_CREATE_CHANNELMAP
     tcat_meta_file_name=regexp(tcat_meta_file,'((?<=imec0\\).*(?=.meta))','match');
     tcat_meta_file_name=strrep(tcat_meta_file_name,'.ap','.ap.meta');
 
-    %[PRM_chanMapFile,PRM_chanMapPath]=SGLXMetaToCoords_SS('metaName',tcat_meta_file_name{1},'metaFilePath',AP_FILE_DIR);
-    [PRM_chanMapFile,PRM_chanMapPath]=SGLXMetaToCoords_SS('metaName',tcat_meta_file_name{1},'path',AP_FILE_DIR);
+    [PRM_chanMapFile,PRM_chanMapPath]=SGLXMetaToCoords_SS('metaName',tcat_meta_file_name{1},'metaFilePath',AP_FILE_DIR);
     PRM_CHANNEL_MAP_FILE=fullfile(PRM_chanMapPath,PRM_chanMapFile);
     fprintf('Channel Map created in location  %s \n', PRM_CHANNEL_MAP_FILE)
 end
-
+%%
 % Would be good to get the rms of the file before sending here for
 % reference
 if PRM_RUN_DENOISE
-    NPXL_Denoise_ap_bin_file('PRM_BIN_FNAME', dest_ap_fname,...
-        'PRM_ADDITIONAL_BAD_CHANNELS0',PRM_BAD_CHANNEL0_LIST,...
-        'CHANNEL_MAP_FILE',PRM_CHANNEL_MAP_FILE);
+    if PRM_NP2
+        NPXL_NP2_Denoise_ap_bin_file('PRM_BIN_FNAME', dest_ap_fname,...
+            'PRM_ADDITIONAL_BAD_CHANNELS0',PRM_BAD_CHANNEL0_LIST,...
+            'CHANNEL_MAP_FILE',PRM_CHANNEL_MAP_FILE);
+    else
+        NPXL_Denoise_ap_bin_file('PRM_BIN_FNAME', dest_ap_fname,...
+            'PRM_ADDITIONAL_BAD_CHANNELS0',PRM_BAD_CHANNEL0_LIST,...
+            'CHANNEL_MAP_FILE',PRM_CHANNEL_MAP_FILE);
+    end
         
 end
 
@@ -137,6 +165,27 @@ end
 % tcat will take over.
 disp('Check the _tcat files. If they are good, you can probably delete the original ap.bin and lf.bin files.')
 
+%% 
+%Run Overstrike to quickly remove the stimulation artifact
+%Change the extension of the stim file it reads. 
+%NOTE: Should have already run CAT_GT Event extraction and preferably run
+%it on the catgt file.
+if PRM_RUN_OVERSTRIKE
+    disp('Running Overstrike')
+    NPXL_Zero_Artifact_OverStrike('PRM_ROOT_DATA_DIR',PRM_ROOT_DATA_DIR,...
+        'PRM_STIM_FILE_EXT',PRM_STIM_FILE_EXT,'zero_time_win_in_s',zero_time_win_in_s,...
+        'PRM_CAGE_TIMES',PRM_CAGE_TIMES,'PRM_BAD_CHANNEL0_LIST',PRM_BAD_CHANNEL0_LIST, ...
+        'CHANNEL_MAP_FILE',PRM_CHANNEL_MAP_FILE);
+end
+%%
+if PRM_RUN_REM_NOISE
+    disp('Remove Noise sections')
+    NPXL_NP2_RemoveNoiseSections_AP('PRM_ROOT_DATA_DIR',PRM_ROOT_DATA_DIR,...
+        'PRM_STIM_FILE_EXT',PRM_STIM_FILE_EXT,'zero_time_win_in_s',zero_time_win_in_s,...
+        'PRM_CAGE_TIMES',PRM_CAGE_TIMES,'PRM_BAD_CHANNEL0_LIST',PRM_BAD_CHANNEL0_LIST, ...
+        'CHANNEL_MAP_FILE',PRM_CHANNEL_MAP_FILE,'PRM_TEMP_FOLDER_LOCATION',PRM_TEMP_FOLDER_LOCATION);
+end
+%%
 % When you complete spike sorting, be sure to copy the results back to the
 % original data folder.
 if PRM_RUN_KILOSORT

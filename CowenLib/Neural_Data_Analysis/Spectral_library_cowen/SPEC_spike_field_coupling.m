@@ -29,10 +29,14 @@ INFO.n_shuffs = n_shuffs;
 SP = [];
 
 minimum_dur_sec = [];
-if ~isempty(fq_ctrs)
-    for iC = 1:length(fq_ctrs)
-       minimum_dur_sec(iC) = (1/fq_ctrs(iC))*thresh_prctile_of_power(2);
+if ~isempty(thresh_prctile_of_power)
+    if ~isempty(fq_ctrs)
+        for iC = 1:length(fq_ctrs)
+            minimum_dur_sec(iC) = (1/fq_ctrs(iC))*thresh_prctile_of_power(2);
+        end
     end
+else
+    
 end
 %
 % A = zeros(Rows(LFP),Cols(LFP)-1);
@@ -51,7 +55,8 @@ for iC = 2:Cols(DATA)
         % so that there is enough data to do a meaninful analysis.
         %         GIX = I(:,2)-I(:,1) >= minimum_dur_sec*1e6;
         %         good_pow_intervals{iC-1} = I(GIX);
-        
+    else
+        good_pow_intervals{iC-1} = [DATA(1,1) DATA(end,1)];
     end
     DATA(:,iC) = angle(hilbert(DATA(:,iC))); % Convert to radians
     

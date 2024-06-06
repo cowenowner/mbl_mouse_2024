@@ -1,7 +1,7 @@
 %SS LFP Analysis
 tic;
 %Data Dirs
-PRM_RAT_DATA_DIR='C:\SGL_DATA\vHPC_stim_mPFC_excitability_project\10850\';
+PRM_RAT_DATA_DIR='C:\SGL_DATA\vHPC_stim_mPFC_excitability_project\10902\';
 PRM_SUB_FOLDER='mPFC_L5_part2_g1';
 PRM_ROOT_DATA_DIR=fullfile(PRM_RAT_DATA_DIR,PRM_SUB_FOLDER);
 [~,root_folder] = fileparts(PRM_ROOT_DATA_DIR);

@@ -20,8 +20,8 @@ scaleopt = 'none';
 Extract_varargin
 
 if iscell(ts1)
-    cc = nan(lenght(ts1),n_lags);
-    for ii = 1:lenght(ts1)
+    % cc = nan(length(ts1),n_lags);
+    for ii = 1:length(ts1)
         [cc(ii,:),x] = Cross_corr(ts1{ii},ts2{ii}, binsize, n_lags,'scaleopt',scaleopt);
     end
     return

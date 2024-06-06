@@ -10,26 +10,32 @@ function [hb ,he]= Error_bars(varargin)
 % cowen
 error_type = 'Sem';
 plot_points = true;
+MarkerFaceColor = [.6 .6 .6];
 count = 1;
 % find commands and creat an argument cell array that just has the data.
-for ii = 1:length(varargin)
-    if ischar(varargin{ii})
-        switch varargin{ii}
-            case 'std'
-                error_type = 'std';
-            case 'nanstd'
-                error_type = 'nanstd';
-            case '1.95*std'
-                error_type = '1.95*std';
-            otherwise
-                error('Incorrect error type')
+if nargin == 1 && iscell(varargin{1})
+    arg = varargin{1};
+else
+    for ii = 1:length(varargin)
+        if ischar(varargin{ii})
+            switch varargin{ii}
+                case 'std'
+                    error_type = 'std';
+                case 'nanstd'
+                    error_type = 'nanstd';
+                case '1.95*std'
+                    error_type = '1.95*std';
+                otherwise
+                    error('Incorrect error type')
+            end
+        else
+            arg{count} = varargin{ii};
+            count = count + 1;
         end
-    else
-        arg{count} = varargin{ii};
-        count = count + 1;
     end
 end
 %%%%%% the real code %%%%%
+
 if length(arg) == 1
     if iscell(arg{1})
         error('hmmm')
@@ -55,31 +61,32 @@ end
 
 hh = bar(m);
 set(hh,'FaceColor',[.8 .8 .8])
+
 hold on
 if plot_points
-    if nargin==1
+    if length(arg) == 1
         for ii = 1:Cols(arg{1})
             pts = arg{1}(:,ii);
             x = repmat(ii,length(pts),1);
             x = x + (rand(size(x))-.5)*.2;
-            plot(x,pts,'o','MarkerSize',8,'MarkerFaceColor',[.2 .2 .2],'MarkerEdgeColor',[.5 .1 .5])
+            plot(x,pts,'o','MarkerSize',5,'MarkerFaceColor',MarkerFaceColor,'MarkerEdgeColor',[.2 .2 .2])
         end
     else
         for ii = 1:length(arg)
             pts = arg{ii};
             x = repmat(ii,length(pts),1);
             x = x + (rand(size(x))-.5)*.2;
-            plot(x,pts,'o','MarkerSize',8,'MarkerFaceColor',[.2 .2 .2],'MarkerEdgeColor',[.5 .1 .5])
+            plot(x,pts,'o','MarkerSize',8,'MarkerFaceColor',MarkerFaceColor,'MarkerEdgeColor',[.2 .2 .2])
         end
     end
 end
 
 %errorbar(m,sd,'+')
 if 1
-    
+
     errorb(1:length(m),m,err,'barwidth',2); e = [];
 else
-    
+
     e = errorbar(m,err,'k','LineStyle','none');
 end
 

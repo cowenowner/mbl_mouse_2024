@@ -7,15 +7,18 @@ function [bad_times,good_times,BIX,PAR] = Clean_LFP(LFP,sFreq,varargin)
 % INPUT: LFP = 2col - ist col time, 2nd data 
 % sFreq of the LFP
 % optional args - see code.
-% Cowen 2020
+% Cowen 2023
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 remove_high_voltage_spindles = false;
 artifact_thresh = 2000;
+diff_artifact_thresh = 300;
 buffer_win_pts = sFreq*1;
 
 Extract_varargin;
 
+PAR = [];
 BIX = abs(LFP(:,2))>artifact_thresh;
+BIX = BIX | abs([0;diff(LFP(:,2))])>diff_artifact_thresh;
 
 if remove_high_voltage_spindles
     [PAR.hvs_times_s, ~, PAR.no_hvs_times_s,HVS_IX] = High_voltage_spindle_detector(LFP,sFreq);

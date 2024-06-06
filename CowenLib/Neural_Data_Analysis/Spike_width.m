@@ -1,4 +1,4 @@
-function [peak_half_width, peak_to_trough] = Spike_width(WV,precision_multiplier)
+function [peak_half_width, peak_to_trough,waveforms_upsampled] = Spike_width(WV,precision_multiplier)
 %function [peak_half_width, peak_to_trough] = Spike_width(WV,precision_multiplier)
 % INPUT
 %
@@ -48,10 +48,13 @@ for iW = 1:nWaves
     % This IF makes sure that only actual data vectors are worked on and graphed
     % ~= means does not equal.. so as long as the program doesn't see a vector
     % full of just 0's the program will continue
-    if sum(waveform) ~= 0 && ~isnan(sum(waveform))
+    if sum(waveform,'omitmissing') ~= 0 % && ~isnan(sum(waveform))
         %smooth with spline
         new_waveform = spline(1:nPoints, waveform, new_range);
+         % x = find(~isnan(waveform));
+         % new_waveform = interp1(x, waveform(x), new_range,'pchip','extrap');
 
+        waveforms_upsampled(iW,:) = new_waveform;
         % find global max and min in new wave form.
         %mx and mn are y values and the idx's are the corresponding element number(not value) in the
         % x axis vector called "new_range"
@@ -147,6 +150,10 @@ for iW = 1:nWaves
 
             %Create the data point for right half max x value as before
             right_half=yminusb2/m2 + new_range(half2);
+            
+            if right_half > new_range(mn_after_idx)
+                right_half = new_range(half2);
+            end
 
             %Calculate width at half maximal height of waveform
             peak_half_width(iW)=right_half-left_half;

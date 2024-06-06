@@ -12,6 +12,7 @@
 % C:\CatGT-win
 % C:\TPrime-win
 % Assumes CowenLib
+% Assumes in your GitHub folder: https://github.com/djoshea/neuropixel-utils
 %
 
 % You must run kilosort manually throught the GUI.
@@ -20,25 +21,43 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Cowen 2022
+ %% EDITS 2023
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clearvars; close all; fclose all;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Change variables here for your analysis.
-
+  
 %%DataDirs
-PRM_RAT_ROOT='E:\NSB_Mouse\23242\02_7_7_23';
-PRM_RAT_SUBDIRS={'HC_2_Neuro2_g0' 'HC_Neuro2_g0'};
-PRM_BAD_CHANNEL0_LIST = []; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
-PRM_TEMP_FOLDER_BASE = 'E:\neuropixels_vHC_stim\Denoised'; % This needs to be a SSD.
+PRM_RAT_ROOT='F:\436';
+PRM_RAT_SUBDIRS={'Post_Ketamine_g0'};%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0',
+PRM_BAD_CHANNEL0_LIST = [138 191 222]; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
+PRM_TEMP_FOLDER_BASE = 'G:\Acute_DANA\Rat506\Denoised'; % This needs to be a SSD.
 
+%PROBE Type Neuropixels 2.0 or 1.0
 
 %Functions to run
-PRM_CREATE_TCAT_FILE = false; % make false if you already created this file on a previous run to save some time.
-PRM_CREATE_LF_FILE=false; %make false if you don't want to run the LF files. Saves time
+PRM_CREATE_TCAT_FILE =true; % make false if you already created this file on a previous run to save some time.
+PRM_CREATE_LF_FILE=true; %make false if you don't want to run the LF files. Saves time
 PRM_COPY_FILES=false; %If you want a copy of the tcat files copied from the Base dir to denoising/kilosort dir
 PRM_CREATE_CHANNELMAP=true; %Will generate a new channel map if you are using a custom config
 PRM_RUN_DENOISE=false;
 PRM_RUN_KILOSORT=false; %DONNOT RUN
+
+% NP2
+% FOLL TWO FUNCTIONS NP2 and STIM ONLY SS EDITS 
+PRM_NP2=true;%Default set to false if this is NP1.0
+%Note: if this is set to true and CREATE LF is set to True then it will not
+%run AP CATGT Separately. The LF_NP2 CatGT  runs both since it has to use
+%the AP file to generate the LF file for NP2
+%OVERSTRIKE TO REMOVE ARTIFACTS
+PRM_RUN_OVERSTRIKE=false;
+%IMEC To REMOVE NOISE %Removes stim noise for NP2 files
+PRM_RUN_REM_NOISE=false;
+
+%Need to add the following to the run functions
+PRM_STIM_FILE_EXT='*.xa_5_0.txt'; %This uses stim files from the xa stream of ch5 (after catGT runs) 
+zero_time_win_in_s=0.003;%  Removes a 2 ms window post stim as default
+PRM_CAGE_TIMES=[2040 2160]; %in seconds to remove any values within this time window
 
 %Note if you run Channel Map make sure the meta file is in the same
 %location where data was originally collected!!
@@ -53,7 +72,7 @@ PRM_RUN_KILOSORT=false; %DONNOT RUN
 %LF FILES
 
 %ANALOG FILES
-PRM_EVENT_CHANNELS=[1:7]; %Which analog channels to extract
+PRM_EVENT_CHANNELS=[0:7]; %Which analog channels to extract
 PRM_XA_Duration = [0]; %Time of pulses in ms - creates separate files. Good to keep 0 as a default
 PRM_INAROW=2;
 PRM_XA_THR1=0.8;%Threshold for detecting xa (in V)
@@ -93,7 +112,11 @@ for ii=1:length(PRM_RAT_SUBDIRS) %Specify which subfolders here
         'PRM_XA_Duration',PRM_XA_Duration,...
         'PRM_INAROW',PRM_INAROW,...
         'PRM_XA_THR1',PRM_XA_THR1,...
-        'PRM_XA_THR2',PRM_XA_THR2);
+        'PRM_XA_THR2',PRM_XA_THR2,...
+        'PRM_NP2',PRM_NP2,...
+        'PRM_RUN_OVERSTRIKE',PRM_RUN_OVERSTRIKE, ...
+        'PRM_CAGE_TIMES',PRM_CAGE_TIMES,...
+        'PRM_RUN_REM_NOISE',PRM_RUN_REM_NOISE );
 end
 
         

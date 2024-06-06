@@ -1,6 +1,6 @@
 function [ISImax, pks, flags] = calcISImax(bins, ISIhist, mpd, voidParamTh, ISITh)
 % calcISImax.m
-% by Valentina Pasquale - Italian Institute of Technology, March 2008
+% by Valentina  −log(0.01)  - Italian Institute of Technology, March 2008
 % %%
 % calcISImax returns the value of ISI that optimally separates intra-burst
 % ISI and inter-burst ISI (ISImax) (when present).

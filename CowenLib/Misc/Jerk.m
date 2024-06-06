@@ -1,4 +1,4 @@
-function j = Jerk(position_data)
+function [j, acc] = Jerk(position_data)
 % Jerk is the time derivative of acceleration.
 % 
 % https://en.wikipedia.org/wiki/Jerk_%28physics%29

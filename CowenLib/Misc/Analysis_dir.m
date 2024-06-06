@@ -4,7 +4,8 @@ function A = Analysis_dir()
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 A = [];
 possible_dirs = {fullfile(Dropbox_dir,'Foldershare','Analysis_Results_Dropbox'), ...
-    'C:\Cowen\Analysis_results','C:\Temp\Analysis_results'};
+    'C:\Cowen\Analysis_results','C:\Temp\Analysis_results', ...
+    'A:\Temp_6.6.23', 'C:\Analysis_Results'};
 for ii =1:length(possible_dirs)
     if exist(possible_dirs{ii},'dir')
         A = possible_dirs{ii};

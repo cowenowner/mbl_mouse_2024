@@ -1,19 +1,21 @@
 function plot_raster(A,row_id,varargin)
 % function plot_raster(A,row_id,varargin)
-% plot vertical raster lines - like spike trains.
-% TOO SLOW! 
-% input - A = vector of timestamps, row_id = where on the vertical axis
-% should this raster go? e.g., row 3.
+% plot vertical raster lines - like spike trains - for ensemble data.
+%
+% INPUT:
+% A = vector of timestamps
+% row_id = where on the vertical axis should this raster go? e.g., row 3.
 % A can also be a cell array of timestamps.
-%ALSO:
+%
+% ALSO:
 % You can adjust the following parameters using name-value pairs.
 % 'Color',Color,'LineWidth',LineWidth,'vert_size',vert_size;
 % See plot_tics - somewhat redundant.
 %
-% Cowen 2020
-%
-% A = [1 2 5];
-% row_id = 1;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cowen 2023
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 if nargin < 2 || isempty(row_id)
     if ~iscell(A)
         row_id = 1;
@@ -27,10 +29,12 @@ if iscell(A)
         error('need a unique ID for each row - send as vector or empty')
     end
     for ii = 1:length(A)
-        if length(varargin)>1
-            plot_raster(A{ii},row_id(ii),varargin{:});
-        else
-            plot_raster(A{ii},row_id(ii));
+        if ~isempty(A{ii})
+            if length(varargin)>1
+                plot_raster(A{ii},row_id(ii),varargin{:});
+            else
+                plot_raster(A{ii},row_id(ii));
+            end
         end
         hold on
     end
@@ -50,13 +54,12 @@ if make_colorful
     Color = clrs(end,:);
 end
 
-
 A = A(:)'/time_divisor;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The whole function boils down to this one line.
-% NOTE: Line is about 70% faster than plot and patch is 10000% faster than
+% NOTE: line() is about 70% faster than plot() and patch() is 10000% faster than
 % both.
-% line([A; A], [ones(1,length(A))*row_id-vert_size; ones(1,length(A))*row_id+vert_size],'Color',Color,'LineWidth',LineWidth);
+% OLD VERSION (SLOOOOOW): line([A; A], [ones(1,length(A))*row_id-vert_size; ones(1,length(A))*row_id+vert_size],'Color',Color,'LineWidth',LineWidth);
 h = patch([A; A], [ones(1,length(A))*row_id-vert_size; ones(1,length(A))*row_id+vert_size],'black');
 h.FaceColor = Color;
 h.EdgeColor = Color;

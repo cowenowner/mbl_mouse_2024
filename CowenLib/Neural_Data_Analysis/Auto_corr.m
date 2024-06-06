@@ -23,8 +23,8 @@ scaleopt = 'none';
 Extract_varargin
 
 if iscell(ts)
-    ac = nan(lenght(ts),n_lags);
-    for ii = 1:lenght(ts)
+    ac = nan(length(ts),n_lags);
+    for ii = 1:length(ts)
         [ac(ii,:),x] = Auto_corr(ts{ii}, binsize, n_lags,'scaleopt',scaleopt);
     end
     return
@@ -44,6 +44,10 @@ if length(edges) > 1
     ac = ac((n_lags+2):end);
 else
     ac = nan(n_lags,1);
+end
+
+if nargout == 0
+    plot_it = true;
 end
 
 if plot_it

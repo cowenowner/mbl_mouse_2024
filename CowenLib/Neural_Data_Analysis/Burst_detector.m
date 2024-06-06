@@ -1,4 +1,5 @@
 function [first_in_burst, durations, n_per_burst, burst_id] = Burst_detector(T, interval_thresh, min_spikes_per_burst, second_interval_thresh)
+% THIS IS CALLED BY Burst_Analysis
 % INPUT: 
 %   T =  a ts object, a vector of timestamps, or a ts array
 %   interval_thresh = interspike interval that is the maximum to consider in a burst
@@ -85,7 +86,7 @@ last_in_burst  = T(last_diffs > 0 );
 % Eliminate those spikes that do not meet the 
 % min_spikes_per_burst criterion
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-IX =n_per_burst >= min_spikes_per_burst ;
+IX = n_per_burst >= min_spikes_per_burst ;
 n_per_burst = n_per_burst( IX );
 first_in_burst = first_in_burst( IX );
 last_in_burst = last_in_burst( IX );

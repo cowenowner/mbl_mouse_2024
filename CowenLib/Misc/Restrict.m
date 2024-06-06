@@ -16,7 +16,7 @@ function [T, IDX] = Restrict(I, start_ts, end_ts)
 T = []; IDX = [];
 
 if isempty(start_ts) || isempty(I)
-%     disp('WARNING: START AND END TS or INPUT ARE EMPTY!!! RETURNING EMPTY.')
+    %     disp('WARNING: START AND END TS or INPUT ARE EMPTY!!! RETURNING EMPTY.')
     return
 end
 

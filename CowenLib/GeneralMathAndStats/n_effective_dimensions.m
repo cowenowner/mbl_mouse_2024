@@ -9,13 +9,15 @@ function [Neff, nl] = n_effective_dimensions(M)
 %         explained variance).
 %
 % Cowen (2010)
+% Cowen 2023 - added economy false - not 100% tested. Makes latent
+% consistent.
 IX = ~isnan(sum(M,2)); % Get rid of rows with Nans
 if sum(IX) < 10
     % Too few trials to make any conclusions.
     nl = nan;
     Neff = nan;
 else
-    [~,~,latent] = pca(standardize_range(M(IX,:)));
+    [~,~,latent] = pca(standardize_range(M(IX,:)),'Economy',false);
     nl = latent./sum(latent);
     Neff = 1/(sum(nl.^2)+eps); %From Abbott 09
 end

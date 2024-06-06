@@ -14,7 +14,7 @@ PRM.intra_burst_interval_ms = 2.5; % 400 Hz
 PRM.time_between_bursts_sec = 2; % for experiment should be 2s
 PRM.n_trials = 30;
 % PRM.output_voltage = 2.32; % Look at the purple digitimer stimulator to translate this to uA.
-PRM.output_voltage = 5; % This is equal to 300uA based on the translation - Abhi
+PRM.output_voltage = 2.77; % This is equal to 300uA based on the translation - Abhi
 %PRM.output_voltage = 5.76; % This is equal to 500uA based on the translation - Abhi
 %%%%%%%% SIMPLE STIM EXPERIMNET...
 pulse_sequence_sec = 0:PRM.intra_burst_interval_ms/1000:(1 + PRM.n_pulses_per_burst*PRM.intra_burst_interval_ms/1000);

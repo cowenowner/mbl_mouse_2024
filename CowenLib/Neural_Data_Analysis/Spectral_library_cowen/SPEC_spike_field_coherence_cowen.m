@@ -1,6 +1,7 @@
 function [OUT,OUTsh] = SPEC_spike_field_coherence_cowen(TS, DATA, sFreq, psd_fqs, varargin)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % INPUT: TS   cell array of action potential times.
+%        DATA - 2 col with first col in uS
 %        OUT(iN).  col 1= timestamps in same units as TS, col 2 = unfiltered LFP
 %        psd_fqs = the frequencies for the psd (e.g., 2:.5:180).
 %        other parameters can be accessed through varargin.

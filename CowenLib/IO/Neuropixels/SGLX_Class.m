@@ -123,13 +123,13 @@ classdef SGLX_Class
         function dataArray = ReadBin(samp0, nSamp, meta, binName, path)
 
             nChan = str2double(meta.nSavedChans);
-
+        
             nFileSamp = str2double(meta.fileSizeBytes) / (2 * nChan);
-            samp0 = uint32(max(samp0, 0));
-            nSamp = uint32(min(nSamp, nFileSamp - samp0));
-
+            samp0 = max(samp0, 0);
+            nSamp = min(nSamp, nFileSamp - samp0);
+        
             sizeA = [nChan, nSamp];
-
+        
             fid = fopen(fullfile(path, binName), 'rb');
             fseek(fid, samp0 * 2 * nChan, 'bof');
             dataArray = fread(fid, sizeA, 'int16=>double');
@@ -150,9 +150,11 @@ classdef SGLX_Class
             fseek(fid, samp0 * 2 * nChan, 'bof');
             dataArray = fread(fid, sizeA, 'int16=>double');
             fclose(fid);
+            dataArray = single(dataArray);
             meta.original_chans = SGLX_Class.OriginalChans(meta);
             % Cowen - this is me- might be crap. Worried that the channels
             % will not align. (that I used 1:nChan)
+            %NOTE: THis does not seem to be working with the NP2 probes.
             if strcmp(meta.typeThis, 'imec')
                 dataArray = SGLX_Class.GainCorrectIM(dataArray, 1:nChan, meta);
             else

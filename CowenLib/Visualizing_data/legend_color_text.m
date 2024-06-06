@@ -20,7 +20,7 @@ end
 if nargin < 3 || isempty(font_size)
     font_size = 8;
 end
-if nargin < 4
+if nargin < 4 || isempty(location)
     location = 'top right';
 end
 if nargin < 5

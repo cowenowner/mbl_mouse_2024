@@ -2,17 +2,23 @@ function [OUT] = NPXL_Find_Ripples_From_LFP(lfp_bin_file_path, sleep_intervals_s
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % much to do here -but something tells me someone has already done all of
 % this.
-% Cowen
+% Cowen 2024
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % channels = 1:10:384; Hi Stephen, I estimated that the hippocampus, CA3 to CA1, spans from channels 65 to 235 on bank 1. Each bank is 3840 um with each recording site being 20 um. CA3 starts at about .65mm up bank 1, and CA3 and CA1 spans across the next 1.7mm up the bank
+%
+% 
 %%
 if nargin == 0
     % for testing
     % rood file name without the .lf.bin 430_S2_g0_t0.imec0.lf.bin
     lfp_bin_file_path = 'G:\Data\NP_Time_Cells\session_4_g0\session_4_g0_imec0\session_4_g0_t0.imec0.lf.bin';
-    sleep_intervals_sec = [60 60*20];
-    hpc_channels_ix = 65:4:235;
+    sleep_intervals_sec = [60 60*30];
+    hpc_channels_ix = 60:4:235;
     hpc_channels_ix = 1:2:384;
+
+    % Shank0_channels_ix = [1:4:45 97:4:141 194:4:238 290:4:334 243:4:287 339:4:383 52:4:96 148:4:192];
+    % Shank1_channels_ix = 1:4:384;
+    % Shank2_channels_ix = 1:4:384;
 end
 %%
 all_channels = 1:385;
@@ -26,6 +32,13 @@ LFP.nChan = str2double(LFP.meta.nSavedChans);
 LFP.sFreq = str2double(LFP.meta.imSampRate);
 LFP.nFileSamp = str2double(LFP.meta.fileSizeBytes) / (2 * LFP.nChan);
 LFP.duration_of_recording_sec = LFP.nFileSamp/LFP.sFreq;
+
+TBL = NPXL_Depth_From_Meta(LFP.meta);
+
+figure; gscatter(TBL.x_inter_shank_uM,TBL.Depth_uM,TBL.shank)
+ylabel('uM'); xlabel('uM'); axis ij
+title('Shank and channel configuraiton')
+
 
 mua_filt = designfilt('bandpassiir','FilterOrder',14, 'HalfPowerFrequency1',500,'HalfPowerFrequency2',1200,'SampleRate',LFP.sFreq);
 
@@ -42,9 +55,12 @@ n_samples = end_rec - start_rec + 1;
 LFP.start_rec = start_rec;
 
 % read the data. The last rec is typically the sync pulse.
-[LFP.data_uV,LFP.meta] = obj.ReadBinVolts(start_rec,n_samples,LFP.meta ,lfp_fname,path_name); %(samp0, nSamp, meta, binName, path)
-LFP.data_uV = LFP.data_uV*1e6;
-LFP.data_uV = LFP.data_uV' -  movmean(LFP.data_uV',round(LFP.sFreq)*1.5);
+
+[LFP.data_uV] = obj.ReadBin(start_rec,n_samples,LFP.meta ,lfp_fname,path_name); %(samp0, nSamp, meta, binName, path);
+LFP.data_uV   = NPXL_Convert_to_uV(LFP.data_uV,LFP.meta);
+% The following is not working - nans!!!!
+% [LFP.data_uV,LFP.meta] = obj.ReadBinVolts(start_rec,n_samples,LFP.meta ,lfp_fname,path_name); %(samp0, nSamp, meta, binName, path)
+LFP.data_uV = LFP.data_uV' -  movmean(LFP.data_uV',round(LFP.sFreq)*2.5);
 LFP.data_uV = LFP.data_uV';
 
 ABV = mean(abs(LFP.data_uV),2,'omitnan');
@@ -89,6 +105,9 @@ for iCh = 1:Rows(LFP.data_uV)
     end
 end
 
+% TODO: plot this for each shank separately here using the TBL values for
+% shank.
+
 figure
 
 subplot(1,2,1)
@@ -107,7 +126,7 @@ ylabel('Channel'); xlabel('ms')
 colorbar
 plot_vert_line_at_zero
 title('MUA aligned on ripple onset.')
-caxis([-10 20])
+caxis([-50 110])
 
 
 figure
@@ -116,6 +135,7 @@ imagesc(x_s*1000,[],diff(Mn(1:1:end,:),1,1))
 axis xy
 xlabel('ms')
 colorbar
+caxis([-250 150])
 plot_vert_line_at_zero
 title('Locl Diff aligned on ripple onset.')
 subplot(1,2,2)
@@ -123,6 +143,7 @@ imagesc(x_s*1000,[],diff(Mn,2,1))
 axis xy
 xlabel('ms')
 colorbar
+caxis([-250 150])
 plot_vert_line_at_zero
 title('CSD aligned on ripple onset.')
 

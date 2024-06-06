@@ -246,9 +246,18 @@ end % NP10_ElecInd
 % 'HeaderLines' = 1 skips the initial entry in the table with
 % the number of shanks, columns, and rows
 function [exChan] = findDisabled(meta)     
-    % read in the shank map    
-    C = textscan(meta.snsShankMap, '(%d:%d:%d:%d', ...
-            'EndOfLine', ')', 'HeaderLines', 1 );
+    % read in the shank map
+    if isfield(meta,'snsShankMap')
+        C = textscan(meta.snsShankMap, '(%d:%d:%d:%d', ...
+                'EndOfLine', ')', 'HeaderLines', 1 );
+    elseif isfield(meta,'snsGeomMap')
+        C = textscan(meta.snsGeomMap, '(%d:%d:%d:%d', ...
+                'EndOfLine', ')', 'HeaderLines', 1 );
+    else
+        print('No snsShankMap or snsGeomMap in meta file');
+    end
+
+
     enabled = double(cell2mat(C(4)));
     % There's an entry in the shank map for each saved channel.
     % Get the array of saved channels:

@@ -44,8 +44,9 @@ EEG_t_sec_data(BIX,2) = 0;
 %     end
 % else
 % [~,F] = SPEC_waveletdecomp(fq_range,EEG_t_sec_data(:,2),sFreq,5);
-[pow,fqs]=SPEC_cwt_cowen(EEG_t_sec_data(:,2),sFreq,fq_range,32, 0);
-F = real(abs(pow));
+[pow,fqs]=SPEC_cwt_cowen(EEG_t_sec_data(:,2),sFreq,fq_range);
+% [pow,fqs]=SPEC_cwt_simple_cowen(EEG_t_sec_data(:,2),sFreq,fq_range);
+F =abs(pow);
 % end
 FF = Align_and_interpolate_on_events(F',EEG_t_sec_data(:,1),alignments_t,x_axis_sec);
 %  AVG = nanmean(FF,3)';

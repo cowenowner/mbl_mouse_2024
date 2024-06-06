@@ -7,6 +7,8 @@ elseif  exist('F:\Nitz_Spiral','dir')
     p = 'F:\';
 elseif  exist('C:\Data','dir')
     p = 'C:\Data';
+elseif  isfolder('D:\Data')
+    p = 'D:\Data';
 elseif  exist('C:\Cowen\Data','dir')
     p = 'C:\Cowen\Data';
 elseif  exist('G:\Data','dir')

@@ -10,7 +10,7 @@ function [spd, acc, txy, vel] = Speed_from_xy(M, filt_factor, pixels_per_cm)
 % OUTPUT: Speed - after some smoothing in units/whatever units the first
 % col of M is.
 %
-% cowen
+% Cowen 2023
 if nargin < 2 || isempty(filt_factor)
     filt_factor = 19;
 end
@@ -19,12 +19,12 @@ if nargin < 3
 end
 interp_meth = 'linear';
 
-% Get rid of the zeros.
-M(sum(M(:,2:end),2) ==0 ,2:end) = nan;
+% Get rid of the zeros. Indicates that we lost tracking.
+M( sum( M(:,2:end),2) == 0 , 2:end ) = nan;
 d = diff(M(:,2));
 % goodix = find(abs(d)<15);
-BIX = isnan(M(1:(end-1),2)) | abs(d) >=15;
-x = interp1(M(~BIX,1),M(~BIX,2), M(:,1),interp_meth);
+BIX = isnan( M(1:(end-1),2)) | abs(d) >= 15;
+x = interp1( M(~BIX,1),M(~BIX,2), M(:,1), interp_meth);
 x = sgolayfilt(x,3,filt_factor);
 dx = [0;diff(x)];
 t = M(:,1);
@@ -52,7 +52,7 @@ dist = dist/pixels_per_cm;
 
 vel = dist./dt; % DO NOT DIVIDE BY ASSUMPTION OF 10000 samples per second.
 % NOTE: vel is not really showing heading. It's always positive.
-spd = abs(vel);
+spd = abs(vel); % actuall dumb since vel is always positive the way it's calculated.
 spd = sgolayfilt(spd,3,filt_factor);
 spd(spd < 0) = 0; % Smoothing can make things dip to negative speed which makes no sense.
 spd(abs(vel) < 0.1) = 0; 

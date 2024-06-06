@@ -22,6 +22,8 @@ PLOT_IT = false;
 
 Extract_varargin;
 
+D = double(D);
+
 % blank out bad intervals so that false rips are not detected.
 for iR = 1:Rows(intervals_to_ignore)
     IX = D(:,1) >= intervals_to_ignore(iR,1) & D(:,1) <= intervals_to_ignore(iR,2);

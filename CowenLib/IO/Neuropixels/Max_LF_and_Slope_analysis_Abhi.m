@@ -63,7 +63,21 @@ for stim =1:length(Stim_times)
         Slope(stim,ii)=(max_point(2)-min_point(2))/(max_point(1)-min_point(1));
     end
 end
+%%
+%Remove 60hz Noise
+All_LFP_data_V_filtered=zeros(size(All_LFP_data_V));
 
+%notch filter
+Fs=LFP.meta.imSampRate;
+notch_filt= designfilt('bandstopiir','FilterOrder',2, ...
+               'HalfPowerFrequency1',59,'HalfPowerFrequency2',61, ...
+               'DesignMethod','butter','SampleRate',Fs);
+%Filter
+for stim_no =1: size(All_LFP_data_V,1)
+    for chan_no=1:size(All_LFP_data_V,2)
+        All_LFP_data_V_filtered(stim_no,chan_no,:)=filter(notch_filt,All_LFP_data_V(stim_no,chan_no,:));
+    end
+end
 
 
 
@@ -90,17 +104,17 @@ end
 %% time of max response in the dorsal inframlimbic area
 
 infra_idx = [140:1:180];
-infra_idx2 = [20:1:80];
+infra_idx2 = [50:1:150];
 why = mean(max_time_all(:,infra_idx2),2);
 why=why(sorted_idx);
 figure
-scatter(sorted_current(3:end), why(3:end))
+scatter(sorted_current, why)
 ylabel('mean time to LFP response from stim (s)')
 xlabel('vHPC stimulation current')
 title('Response time and voltage relationship mPFC L5 vHPC stim')
 pubify_figure_axis
-pf = polyfit(sorted_current(3:end), why(3:end),3);
-x1 = linspace(min(sorted_current(3:end)), max(sorted_current(3:end)),16);
+pf = polyfit(sorted_current, why,3);
+x1 = linspace(min(sorted_current), max(sorted_current),16);
 pv = polyval(pf,x1);
 hold on
 plot(x1,pv)
@@ -109,10 +123,10 @@ lsline
 
 
 figure
-scatter(PRM.output_current_array, nanmean(max_point_all(:,infra_idx),2))
+scatter(PRM.output_current_array, nanmean(max_point_all(:,infra_idx2),2))
 ylabel('max LFP response')
 xlabel('vHPC stimulation current')
-title('Voltage and max LFP response relationship mPFC L5 vHPC stim Rat10858')
+title('Voltage and max LFP response relationship mPFC L5 vHPC stim Rat10907')
 lsline
 pubify_figure_axis
 
@@ -120,6 +134,6 @@ figure
 scatter(PRM.output_current_array, nanmean(Slope(:,infra_idx2),2))
 ylabel('Slope')
 xlabel('vHPC stimulation current')
-title('Voltage and Slope relationship mPFC L5 vHPC stim Rat10847')
+title('Voltage and Slope relationship mPFC L5 vHPC stim Rat10907')
 lsline
 pubify_figure_axis

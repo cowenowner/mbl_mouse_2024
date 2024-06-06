@@ -29,6 +29,32 @@ function [It,Isp] = Skaggs_spatial_information(occ,f_rates,mean_rate)
 % was For analysis of spatial tuning of APs, only recording epochs in which the mouse was running with a velocityR2cms-1 were analyzed. Cells were considered spatially tuned if their spatial information score (Skaggs et al., 1993) was statistically significant from shuffled controls and R 0.4 bits s-1. Spatial information was computed according to the equations
 % Cowen 2021
 %
+if nargin == 0
+    %% demo
+    n_samples = 1e6;n_bins = 10;
+    M = rand(n_samples,n_bins);
+    M = M./sum(M,2);
+    % assume occ is not an issues = equal sampling. assume mrate is same
+    % for all neurons
+    for iR = 1:Rows(M)
+        SI(iR) = sum(M(iR,:).*log2(M(iR,:)));
+    end
+    [s,ix] = sort(SI);
+    %
+    figure
+    imagesc(M(ix,:))
+    xlabel('bin')
+    figure
+    plot(s)
+    ylabel('SI')
+    figure
+    plot(M(ix(1:5),:)','k')
+    hold on
+    plot(M(ix(end-3:end),:)')
+    xlabel('bin')
+    %%
+end
+
 occ = occ/nansum(occ); % should sum to 1.
 It = nansum(occ.*(f_rates).*log2(f_rates/mean_rate));
 Isp = nansum(occ.*(f_rates/mean_rate).*log2(f_rates/mean_rate));

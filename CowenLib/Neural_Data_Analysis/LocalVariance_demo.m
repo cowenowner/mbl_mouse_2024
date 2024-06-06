@@ -1,6 +1,9 @@
-function LocalVariance_demo( )
+% function LocalVariance_demo( )
 % Generate a number of ISI trains from different distributions...
 %%
+clearvars
+close all
+
 mean_rate_Hz = 20;
 mean_ISI = 1/mean_rate_Hz;
 mean_ISI_2 = mean_ISI * 1.4; % for the double exponential. 

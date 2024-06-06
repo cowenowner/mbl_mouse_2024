@@ -3,6 +3,7 @@ function [f,just_names] = find_files(thepath)
 % does not prepend the full path likd FindFiles.
 % cowen 
 % 
+
 f = [];
 just_names = [];
 [p,n,e] = fileparts(thepath);

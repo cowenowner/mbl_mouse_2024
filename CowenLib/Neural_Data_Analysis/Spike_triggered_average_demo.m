@@ -5,11 +5,11 @@
 %% Generate some fake data...
 %%%%%%%%%%%%%%%%%%%%%%%%%
 win_bins = 100;
-sig_type = 'punctate';
+sig_type = 'sin';
 % sig_type = 'sin';
 switch sig_type
     case 'sin'
-        sig = sin(0:.1:100*2*pi);
+        sig = peakperiod1;
         [~,locs] = findpeaks(sig);
         locs = locs +10;
         locs(locs<1) = [];
@@ -49,6 +49,7 @@ plot(sh_locs,sh_pks,'c+')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Decide whether to do on phase-locked or shuffled.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 t = locs;
 % t = sh_locs;
 bin_spikes = zeros(size(sig));

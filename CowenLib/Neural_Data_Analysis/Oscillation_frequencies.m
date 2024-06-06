@@ -10,11 +10,12 @@ O.alpha = [9 14]; % alpha rhythms (8—10 Hz in humans, listed a little faster in 
 O.beta  = [15 30]; % beta [25 37]
 O.beta1 = [12 20]; % beta1 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5088183/
 O.beta2 = [20 30]; % beta2 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5088183/
-O.beta3 = [25 37]; % Looking at my rat data... 
+O.beta3 = [20 37]; % Looking at my rat data... 
 O.low_gamma = [35 58]; % exploratory behaviour and perceptual tasks (Soltesz and Deschênes, 1993; Bragin et al., 1995; Csicsvari et al., 1999; Gray et al., 1989),
 O.low_gamma_colgin = [31 55]; % From Laura Colgin's work.
 O.low_gamma2 = [45 55]; %  See Ven der meer Redish paper where they define low gamma 50 as being 45-55 Hz (vSTR). Also see  Masimore et al. (2005) . This was determined by first JUST looking at peak gamma evoked by ketamine - this was then used to compare between drug groups or time..
 O.gamma_50 = [45 55]; % Berke 2009 found this.  Meer MAA van der, Redish AD (2009). Low and High Gamma Oscillations in Rat Ventral Striatum have Distinct Relationships to Behavior, Reward, and Spiking Activity on a Learned Spatial Decision Task. Front Integr Neurosci 3: 9. NOTE: slightly differnet ranges in their 2010 paper.van der Meer et al., 2010
+O.gamma_wideband = [35 75]; % Guyon et al. 2021 broadband ketamine induced gamma, added/subtracted 5 to avoid 80Hz and beta overlap - Abhi
 % Arg - then in the 2017 piriform paper they call low gamma 45-65 Hz.
 O.gamma_80 = [74 94]; % Berke 2009 found ~this but the upper end is aournd 100 hz. Meer MAA van der, Redish AD (2009). Low and High Gamma Oscillations in Rat Ventral Striatum have Distinct Relationships to Behavior, Reward, and Spiking Activity on a Learned Spatial Decision Task. Front Integr Neurosci 3: 9. NOTE: slightly differnet ranges in their 2010 paper.van der Meer et al., 2010
 O.gamma_80_b = [70 98]; % Berke 2009 found ~this but the upper end is aournd 100 hz. Meer MAA van der, Redish AD (2009). Low and High Gamma Oscillations in Rat Ventral Striatum have Distinct Relationships to Behavior, Reward, and Spiking Activity on a Learned Spatial Decision Task. Front Integr Neurosci 3: 9. NOTE: slightly differnet ranges in their 2010 paper.van der Meer et al., 2010

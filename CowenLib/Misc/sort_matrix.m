@@ -8,43 +8,47 @@ function [OUT, v, six]= sort_matrix(M,sort_type,param)
 % OUTPUT: resorted matrix.
 % Cowen 2021 - updated the kmeans to work with big-column matrices.
 if nargin < 2
-    sort_type = 'peak';
+    sort_type = 'peak_loc'; % location of the peak
+    sort_type = 'pc1'; % location of the peak
 end
 if nargin < 3
     param = [];
 end
 
-six2 = ones(Rows(M),1); % A second sort index if you need it.
+% sort_val2 = ones(Rows(M),1); % A second sort index if you need it.
+[~,sort_val2] = max(M,[],2,'omitmissing');
 switch(lower(sort_type))
     case {'mean'}
-        [six] = nanmean(M,2);
-%         [~,six] = sort(mn);
+        [sort_val] = mean(M,2,'omitmissing');
+    case {'peak_loc' 'max_loc'}
+        [~,sort_val] = max(M,[],2);   
+    case {'trough_loc' 'min_loc'}
+        [~,sort_val] = min(M,[],2);   
     case {'peak' 'max'}
-        [mx,six] = max(M,[],2);
+        [sort_val] = max(M,[],2);
     case {'by_value'}
-        six = param;
+        sort_val = param;
     case {'trough' 'min'}
-        [mx,six] = nanmin(M,[],2);
+        [sort_val] = min(M,[],2,'omitmissing');
     case 'sparsity'
-        six = Density(M')';
+        sort_val = Density(M')';
     case {'pc1','pc2'}
         IX = ~isnan(sum(M));
         [~,score] = pca(M(:,IX));
         if isempty(score)
             disp('PCA failed')
-            six = 1:Rows(M);
-            six = six(:);
+            sort_val = 1:Rows(M);
+            sort_val = sort_val(:);
         else
-            six = score(:,1);
+            sort_val = score(:,1);
             if strcmpi(sort_type,'pc2')
-                six = score(:,2);
+                sort_val = score(:,2);
             end
         end
     case 'pdist'
-        six = clusterdata(M,1);
+        sort_val = clusterdata(M,1);
     case 'kmeans'
-        [~,six2] = max(M,[],2); % Have the sort within the cluster be the peak.
-%         [~,six2] = min(M,[],2); % Have the sort within the cluster be the peak.
+        [~,sort_val2] = max(M,[],2); % Have the sort within the cluster be the peak.
         if nargin < 3
             param = 3;
         end
@@ -53,11 +57,18 @@ switch(lower(sort_type))
         MM(isnan(MM)) = 0;
         if Cols(M) > Rows(M)
             [~,sc] = pca(MM);
-            six = kmeans(sc(:,1:min(round([Cols(M)/2 Rows(M)/2]))),param);
+            sort_val = kmeans(sc(:,1:min(round([Cols(M)/2 Rows(M)/2]))),param);
         else
-            six = kmeans(MM,param);
+            sort_val = kmeans(MM,param);
         end
+    case 'hierarchical'
+        MM = M;
+        MM(isnan(MM)) = 0;
+        klist=2:7;%the number of clusters you want to try
+        eva = evalclusters(MM,'linkage','CalinskiHarabasz','klist',klist); % there are other measures like silhouette
+        sort_val = clusterdata(MM,'Linkage','ward','SaveMemory','off','Maxclust',eva.OptimalK);
+        
         
 end
-v  = sortrows([six'; 1:Rows(M);six2']',[1 3]);
-OUT = M(v(:,2),:);
+[v,six] = sortrows([sort_val'; 1:Rows(M);sort_val2']',[1 3]);
+OUT = M(six,:);

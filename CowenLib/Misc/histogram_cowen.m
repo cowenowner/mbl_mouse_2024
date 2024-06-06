@@ -11,10 +11,10 @@ if 0
     histogram_cowen({a,b})
 end
 
-if nargin < 6 
+if nargin < 6 || isempty(overlay_pdf)
     overlay_pdf = false;
 end
-if nargin < 5
+if nargin < 5 || isempty(normalization)
     normalization = 'count';
     %      normalization = 'pdf';
 end

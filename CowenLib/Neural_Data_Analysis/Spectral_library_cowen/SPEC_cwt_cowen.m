@@ -18,15 +18,17 @@ function [pow,fqs,scales]=SPEC_cwt_cowen(LFP, sFreq, fq_range, varargin)
 %             scalse - wavelet scales
 %
 % Requires Matlab wavelet toolbox
-% ISSUES: How do you get phase from this? Is it just angle?
+% MORE recently i am just using the built in cwt() without using this. I use interp_matrix
+% to then get a linear estimate for the frequencies to make visualization
+% easier.
 %
 % Cowen 2022
 plot_it = false;
 if nargout == 0
     plot_it = true;
 end
-wname = 'morl'; % morelet.
-%  wname = 'bump'; % bump wavelet family.
+% wname = 'morl'; % morelet.
+wname = 'bump'; % bump wavelet family.
 padding = 'zpd'; % use this as the default creates strange results.
 % padding = 'sym'; % This creates strange results - odd frequency
 % responses. It's the default so look out.
@@ -41,9 +43,9 @@ else
     f0 = centfrq(wname);
 end
 
-if nargin < 5
-    plot_it = false;
-end
+% if nargin < 5
+%     plot_it = false;
+% end
 
 if nargin == 0
     sFreq = 1000;

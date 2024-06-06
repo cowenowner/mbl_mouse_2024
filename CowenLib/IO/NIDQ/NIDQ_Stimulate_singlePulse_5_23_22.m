@@ -8,8 +8,8 @@
 
 %%
 %Save Stim file path and name input var
-Stim_path='C:\SGL_DATA\vHPC_stim_mPFC_excitability_project\10847';
-Stim_fileName='params_from_stim_exp_05_23_23.mat';
+Stim_path='C:\SGL_DATA\vHPC_stim_mPFC_excitability_project\10947';
+Stim_fileName='params_from_stim_exp_12_21_23.mat';
 
 %Load Previous Stim File-no need to run the following parameters then
 

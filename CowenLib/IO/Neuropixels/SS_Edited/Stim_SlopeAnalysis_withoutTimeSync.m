@@ -1,10 +1,10 @@
 %SS LFP Analysis
 tic;
-%Look for %% To change input variables 
+%% Look for %% To change input variables 
 
 %%Data Dirs
-PRM_RAT_DATA_DIR='F:\Data\vHPC_stim_mPFC_excitability_project\SinglePulseStim\10847';
-PRM_SUB_FOLDER='mPFC_L5_bank0_g0';
+PRM_RAT_DATA_DIR='C:\SGL_DATA\vHPC_stim_mPFC_excitability_project\10945';
+PRM_SUB_FOLDER='mPFC_L23_L5_NP2_IL_vHC_g0';
 PRM_ROOT_DATA_DIR=fullfile(PRM_RAT_DATA_DIR,PRM_SUB_FOLDER);
 [~,root_folder] = fileparts(PRM_ROOT_DATA_DIR);
 AP_FILE_DIR = fullfile(PRM_ROOT_DATA_DIR, [root_folder '_imec0']);
@@ -20,10 +20,10 @@ NPXL_Extract_Events_With_CatGT_SS('PRM_ROOT_DATA_DIR', PRM_ROOT_DATA_DIR,...
 %%
 % CHANGE VALUES BELOW
 %Load Stim Times
-Stim_times_file=fullfile(PRM_ROOT_DATA_DIR,'mPFC_L5_bank0_g0_tcat.nidq.xa_5_0.txt');
+Stim_times_file=fullfile(PRM_ROOT_DATA_DIR,'mPFC_L23_L5_NP2_IL_vHC_g0_tcat.nidq.xa_5_0.txt');
 Stim_times=readmatrix(Stim_times_file);
-Stim_times_vHC=Stim_times(1:16); %%%Change this if more runs than 16. 
-Stim_times_iHC=Stim_times(17:32);
+%Stim_times_vHC=Stim_times(1:26); %%%Change this if more runs than 16. 
+%Stim_times_iHC=Stim_times(27:52);
 %Change this when you want to run vHC vs iHC
 Stim_times=Stim_times_vHC;
 
@@ -39,6 +39,8 @@ LFP.meta=obj1.ReadMeta(LFP_meta_fname,AP_FILE_DIR);
 
 %%
 Slope=zeros(length(Stim_times),385);
+
+
 %figure
 %hold on
 for stim =1:length(Stim_times)

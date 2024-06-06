@@ -4,7 +4,7 @@ PLOT_IT = true;
 % PLOT_IX = true(size(x));
 ANA_IX_BEF = x < 0;
 ANA_IX_AFT = x > 0;
-sort_type = {'peak' 'peak' 'peak' 'peak' 'peak' 'peak' 'peak' 'peak' 'peak' 'peak' 'peak' 'peak' 'peak' };
+sort_type = {'peak_loc' 'peak_loc' 'peak_loc' 'peak_loc' 'peak_loc' 'peak_loc' 'peak_loc' 'peak_loc' 'peak_loc' 'peak_loc' 'peak_loc' 'peak_loc'  };
 % bin_size = [];
 % cmap_name = 'delta';
 cmap = 'jet';
@@ -21,6 +21,18 @@ p_thresh = 0.01;
 
 Extract_varargin
 
+if isempty(group_names)
+    u = unique(groups);
+    for ii = 1:length(u)
+        if isa(u(ii),'categorical')
+            group_names{ii} = char(u(ii));
+        else
+            group_names{ii} = num2str(u(ii));
+        end
+    end
+end
+
+
 plot_dims{1} = 1:PETH_subplot_size;
 plot_dims{2} = (PETH_subplot_size+1):(PETH_subplot_size+3);
 
@@ -36,9 +48,9 @@ for iG = 1:length(gps)
     TMP = M(IX,:);
     TMPana = M(IX,ANA_IX);
     if ~isempty(sort_type{iG})
-        [~,v]= sort_matrix(TMPana,sort_type{iG});
-        TMP = TMP(v(:,2),:);
-        INFO.ix{iG} = INFO.ix{iG}(v(:,2)); % so that the sort order is preserved
+        [~,v,six]= sort_matrix(TMPana,sort_type{iG});
+        TMP = TMP(six,:);
+        INFO.ix{iG} = INFO.ix{iG}(six); % so that the sort order is preserved
     end
     Mg{iG} = TMP;
     Mg_ana = Mg{iG}(:,ANA_IX); 

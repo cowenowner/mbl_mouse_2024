@@ -14,7 +14,7 @@ function S = standardize_range(X,range_scale)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if ~isa(X,'double')
     X = double(X);
-    disp('WARNING: not double precision. Cnverting to double!!!')
+    % disp('WARNING: not double precision. Cnverting to double!!!')
 end
 
 if nargin < 2

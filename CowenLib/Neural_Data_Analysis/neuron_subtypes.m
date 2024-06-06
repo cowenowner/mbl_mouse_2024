@@ -73,9 +73,9 @@ g = single(g==INg);% Interneurons = 1, other = 0;
 % subtract off the last 100 msec.
 ix = find(AC_x_msec > max(AC_x_msec)-100);
 norm_AC = AC - repmat(mean(AC(:,ix),2),1,Cols(AC)); titstr = 'Norm By Mean Rate';
-norm_AC = standardize_range(norm_AC')';
+norm_AC_std = standardize_range(norm_AC')';
 % Smooth the AC.
-norm_smth_AC = sgolayfilt(norm_AC',3,9)';
+norm_smth_AC = sgolayfilt(norm_AC_std',3,9)';
 
 pyr_ix = find(g == 0);
 PYR_AC = norm_smth_AC(pyr_ix,:);
@@ -163,6 +163,7 @@ if plot_it
     
     f1 = figure_label(mfilename);
     f2 = figure_label(mfilename);
+    f3 = figure_label(mfilename);    
     for ii = 1:3
         %subplot(2,4, [5 6])
         figure(f1)
@@ -173,10 +174,17 @@ if plot_it
         box off
         set(gca,'FontSize',fontsize1)
         figure(f2)
-        [mn, ci] = fun(norm_AC(ix{ii},xix));
+        [mn, ci] = fun(norm_AC_std(ix{ii},xix));
         plot_confidence_intervals(AC_x_msec(xix),mn,ci,clrs(ii,:),0);
         hold on
-        xlabel('msec','FontSize',fontsize1); ylabel('Norm Hz','FontSize',fontsize1)
+        xlabel('msec','FontSize',fontsize1); ylabel('Standardized Norm','FontSize',fontsize1)
+        box off
+        set(gca,'FontSize',fontsize1)
+        figure(f3)
+        [mn, ci] = fun(norm_smth_AC(ix{ii},xix));
+        plot_confidence_intervals(AC_x_msec(xix),mn,ci,clrs(ii,:),0);
+        hold on
+        xlabel('msec','FontSize',fontsize1); ylabel('Smthed standardized Norm','FontSize',fontsize1)
         box off
         set(gca,'FontSize',fontsize1)
     end

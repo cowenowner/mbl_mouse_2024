@@ -19,11 +19,10 @@ function NPXL_Denoise_ap_bin_file(varargin)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Cowen 2022
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The utils directory is now in CowenLib 
-% PRM_NEUROPIXEL_UTILS_DIR = fullfile(Git_dir,'neuropixel-utils'); % if this works for you, go for it
-% % Otherwise, do this if you do not have the folder.
-% % PRM_NEUROPIXEL_UTILS_DIR = 'C:\Users\cowen\Documents\GitHub\neuropixel-utils';
-% addpath(PRM_NEUROPIXEL_UTILS_DIR)
+PRM_NEUROPIXEL_UTILS_DIR = fullfile(Git_dir,'neuropixel-utils'); % if this works for you, go for it
+% Otherwise, do this if you do not have the folder.
+% PRM_NEUROPIXEL_UTILS_DIR = 'C:\Users\cowen\Documents\GitHub\neuropixel-utils';
+addpath(PRM_NEUROPIXEL_UTILS_DIR)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Things that will change with each dataset
 %
 PRM_BIN_FNAME = [];
@@ -67,7 +66,7 @@ PRM_DATA_DIR = fileparts(PRM_BIN_FNAME);
 blocksize_recs = 30000*60*blocksize_min;
 
 % Read in dta and the meta file.
-imec = Neuropixel.ImecDataset({PRM_BIN_FNAME}, 'channelMap',CHANNEL_MAP_FILE);
+imec = Neuropixel.ImecDataset(PRM_BIN_FNAME, 'channelMap',CHANNEL_MAP_FILE);
 extraMeta.processing_function = [];
 [channelInds, channelIds] = imec.lookup_channelIds(imec.channelIds);
 hrs = (double(imec.nSamplesAP)/30000)/3600;

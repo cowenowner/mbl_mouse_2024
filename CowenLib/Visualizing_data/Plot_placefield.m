@@ -1,4 +1,4 @@
-function [PF,TC,Occ,AXIS,PFrate] = Plot_placefield(TS,POS,RANGES,n_place_bins,smooth_factor,plot_it)
+function [PF,TC,Occ,AXIS,PFrate] = Plot_placefield(TS,POS,RANGES,n_place_bins,smooth_factor,plot_it,occ_threshold)
 % Plots placefields for different ranges of time
 % INPUT:
 % TS - timestamps (a vector) - Assumes its in uSec, 
@@ -15,6 +15,8 @@ function [PF,TC,Occ,AXIS,PFrate] = Plot_placefield(TS,POS,RANGES,n_place_bins,sm
 % place field, rate map, and occupancy.
 % 
 % Cowen(2009)
+% Cowen 2024 - updated so that it eliminates low occupancy bins if they are
+% small. This helps clean it up.
 %
 if nargin < 6 || nargout ==0
     plot_it = 1;
@@ -31,6 +33,9 @@ end
 
 if nargin < 3
     RANGES = [];
+end
+if nargin < 7
+    occ_threshold = [];
 end
 
 if ~isempty(RANGES)
@@ -51,6 +56,14 @@ end
 %PF = TC./(Occ+eps);
 
 [TC,Occ,PF] = Ratemap([POS(:,1) POS(:,2:3)], TS, n_place_bins, n_place_bins);
+
+if ~isempty(occ_threshold)
+    BIX = Occ < occ_threshold;
+    Occ(BIX) = 0;
+    PF(BIX) = 0;
+    TC(BIX) = 0;
+end
+
 %subplot(2,2,1);imagesc(TC1);colorbar;subplot(2,2,2);imagesc(TC);colorbar;
 %subplot(2,2,3);imagesc(Occ1);colorbar;subplot(2,2,4);imagesc(Occ);colorbar;
 % Old school placefield - very simple..

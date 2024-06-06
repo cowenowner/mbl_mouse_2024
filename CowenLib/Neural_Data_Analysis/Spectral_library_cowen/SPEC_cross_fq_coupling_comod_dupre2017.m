@@ -117,6 +117,7 @@ pth = which('SPEC_cross_fq_coupling_comod_dupre2017');
 pth(end-1:end+1) = '.py'; % there is python code of the same name in this dir.
 cmd = ['"' ppath 'pythonw.exe" "' pth '"'];
 %  system (cmd, '-echo') % run the python code.
+% [a,b] = system('C:\ProgramData\Anaconda3\condabin\conda.bat activate pactools')
 [a,b] = system(cmd); % run the python code.
 if exist('C:\Temp\cm_out.mat','file')
     OUT = load('C:\Temp\cm_out.mat'); % load the result and spit them out

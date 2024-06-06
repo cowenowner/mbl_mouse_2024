@@ -1,4 +1,5 @@
 addpath(genpath(pwd))
 dbstop if error
-disp('Ran Cowenlib startup')
-
+set_default_text_interpreters
+format long G
+disp('Ran Cowenlib startup.')
