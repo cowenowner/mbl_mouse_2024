@@ -1,0 +1,8 @@
+How to install your python code so that it runs automatically on your Pico W:
+
+In Thonny, save as or drag and drop the file (rename it to to main.py) to the RPI_... drive that loaded up in bootloader mode.
+THEN UNPLUG FROM THE COMPUTER!!!! I missed this part. If you plut back into a computer, then the main.py will be removed automatically and replaced by the default program.
+
+If this does not work, then restart and do this first and then repeat the save to main.py in Thonny.
+1) Boot Pico in bootloader mode by holding down the BOOTSEL button while you plut into computer USB. 
+[I think you only need to do this once or not at all if micropython.uf2 is installed]
