@@ -1,6 +1,6 @@
 During these two weeks, we'll be collecting many sessions of data from various mice. All of that data needs to be preprocessed before it can be used for visualization and analysis, and keeping track of which session has had what kind of processing done to it quickly becomes messy!
 
-To keep things organized, data on the server (`Z:\NSB_2024\03_Mouse\Data\`) should live in one of two specific locations (**incoming** and **preprocessed**) using a specific folder naming scheme and structure. 
+To keep things organized, data on the server (e.g. `Z:\NSB_2024\03_Mouse\Neuropixels-data\`) should live in one of two specific locations (**incoming** and **preprocessed**) using a standardized folder naming scheme and structure. 
 
 Freshly acquired data goes in the **incoming** folder. It's a "reference copy" of the raw data that should not be touched. 
 
