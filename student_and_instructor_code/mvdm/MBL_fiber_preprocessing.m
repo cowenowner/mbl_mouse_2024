@@ -15,29 +15,27 @@
 file_name = 'M514_2024_07-01'; 
 
 % -----------------------------------------------------------------------
-addpath(genpath('C:\Users\mimia\Documents\GitHub\replay_DA\analysis\photometry'));
-addpath(genpath('C:\Users\mimia\Documents\Toolboxes\vandermeerlab-replay-da\code-matlab\shared'));
+% add the vandermeer codebase to your path.
+cd('C:\Users\mimia\Documents\Toolboxes\vandermeerlab-replay-da\code-matlab\shared'); % or, wherever your code is located -- NOTE \shared subfolder!
+p = genpath(pwd); % create list of all folders from here
+addpath(p);
 
 %% load CSV
-please = readtable('M514-2024-07-01-Lhemi_nostim.csv');
+% folder where data is
+cd 'C:\Data\MBL\M514'
+data_table = readtable('M514_2024_06_29_Lhemi_pedestal.csv');
 
 %% Save in structure that works for our code base 
 % sampling rate is x = samples / second 
-sampling_rate = 1/(table2array(please(2,1) - please(1,1))); 
+sampling_rate = 1/(table2array(data_table(2,1) - data_table(1,1))); 
 % 100 Hz or 100 samples/s
 
-FP_data = [];
-FP_data.acq.Fs = sampling_rate; 
-FP_data.acq.time = table2array(please(:,1));
-FP_data.acq.FP{1} = table2array(please(:,2)); %fiber data 
-
-% rename variables and store in a ts struct for manipulation without
+% rename variables and store in a time series (ts) struct for manipulation without
 % manipulated raw files
 FP = ts;
-FP.data = (FP_data.acq.FP{1}); %*(1239/39); %1239/39 is the voltage multiplier
-FP.tvec = FP_data.acq.time; 
-FP.FS = FP_data.acq.Fs;
-
+FP.data = table2array(data_table(:,2));
+FP.tvec = table2array(data_table(:,1)); 
+FP.FS = sampling_rate;
 
 %% Start and End Buffer
 % consider adding a buffer
@@ -120,6 +118,8 @@ xlabel('Time (s)')
 legend('median','butterworth','Location','northeast')
 xlim([5 inf])
 
+%%
+t = FP.tvec; 
 %% Windowed Detrend using Locdetrend
 addpath(genpath('C:\Users\mimia\Documents\Toolboxes\vandermeerlab-replay-da'));
 
