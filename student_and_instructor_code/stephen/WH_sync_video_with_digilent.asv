@@ -2,20 +2,13 @@
 % Cowen 2024
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%
 % define the files.
-close all
 digilent_file = 'D:\M520\2024-07-02\Trial 1\M520_L_2024_07_02_Trial1_Baseline.csv';
 video_file = 'D:\M520\2024-07-02\Trial 1\M520_L_2024_07_02_Trial1_Baseline.mp4';
 dlc_file = [];
-out_video_file = "C:\Temp\peaks.mp4";
-vid_limits_x = [200 450];
+vid_limits_x = [200 500];
 vid_limits_y = [200 420];
 % dlc_file = 'C:\MBL DATA\test1\recording_testdownsampledDLC_resnet50_hand-testJun30shuffle1_4000.csv';
 USE_DIO = true;
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-[~,digilent_fname] = fileparts(digilent_file);
 
 % load the digilent data and get the timestamps for each video frame. 
 DATA = readtable(digilent_file);
@@ -45,7 +38,7 @@ fprintf('%d frames, %1.2f Hz\n',n_frames, video_sFreq)
 % load the video file. Check to ensure the number of frames in the video
 % data corresponds to the number of frames in the digilent file.
 v = VideoReader(video_file);
-vw = VideoWriter(out_video_file);
+vw = VideoWriter("C:\Temp\peaks.mp4");
 open(vw)
 
 figure(101)
@@ -79,8 +72,6 @@ while hasFrame(v)
     rec_ix = find(DATA.Time_s_ >= frame_sec,1,'first');
     plot(frame_sec,DATA.smoothed(rec_ix),'b.')
     hold on
-    title(digilent_fname)
-
     subplot(2,2,3:4)
     plot(frame_sec,DATA.smoothed(rec_ix),'bo','MarkerSize',3)
     
@@ -92,7 +83,7 @@ while hasFrame(v)
     if mod(frame_cnt,200) == 0
         fprintf('%d ',frame_cnt)
     end
-
+    
 end
 close(vw)
 close(v)
