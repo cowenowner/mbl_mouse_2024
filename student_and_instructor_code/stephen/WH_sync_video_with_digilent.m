@@ -5,7 +5,7 @@
 close all
 digilent_file = 'D:\M520\2024-07-02\Trial 1\M520_L_2024_07_02_Trial1_Baseline.csv';
 video_file = 'D:\M520\2024-07-02\Trial 1\M520_L_2024_07_02_Trial1_Baseline.mp4';
-dlc_file = [];
+dlc_file = []; % The deep lab cut csv file if it exists
 out_video_dir = "C:\Temp\";
 vid_limits_x = [200 450];
 vid_limits_y = [200 420];
