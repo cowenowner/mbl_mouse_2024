@@ -6,7 +6,7 @@ close all
 digilent_file = 'D:\M520\2024-07-02\Trial 1\M520_L_2024_07_02_Trial1_Baseline.csv';
 video_file = 'D:\M520\2024-07-02\Trial 1\M520_L_2024_07_02_Trial1_Baseline.mp4';
 dlc_file = [];
-out_video_file = "C:\Temp\peaks.mp4";
+out_video_dir = "C:\Temp\";
 vid_limits_x = [200 450];
 vid_limits_y = [200 420];
 % dlc_file = 'C:\MBL DATA\test1\recording_testdownsampledDLC_resnet50_hand-testJun30shuffle1_4000.csv';
@@ -16,7 +16,7 @@ USE_DIO = true;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 [~,digilent_fname] = fileparts(digilent_file);
-
+out_video_file = fullfile(out_video_dir,digilent_fname);
 % load the digilent data and get the timestamps for each video frame. 
 DATA = readtable(digilent_file);
 DATA.smoothed = movmean(DATA.Channel1_V_,2000);
