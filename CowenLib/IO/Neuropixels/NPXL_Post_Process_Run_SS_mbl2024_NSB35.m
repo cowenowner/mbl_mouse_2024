@@ -28,10 +28,10 @@ clearvars; close all; fclose all;
 % Change variables here for your analysis.
   %  C:\SGL_DATA\myRun8_crus2_g0\myRun8_crus2_g0_imec0
 %%DataDirs
-PRM_RAT_ROOT='C:\SGL_DATA\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
-PRM_RAT_SUBDIRS={'myRun8_crus2_g0'};%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0',
+PRM_RAT_ROOT='C:\DATA\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
+PRM_RAT_SUBDIRS={'PhotoPixelsStrobe_g0'};%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0',
 PRM_BAD_CHANNEL0_LIST = []; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
-PRM_TEMP_FOLDER_BASE = 'C:\Temp\kilosort'; % This needs to be a SSD.
+PRM_TEMP_FOLDER_BASE = 'C:\Temp\kilosortrun2'; % This needs to be a SSD.
 
 %PROBE Type Neuropixels 2.0 or 1.0
 
@@ -93,7 +93,7 @@ PRM_XA_THR2=0.5; %Secondary threshold for detetcting xa (in V) -keep lower than 
 %you will need to declare the variable in the command below (varargin) and
 %in the NPXL_Post_Process_SS file. 
 
-PRM_CatGT_dir = 'C:\CatGTWinApp';
+PRM_CatGT_dir = 'C:\CatGT-win';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Run it.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
