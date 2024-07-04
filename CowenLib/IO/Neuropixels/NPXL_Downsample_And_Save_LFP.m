@@ -7,7 +7,8 @@ function NPXL_Downsample_And_Save_LFP(lf_bin_name, meta, decimation_factor, skip
 %
 % INPUT:
 % name of the bin file (can be .lf.bin or .ap.bin)
-% meta data for that file from the .meta file
+% meta data for that file from the .meta file. Leave empty if you want this
+% function to guess.
 % decimation factor (see the decimate function). Make it big for big files.
 % skip_every_n_ch (only write every n channels).
 %
@@ -16,7 +17,7 @@ function NPXL_Downsample_And_Save_LFP(lf_bin_name, meta, decimation_factor, skip
 % memory demands.
 % NPXL_Downsample_And_Save_LFP('session6_g0_tcat.imec0.lf.bin', meta, decimation_factor, skip_every_n_ch, fast_and_dirty);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Cowen 2023
+% Cowen 2024
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % mmap the data
 if nargin < 4
@@ -24,6 +25,16 @@ if nargin < 4
 end
 if nargin < 5
     fast_and_dirty = 0; % if true, no downsampling, only load ever n recs
+end
+[data_dir, n] = fileparts(lf_bin_name);
+if isempty(data_dir)
+    data_dir = pwd;
+end
+if isempty(meta)
+    meta_file = strrep(lf_bin_name,'.lf.bin','.lf.meta');
+    obj = SGLX_Class;
+    d = dir(meta_file);
+    meta = obj.ReadMeta(d(1).name,data_dir);
 end
 
 [~,fname_only] = fileparts(lf_bin_name);
@@ -68,12 +79,13 @@ if fast_and_dirty % Do it all at once with no low pass (so aliasing issues). Gre
         txt = sprintf('.dec%d.ch%d.mat',LFP.decimation_factor,iCh );
         out_file = strrep(fname_only,'.bin',txt);
         save(fullfile(pth,'LFP',out_file),'LFP')
-        fprintf('%d/%d ',iCh,length(chans))
+        fprintf('%d/%d ',iCh,chans(end))
     end
 else % load by block
     disp('Using decimate')
 
-    block_edges = 0:blocksz:length(m.Data);
+    % block_edges = 0:blocksz:length(m.Data);
+    block_edges = linspace(0,length(m.Data), ceil(length(m.Data)/blocksz)+1);
     block_edges(end) = length(m.Data)+1; % add + 1 as the loop below subtracts one from the end to ensure the blocks do not overlap 
     
     fprintf('%d files\n',length(chans))

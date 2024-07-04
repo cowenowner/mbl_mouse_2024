@@ -15,11 +15,11 @@ end
 % REMOVE_SHORT_ISIs = true;
 ISI_thresh_ms = 1;
 meta_file = dir(fullfile(phy_dir,'*tcat.*.ap.meta'));
-% bin_file = dir(fullfile(phy_dir,'*.ap.bin'));
-if length(meta_file) ==0 
-    phy_dir
-    error('could not identify a single .meta file in directory')
+if isempty(meta_file)
+    % assume the meta is in the directory above.
+    meta_file = dir(fullfile(phy_dir,'..','*tcat.*.ap.meta'));
 end
+
 if length(meta_file) >1 
     phy_dir
     error('MORE THAN ONE META FILE!')
@@ -27,7 +27,7 @@ end
 % Assume an rhd file and load the spikes from the Phy output.
 % Load meta data.
 obj = SGLX_Class;
-meta = obj.ReadMeta(meta_file(1).name,phy_dir);
+meta = obj.ReadMeta(meta_file(1).name,meta_file(1).folder);
 sFreq = str2double(meta.imSampRate); % MAKE SURE THAT THIS IS THE TRUE RATE!!!!
 if sFreq == 30000
     disp('WARNING: The sample rate in your ap.meta file is exactly 30000. THIS IS NOT THE TRUE RATE. Run the calibration tool in SPikeGLX and update the .meta file yourself. https://billkarsh.github.io/SpikeGLX/help/syncEdges/Sync_edges/')

@@ -61,7 +61,11 @@ INFO.data_dir = data_dir;
 % It is  in the ch column in CI I believe.
 % This file is not in the output - I did not run extract-waveforms so that
 % is probably why.
-WV = readNPY(fullfile(data_dir,'_phy_spikes_subset.waveforms.npy'));
+wv_file = fullfile(data_dir,'_phy_spikes_subset.waveforms.npy');
+if ~isfile(wv_file)
+    error('I think you forgot to run > phy extract-spikes params.py as no _phy_spikes_subset.waveforms.npy file exists.')
+end
+WV = readNPY(wv_file);
 % SC = readNPY(fullfile(data_dir,'_phy_spikes_subset.channels.npy'));
 WV_recID = readNPY(fullfile(data_dir,'_phy_spikes_subset.spikes.npy'));
 T_WV_usec = T_usec(WV_recID+1);

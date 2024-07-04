@@ -22,17 +22,20 @@ SNS(1,:) = [];
 SNS(end,:) = [];
 
 tmp = meta.snsGeomMap;
+ix = strfind(tmp,')');
+tmp = tmp(ix+1:end);
 tmp2 = strrep(tmp,':',',');
 tmp2 = strrep(tmp2,';',',');
 tmp2 = strrep(tmp2,')(',';');
 tmp2 = strrep(tmp2,'(','[');
 tmp2 = strrep(tmp2,')',']');
-ix = strfind (tmp2,',');
-tmp2(2:(ix(1)-2)) = [];
+% ix = strfind (tmp2,',');
+% tmp2(2:(ix(1)-2)) = [];
+% tmp2 = strrep(tmp2,'C,',[]);
 GEO= eval(tmp2);
 % I think the first row of GEO is just the probe info so eliminate to
 % align with the SNS
-GEO(1,:) = [];
+% GEO(1,:) = [];
 
 Ch = SNS(:,1);
 ChannelID = SNS(:,2);
