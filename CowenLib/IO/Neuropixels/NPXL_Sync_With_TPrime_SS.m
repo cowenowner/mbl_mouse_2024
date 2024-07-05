@@ -32,7 +32,7 @@ end
 %The default sync files for the nidq and neural data 
 d = dir(fullfile(PRM_ROOT_DATA_DIR,'*_tcat.nidq.xa_0_500.txt')); 
 if isempty(d)
-    d = dir(fullfile(PRM_ROOT_DATA_DIR,'*tcat.nidq.xd_2_0_500.txt'));
+    d = dir(fullfile(PRM_ROOT_DATA_DIR,'*tcat.nidq.xd_*_0_500.txt'));
 end
 ni_sync_file = fullfile(PRM_ROOT_DATA_DIR,d(1).name);
 d = dir(fullfile(DATA_DIR,'*ap.xd_384_6_500.txt'));
@@ -132,7 +132,9 @@ if PRM_EVT_generate
         if ~isempty(EVT_Channels)
             T=table(EVT_Channels,EVT_Channel_Names);
         else
-            error('You must create a 3 col csv file called event_codes.csv that has in col 1 the event channel (1-7), the matlab-friendly variable name, and any notes. This goes in the top data folder (with the .nidq. file)')
+            disp('You must create a 3 col csv file called event_codes.csv that has in col 1 the event channel (1-7), the matlab-friendly variable name, and any notes. This goes in the top data folder (with the .nidq. file)')
+            disp('Because I am nice, I will create a default one for you.')
+            Create_default_event_codes_csv_file(PRM_ROOT_DATA_DIR)
         end
          
     end
