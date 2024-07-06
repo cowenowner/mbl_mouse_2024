@@ -24,6 +24,9 @@ if ~exist(fullfile(data_dir,'probe_depths.mat'),'file')
         error('you must enter a depth for the array in mm')
     end
     tip_depth_mm = str2double(answer{1});
+    if tip_depth_mm > 15
+        error('I SAID mm!!!')
+    end
     save(fullfile(data_dir,'probe_depths.mat'),'tip_depth_mm')
 else
     load(fullfile(data_dir,'probe_depths.mat'),'tip_depth_mm');

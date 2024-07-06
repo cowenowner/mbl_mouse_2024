@@ -1,4 +1,4 @@
-function PHY_Check_Clusters_From_AllSpikes(SP, save_png, kilosort_dir)
+function PHY_Check_Clusters_From_AllSpikes(SP, save_png)
 % PHY_Check_Clusters_From_AllSpikes
 % Cowen 2024
 if nargin < 1
@@ -6,9 +6,6 @@ if nargin < 1
 end
 if nargin < 2
     save_png = false;
-end
-if nargin < 3
-    kilosort_dir = [];
 end
 
 for iF = 1:length(SP)
@@ -21,14 +18,10 @@ for iF = 1:length(SP)
     % PLOT a subset of the 3 max amp waveforms.
     mx = max(SP(iF).WV.mWV);
     [~,six] = sort(mx,'descend');
-    %     mx(six(1:4))
     for ii = 1:3
         plot(SP(iF).WV.mWV(:,six(ii))+80*(ii-1),'-')
         hold on
     end
-    %     hold on
-    %     plot(SP(iF).WV.mWV(:) + SP(iF).WV.sWV(:),'r')
-    %     plot(SP(iF).WV.mWV(:) - SP(iF).WV.sWV(:),'r')
     title(sprintf('ID: %d, %s', SP(iF).cluster_id, SP(iF).PHYLabel))
     axis tight
     xlabel('sample')
@@ -84,6 +77,7 @@ for iF = 1:length(SP)
         plot(SP(iF).template_features(:,1),SP(iF).template_features(:,2),'.')
 
     end
+    title(sprintf('Depth %1.1f uM',SP(iF).neuropixels_depth_uM))
 
     subplot(3,3,6)
     [b,x] = AutoCorr(SP(iF).t_uS/100,20,100);
@@ -96,18 +90,8 @@ for iF = 1:length(SP)
 
 
     subplot (3,3,7:9)
-    %     if ~isempty(PKS_cell)
-    %         plot(SP(iF).t_uS/3600e6,PKS_cell(:,1),'.')
-    %         hold on
-    %         plot(SP(iF).t_uS/3600e6,PKS_cell(:,2),'.')
-    %         plot(SP(iF).t_uS/3600e6,PKS_cell(:,3),'.')
-    %         plot(SP(iF).t_uS/3600e6,PKS_cell(:,4),'.')
-    %         legend({'1' '2' '3' '4'});
-    %         legend boxoff
-    %     else
     plot(SP(iF).t_uS/3600e6,SP(iF).amp_all,'.')
     hold on
-    %     end
     xlabel('hours')
     ylabel('amp')
     axis tight
