@@ -32,13 +32,16 @@ for iF = 1:length(SP)
     box off
 
     subplot (3,3,2)
-    gix = find(sum(abs(SP(iF).template),2)>.1);
-    plot(SP(iF).template(gix,:)'); 
+    template_v = sum(abs(SP(iF).template),2);
+    [~,six] = sort(template_v,'descend');
+
+%     gix = find(sum(abs(SP(iF).template),2)>.3);
+    plot(SP(iF).template(six(1:6),:)'); 
     axis tight
-    legend(num2str(gix)); legend boxoff
+%     legend(num2str(six(1:6))); legend boxoff
 %     set(gca,'YTick',1:length(gix))
 %     set(gca,'YTickLabel',gix)
-    title('templates')
+    title('1st 6 templts')
     xlabel('sample')
     axis off
   
