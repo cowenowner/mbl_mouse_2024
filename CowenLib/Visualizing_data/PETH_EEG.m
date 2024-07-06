@@ -700,5 +700,3 @@ for mc = 1:Rows(offsets)
     plot([offsets(mc,1) offsets(mc,1) ],[a(3) a(4)],colors{offsets(mc,2)},'LineWidth',2)
     plot([offsets(mc,1) offsets(mc,1) ],[a(3) a(4)],'k:','LineWidth',2)
 end
-
-end

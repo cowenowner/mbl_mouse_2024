@@ -82,8 +82,6 @@ t = start_end_rec(1):start_end_rec(2);
 LFP.t_sec = t/LFP.sFreq;
 
 if PLOT_IT
-
-
     figure
     subplot(2,1,1)
     imagesc(LFP.t_sec(1:20:end)/60,[],LFP.data_uV(:,1:20:end));colorbar
