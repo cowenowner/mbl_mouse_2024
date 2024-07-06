@@ -1,10 +1,18 @@
 function [status,cmdout] = NPXL_Sync_With_TPrime_SS(varargin)
+% function [status,cmdout] = NPXL_Sync_With_TPrime_SS(varargin)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % For tprime: http://billkarsh.github.io/SpikeGLX/help/syncEdges/Sync_edges/
+% You must have tprime in C:\
+% 
+%
 % EXAMPLE CALL:
 % NPXL_Extract_Events_With_CatGT('PRM_ROOT_DATA_DIR','C:\Data\DANA_NAc_Acute\Rat411\1112022_DANA_REAL_g0','evt_files_extension',{'*nidq.x*_0.txt'})
+%
+% Another example:
+% (running in the root data folder)
+% NPXL_Sync_With_TPrime_SS('PRM_spike_sort_subfolder','kilosort_cowen','PRM_AlignSpikes',true)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Cowen 2022
+% Cowen 2022,2024
 % Sahana 2023
 PRM_ROOT_DATA_DIR = pwd; % assume you are running in the current directory. This directory should end in _g0.
 % for example: F:\Data\DANA_NAc_Acute\Rat411\1112022_DANA_REAL_g0

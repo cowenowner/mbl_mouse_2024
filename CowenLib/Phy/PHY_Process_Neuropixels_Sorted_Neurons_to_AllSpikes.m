@@ -1,10 +1,11 @@
 function SP = PHY_Process_Neuropixels_Sorted_Neurons_to_AllSpikes(phy_dir,GET_USER_INPUT)
+% function SP = PHY_Process_Neuropixels_Sorted_Neurons_to_AllSpikes(phy_dir,GET_USER_INPUT)
 %
 % After you are done spike sorting in Phy, run this function and it will create a nice AllSpikes.mat files that have all of the
 % relevant meta data like waveform, etc... Also prompts for cluster
 % quality.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Cowen 2022
+% Cowen 2024
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if nargin < 1
     phy_dir = pwd;

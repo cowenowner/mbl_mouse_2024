@@ -23,7 +23,7 @@ SNS(end,:) = [];
 
 tmp = meta.snsGeomMap;
 ix = strfind(tmp,')');
-tmp = tmp(ix+1:end);
+tmp = tmp((ix+1):end);
 tmp2 = strrep(tmp,':',',');
 tmp2 = strrep(tmp2,';',',');
 tmp2 = strrep(tmp2,')(',';');

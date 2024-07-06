@@ -28,17 +28,22 @@ if ~exist(fullfile(data_dir,'probe_depths.mat'),'file')
 else
     load(fullfile(data_dir,'probe_depths.mat'),'tip_depth_mm');
 end
-if ~exist(fullfile(data_dir,'spike_seconds.npy'),'file')
-    error('No spike_seconds.npy file found')
-end
-
 C = readNPY(fullfile(data_dir,'spike_clusters.npy'));
 AMP = readNPY(fullfile(data_dir,'amplitudes.npy'));
 % The 'synced_spike_seconds.npy' is produced by running
 % NPXL_Sync_With_TPrime. You sadly need to do this to guarantee that the
 % spike times are truly aligned.
-T_usec = readNPY(fullfile(data_dir,'spike_seconds.npy'));
+spike_recID = readNPY(fullfile(data_dir,'spike_times.npy'));
+
+if isfile(fullfile(data_dir,'synced_spike_seconds.npy'))
+    T_usec = readNPY(fullfile(data_dir,'synced_spike_seconds.npy'));
+elseif isfile(fullfile(data_dir,'spike_seconds.npy'))
+    T_usec = readNPY(fullfile(data_dir,'spike_seconds.npy'));
+else
+    disp('No spike_seconds.npy file found. You may not have run TPrime. Use NPXL_Sync_With_TPrime.')
+end
 T_usec = T_usec*1e6;
+
 if any(diff(T_usec)<0)
     disp('WARNING: spike_seconds is not in the correct order. Will attempt to correct.')
     sum(diff(T_usec)<0)
@@ -63,12 +68,15 @@ INFO.data_dir = data_dir;
 % is probably why.
 wv_file = fullfile(data_dir,'_phy_spikes_subset.waveforms.npy');
 if ~isfile(wv_file)
-    error('I think you forgot to run > phy extract-spikes params.py as no _phy_spikes_subset.waveforms.npy file exists.')
+    error('I think you forgot to run > phy extract-waveforms params.py as no _phy_spikes_subset.waveforms.npy file exists.')
 end
 WV = readNPY(wv_file);
 % SC = readNPY(fullfile(data_dir,'_phy_spikes_subset.channels.npy'));
 WV_recID = readNPY(fullfile(data_dir,'_phy_spikes_subset.spikes.npy'));
 T_WV_usec = T_usec(WV_recID+1);
+
+template_features = readNPY(fullfile(data_dir,'template_features.npy'));
+
 
 % CG = readtable(fullfile(data_dir,'cluster_group.tsv'),'FileType','text', 'Delimiter' ,'tab');
 CI = readtable(fullfile(data_dir,'cluster_info.tsv'),'FileType','text', 'Delimiter' ,'tab');
@@ -80,6 +88,7 @@ for iG = 1:length(groups_to_load)
         row_ix = gix(ii); % A particular row in the table.
         cid = CI.cluster_id(row_ix);
         SPK_IX = C == cid;
+        rec_ID = spike_recID(SPK_IX);
 
         t_uS = T_usec(SPK_IX);
         amp = single(AMP(SPK_IX));
@@ -122,8 +131,10 @@ for iG = 1:length(groups_to_load)
         SP(cnt).Notes = [];
         SP(cnt).mfile = mfilename;
         SP(cnt).CQ = []; % cluster quality (TODO). Cluster separation from mclust was what it used to be.
+        SP(cnt).rec_ID = rec_ID; % the sample from the original .ap.bin file.
+        SP(cnt).template_features = template_features(SPK_IX,1:4);
 
-        INFO.t_uS{cnt} =t_uS; % store the same thing as a cell array which can be convenient for plotting.
+        INFO.t_uS{cnt} = t_uS; % store the same thing as a cell array which can be convenient for plotting.
         cnt = cnt + 1;
     end
 end
