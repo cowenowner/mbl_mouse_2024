@@ -59,6 +59,7 @@ for iF = 1:length(SP)
     title(sprintf('Dur = %2.2f hr, %d/%d < 2ms',(SP(iF).t_uS(end) - SP(iF).t_uS(1))/3600e6,sum(diff(SP(iF).t_uS/1000) < 2), length(SP(iF).t_uS)))
     subplot(3,3,5)
     if 0
+        PKS = SP(iF).template_features;
         dims = [2 1;2 3;4 3;4 1];
         signs = [1 1; 1 -1; -1 -1; -1 1];
         for iD = 1:Rows(dims)

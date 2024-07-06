@@ -78,17 +78,18 @@ end
 fclose(fid);
 
 LFP.data_uV = NPXL_Convert_to_uV(LFP.data_uV,LFP.meta);
+t = start_end_rec(1):start_end_rec(2);
+LFP.t_sec = t/LFP.sFreq;
 
 if PLOT_IT
 
-    t = start_end_rec(1):start_end_rec(2);
-    t_min = t/LFP.sFreq/60;
+
     figure
     subplot(2,1,1)
-    imagesc(t_min(1:20:end),[],LFP.data_uV(:,1:20:end));colorbar
+    imagesc(LFP.t_sec(1:20:end)/60,[],LFP.data_uV(:,1:20:end));colorbar
     xlabel('min')
     subplot(2,1,2)
-    plot(t_min(1:20:end), LFP.data_uV(1:3,1:20:end));
+    plot  (LFP.t_sec(1:20:end)/60, LFP.data_uV(1:3,1:20:end));
     axis tight
     xlabel('min');ylabel('uV')
 end

@@ -40,7 +40,9 @@ if isfile(fullfile(data_dir,'synced_spike_seconds.npy'))
 elseif isfile(fullfile(data_dir,'spike_seconds.npy'))
     T_usec = readNPY(fullfile(data_dir,'spike_seconds.npy'));
 else
-    disp('No spike_seconds.npy file found. You may not have run TPrime. Use NPXL_Sync_With_TPrime.')
+    disp('No spike_seconds.npy file found. You may not have run TPrime. Use NPXL_Sync_With_TPrime. Guessing instead.')
+    INFO = PHY_read_params_py(data_dir);
+    T_usec = 1e6*spike_recID/INFO.sFreq;
 end
 T_usec = T_usec*1e6;
 

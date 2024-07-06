@@ -23,7 +23,9 @@ SNS(end,:) = [];
 
 tmp = meta.snsGeomMap;
 ix = strfind(tmp,')');
+warning off
 tmp = tmp((ix+1):end);
+warning on
 tmp2 = strrep(tmp,':',',');
 tmp2 = strrep(tmp2,';',',');
 tmp2 = strrep(tmp2,')(',';');
