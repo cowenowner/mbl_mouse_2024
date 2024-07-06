@@ -1,13 +1,16 @@
-function PHY_Check_Clusters_From_AllSpikes(SP, save_png)
+function PHY_Check_Clusters_From_AllSpikes(SP, save_png, kilosort_dir)
 % PHY_Check_Clusters_From_AllSpikes
-% Cowen 2021
+% Cowen 2024
 if nargin < 1
     load('AllSpikes.mat')
 end
 if nargin < 2
     save_png = false;
 end
-PKS = []; % For now.
+if nargin < 3
+    kilosort_dir = [];
+end
+
 for iF = 1:length(SP)
     if any(diff(SP(iF).t_uS)<=0)
         error('There are some corrupted timestamps.')
@@ -34,13 +37,8 @@ for iF = 1:length(SP)
     subplot (3,3,2)
     template_v = sum(abs(SP(iF).template),2);
     [~,six] = sort(template_v,'descend');
-
-%     gix = find(sum(abs(SP(iF).template),2)>.3);
     plot(SP(iF).template(six(1:6),:)'); 
     axis tight
-%     legend(num2str(six(1:6))); legend boxoff
-%     set(gca,'YTick',1:length(gix))
-%     set(gca,'YTickLabel',gix)
     title('1st 6 templts')
     xlabel('sample')
     axis off
@@ -60,7 +58,7 @@ for iF = 1:length(SP)
 
     title(sprintf('Dur = %2.2f hr, %d/%d < 2ms',(SP(iF).t_uS(end) - SP(iF).t_uS(1))/3600e6,sum(diff(SP(iF).t_uS/1000) < 2), length(SP(iF).t_uS)))
     subplot(3,3,5)
-    if ~isempty(PKS)
+    if 0
         dims = [2 1;2 3;4 3;4 1];
         signs = [1 1; 1 -1; -1 -1; -1 1];
         for iD = 1:Rows(dims)
@@ -78,9 +76,14 @@ for iF = 1:length(SP)
         set(gca,'YLim',[ymin ymax])
         plot_vert_line_at_zero
         plot_horiz_line_at_zero
-    else
+    end
+
+    if isfield(SP,'template_features')
+
+        plot(SP(iF).template_features(:,1),SP(iF).template_features(:,2),'.')
 
     end
+
     subplot(3,3,6)
     [b,x] = AutoCorr(SP(iF).t_uS/100,20,100);
     plot(x,b)
