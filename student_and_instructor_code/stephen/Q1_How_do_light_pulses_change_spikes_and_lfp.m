@@ -28,6 +28,7 @@ plot(EVT.t_sec{1},ones(size(EVT.t_sec{1})),'bo')
 plot(EVT.t_sec{2},2*ones(size(EVT.t_sec{2})),'ro')
 plot(EVT.t_sec{3},3*ones(size(EVT.t_sec{3})),'go')
 xlabel('min')
+
 ax(2) = subplot(3,1,2);
 plot_LFP(LFP.data_uV(1:4,1:10:end)',LFP.t_sec(1:10:end))
 
