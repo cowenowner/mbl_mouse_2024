@@ -20,4 +20,5 @@ LFP.time_sec_of_recording = LFP.nFileSamp/LFP.sFreq;
 % read the data. The last rec is typically the sync pulse.
 % read the data in blocks and downsample.
 % Fast downsample and save the bin file for processing.
-NPXL_Downsample_And_Save_LFP(D.lfp_bin_file_path, LFP.meta , 2, 4);
+LFP = NPXL_Extract_LFP (D.lfp_bin_file_path,1:20:385);
+
