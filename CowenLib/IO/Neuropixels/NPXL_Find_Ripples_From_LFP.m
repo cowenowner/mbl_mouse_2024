@@ -1,10 +1,14 @@
 function [OUT] = NPXL_Find_Ripples_From_LFP(lfp_bin_file_path, sleep_intervals_sec, hpc_channels_ix )
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% much to do here -but something tells me someone has already done all of
-% this.
+% Finds ripples and alignes LFP to putative ripple events for depth
+% estimation.
+%
 % Cowen 2024
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% channels = 1:10:384; Hi Stephen, I estimated that the hippocampus, CA3 to CA1, spans from channels 65 to 235 on bank 1. Each bank is 3840 um with each recording site being 20 um. CA3 starts at about .65mm up bank 1, and CA3 and CA1 spans across the next 1.7mm up the bank
+% channels = 1:10:384; 
+% Hi Stephen, I estimated that the hippocampus, CA3 to CA1, spans from 
+% channels 65 to 235 on bank 1. Each bank is 3840 um with each recording 
+% site being 20 um. CA3 starts at about .65mm up bank 1, and CA3 and CA1 spans across the next 1.7mm up the bank
 %
 % 
 %%

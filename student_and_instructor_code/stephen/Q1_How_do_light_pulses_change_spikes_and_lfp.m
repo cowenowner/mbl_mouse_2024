@@ -6,7 +6,7 @@ npxl_top_dir_name = 'PhotoPixelsStrobe_g0';
 kilosort_dir_name = 'kilosort_cowen';
 
 % Figure out directories and filenames
-[D] = WH_load_NPXL_data(data_folder,npxl_top_dir_name,kilosort_dir_name );
+[D] = NPXL_get_file_names(data_folder,npxl_top_dir_name,kilosort_dir_name );
 
 % Load data
 LFP = NPXL_Extract_LFP(D.lfp_bin_file_path,1:20:385);
@@ -87,7 +87,6 @@ for iC = 1:length(TS_uS)
     figure
     PETH_raster(TS_uS{iC}/100,E_uS(start_gix)/100,100,4000,4000);
     sgtitle(sprintf('Depth %1.2f uM',SP(iC).D ))
-
 end
 
 % now on the EEG

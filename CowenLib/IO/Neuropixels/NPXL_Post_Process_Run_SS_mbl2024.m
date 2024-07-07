@@ -28,8 +28,9 @@ clearvars; close all; fclose all;
 % Change variables here for your analysis.
   %  C:\SGL_DATA\myRun8_crus2_g0\myRun8_crus2_g0_imec0
 %%DataDirs
-PRM_RAT_ROOT='C:\SGL_DATA\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
-PRM_RAT_SUBDIRS={'myRun8_crus2_g0'};%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0',
+%D:\Data\M521_2024_07_04_R_fiber_lightstim_wheel_pixel1-0_g0
+PRM_RAT_ROOT='D:\Data\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
+PRM_RAT_SUBDIRS={'M521_2024_07_04_R_fiber_lightstim_wheel_pixel1-0_g0' };%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0', 'myRun8_crus2_g0'
 PRM_BAD_CHANNEL0_LIST = []; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
 PRM_TEMP_FOLDER_BASE = 'C:\Temp\kilosort'; % This needs to be a SSD.
 
@@ -119,8 +120,7 @@ for ii=1:length(PRM_RAT_SUBDIRS) %Specify which subfolders here
         'PRM_NP2',PRM_NP2,...
         'PRM_RUN_OVERSTRIKE',PRM_RUN_OVERSTRIKE, ...
         'PRM_CAGE_TIMES',PRM_CAGE_TIMES,...
-        'PRM_RUN_REM_NOISE',PRM_RUN_REM_NOISE,...
-        'PRM_SPLIT_SHANKS',PRM_SPLIT_SHANKS);
+        'PRM_RUN_REM_NOISE',PRM_RUN_REM_NOISE);
 end
 
         
