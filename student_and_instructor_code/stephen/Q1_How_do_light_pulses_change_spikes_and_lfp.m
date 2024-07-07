@@ -9,6 +9,8 @@ kilosort_dir_name = 'kilosort_cowen';
 [D] = NPXL_get_file_names(data_folder,npxl_top_dir_name,kilosort_dir_name );
 
 % Load data
+NIDQ = NPXL_Extract_NIDQ(D.nidq_bin_file_path,1:4);
+
 LFP = NPXL_Extract_LFP(D.lfp_bin_file_path,1:20:385);
 
 load(fullfile(D.kilosort_dir,'AllSpikes.mat')); % Loads SP structure. This was generated after spike sorting.
