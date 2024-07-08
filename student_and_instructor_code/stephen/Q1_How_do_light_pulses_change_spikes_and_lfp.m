@@ -4,7 +4,8 @@ clearvars
 data_folder = 'D:\Data\';
 npxl_top_dir_name = 'PhotoPixelsStrobe_g0';
 kilosort_dir_name = 'kilosort_cowen';
-
+figures_dir = './Figures';
+SAVE_FIGURES = true;
 % Figure out directories and filenames
 [D] = NPXL_get_file_names(data_folder,npxl_top_dir_name,kilosort_dir_name );
 
@@ -87,8 +88,11 @@ PETH_raster(TS_uS{1}/100,E_uS(end_gix-1)/100,100,4000,4000);
 
 for iC = 1:length(TS_uS)
     figure
-    PETH_raster(TS_uS{iC}/100,E_uS(start_gix)/100,100,4000,4000);
-    sgtitle(sprintf('Depth %1.2f uM',SP(iC).D ))
+    PETH_raster(TS_uS{iC}/100,E_uS(start_gix)/100,100,2000,4000);
+    sgtitle(sprintf('Stim start, %1.2f uM',SP(iC).depth_of_probe_tip_uM ))
+    if SAVE_FIGURES
+        saveas(gca,fullfile(figures_dir,sprintf('PETH_%d.png',iC)));
+    end
 end
 
 % now on the EEG
@@ -98,4 +102,7 @@ for iCh = 1:Rows(LFP.data_uV)
     figure
     PETH_EEG([LFP.t_sec(:) LFP.data_uV(iCh,:)'],LFP.sFreq,E_uS(start_gix)/1e6, .5,3.2,{'sta_plot'})
     sgtitle(sprintf('Depth %1.2f uM',LFP.INFO.Depth_uM(iCh)))
+    if SAVE_FIGURES
+        saveas(gca,fullfile(figures_dir,sprintf('LFP_%d.png',iC)));
+    end
 end
