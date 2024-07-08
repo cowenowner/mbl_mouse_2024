@@ -30,7 +30,7 @@ clearvars; close all; fclose all;
 %%DataDirs
 %D:\Data\M521_2024_07_04_R_fiber_lightstim_wheel_pixel1-0_g0
 PRM_RAT_ROOT='D:\Data\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
-PRM_RAT_SUBDIRS={'M521_2024_07_04_R_fiber_lightstim_wheel_pixel1-0_g0' };%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0', 'myRun8_crus2_g0'
+PRM_RAT_SUBDIRS={'M564_2024_07_06_NP2_Strobe_Light_Trial_01_g0' };%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0', 'myRun8_crus2_g0'
 PRM_BAD_CHANNEL0_LIST = []; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
 PRM_TEMP_FOLDER_BASE = 'C:\Temp\kilosort'; % This needs to be a SSD.
 
@@ -48,7 +48,7 @@ PRM_RUN_KILOSORT=false; %DONNOT RUN
 
 % NP2
 % FOLL TWO FUNCTIONS NP2 and STIM ONLY SS EDITS 
-PRM_NP2=false;%Default set to false if this is NP1.0
+PRM_NP2=true;%Default set to false if this is NP1.0
 
 %Note: if this is set to true and CREATE LF is set to True then it will not
 %run AP CATGT Separately. The LF_NP2 CatGT  runs both since it has to use
