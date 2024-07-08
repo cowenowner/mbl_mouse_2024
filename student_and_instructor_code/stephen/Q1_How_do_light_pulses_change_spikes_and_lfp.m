@@ -1,11 +1,13 @@
 % Do LED blinky lights alter brain activity in the hippocampus?
 %% 
-clearvars
+clearvars % Clear out variables in the workspace. Start fresh.
+% where is the data?
 data_folder = 'D:\Data\';
 npxl_top_dir_name = 'PhotoPixelsStrobe_g0';
 kilosort_dir_name = 'kilosort_cowen';
 figures_dir = './Figures';
 SAVE_FIGURES = true;
+
 % Figure out directories and filenames
 [D] = NPXL_get_file_names(data_folder,npxl_top_dir_name,kilosort_dir_name );
 
