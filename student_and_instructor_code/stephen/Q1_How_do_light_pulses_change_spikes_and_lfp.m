@@ -73,18 +73,14 @@ for ii = 1:length(d_ms)-1
     end
 end
 start_gix = end_gix +1;
-%
+% Double check the timestamps to make sure the events are correct.
 figure
 plot(E_uS,zeros(size(E_uS)),'bo')
 hold on
 plot(E_uS(start_gix),zeros(size(E_uS(start_gix))),'g+')
 plot(E_uS(end_gix),zeros(size(E_uS(end_gix))),'r*')
 
-% start_gix = find(d_ms > 100);
-figure
-PETH_raster(TS_uS{1}/100,E_uS(start_gix)/100,100,4000,4000);
-figure
-PETH_raster(TS_uS{1}/100,E_uS(end_gix-1)/100,100,4000,4000);
+% Plot some PETHS!
 
 for iC = 1:length(TS_uS)
     figure
@@ -95,8 +91,8 @@ for iC = 1:length(TS_uS)
     end
 end
 
-% now on the EEG
-%function [M, x_axis, fh, OUT, EEG_sec_data] = PETH_EEG(EEG_sec_data, sFreq ,alignments_ts_sec, time_before_sec, time_after_sec, option, option_parameters)
+% On the EEG
+% function [M, x_axis, fh, OUT, EEG_sec_data] = PETH_EEG(EEG_sec_data, sFreq ,alignments_ts_sec, time_before_sec, time_after_sec, option, option_parameters)
 
 for iCh = 1:Rows(LFP.data_uV)
     figure
