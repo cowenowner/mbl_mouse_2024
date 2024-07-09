@@ -1,5 +1,5 @@
 function [NIDQ] = NPXL_Extract_NIDQ(nidq_bin_file_path, channels, start_end_rec )
-% function [NIDQ] = NPXL_Extract_LFP(lfp_bin_file_path, channels, start_end_rec )
+% function [NIDQ] = NPXL_Extract_LFP(nidq_bin_file_path, channels, start_end_rec )
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % nidq_bin_file_path = name of the .nidq.
 % channels = Channels are in 1 based numbering so channel 0 on Imec = channel 1 here.

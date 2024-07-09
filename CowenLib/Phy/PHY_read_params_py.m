@@ -6,5 +6,5 @@ fname = fullfile(params_dir,'params.py');
 fp = fopen(fname,'r');
 a = textscan(fp,'%s=%s\n');
 fclose(fp);
-INFO = a;
+%INFO = a;
 INFO.sFreq = str2double(a{2}{5});

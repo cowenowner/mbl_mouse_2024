@@ -1,4 +1,6 @@
 % Do LED blinky lights alter brain activity in the hippocampus?
+% “The Brain—is wider than the Sky—” was written by the 19th-century American poet Emily Dickinson. 
+% "The Neuropixels-is wider than the Fly"
 %% 
 clearvars % Clear out variables in the workspace. Start fresh.
 % where is the data?
@@ -7,6 +9,11 @@ npxl_top_dir_name = 'PhotoPixelsStrobe_g0';
 kilosort_dir_name = 'kilosort_cowen';
 figures_dir = './Figures';
 SAVE_FIGURES = true;
+
+if ~isfolder(figures_dir)
+    mkdir(figures_dir)
+end
+
 
 % Figure out directories and filenames
 [D] = NPXL_get_file_names(data_folder,npxl_top_dir_name,kilosort_dir_name );
@@ -17,6 +24,10 @@ NIDQ = NPXL_Extract_NIDQ(D.nidq_bin_file_path,1:4);
 LFP = NPXL_Extract_LFP(D.lfp_bin_file_path,1:20:385);
 
 load(fullfile(D.kilosort_dir,'AllSpikes.mat')); % Loads SP structure. This was generated after spike sorting.
+% resort the SP data by depth
+d = [SP.neuropixels_depth_uM];
+
+
 TS_uS = {SP.t_uS}; % A cell array of ts is handy.
 
 EVT = [];
@@ -87,7 +98,7 @@ plot(E_uS(end_gix),zeros(size(E_uS(end_gix))),'r*')
 for iC = 1:length(TS_uS)
     figure
     PETH_raster(TS_uS{iC}/100,E_uS(start_gix)/100,100,2000,4000);
-    sgtitle(sprintf('Stim start, %1.2f uM',SP(iC).depth_of_probe_tip_uM ))
+    sgtitle(sprintf('Stim start, %1.2f uM',SP(iC).neuropixels_depth_uM ))
     if SAVE_FIGURES
         saveas(gca,fullfile(figures_dir,sprintf('PETH_%d.png',iC)));
     end
@@ -99,6 +110,16 @@ end
 for iCh = 1:Rows(LFP.data_uV)
     figure
     PETH_EEG([LFP.t_sec(:) LFP.data_uV(iCh,:)'],LFP.sFreq,E_uS(start_gix)/1e6, .5,3.2,{'sta_plot'})
+    sgtitle(sprintf('Depth %1.2f uM',LFP.INFO.Depth_uM(iCh)))
+    if SAVE_FIGURES
+        saveas(gca,fullfile(figures_dir,sprintf('LFP_%d.png',iC)));
+    end
+end
+
+
+%%
+for iCh = 1:Rows(LFP.data_uV)
+    PETH_EEG([LFP.t_sec(:) LFP.data_uV(iCh,:)'],LFP.sFreq,E_uS(start_gix)/1e6, 2,2,{'power_spectrum'})
     sgtitle(sprintf('Depth %1.2f uM',LFP.INFO.Depth_uM(iCh)))
     if SAVE_FIGURES
         saveas(gca,fullfile(figures_dir,sprintf('LFP_%d.png',iC)));

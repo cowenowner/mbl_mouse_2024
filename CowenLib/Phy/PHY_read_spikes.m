@@ -39,15 +39,15 @@ AMP = readNPY(fullfile(data_dir,'amplitudes.npy'));
 spike_recID = readNPY(fullfile(data_dir,'spike_times.npy'));
 
 if isfile(fullfile(data_dir,'synced_spike_seconds.npy'))
-    T_usec = readNPY(fullfile(data_dir,'synced_spike_seconds.npy'));
+    T_sec = readNPY(fullfile(data_dir,'synced_spike_seconds.npy'));
 elseif isfile(fullfile(data_dir,'spike_seconds.npy'))
-    T_usec = readNPY(fullfile(data_dir,'spike_seconds.npy'));
+    T_sec = readNPY(fullfile(data_dir,'spike_seconds.npy'));
 else
     disp('No spike_seconds.npy file found. You may not have run TPrime. Use NPXL_Sync_With_TPrime. Guessing instead.')
     INFO = PHY_read_params_py(data_dir);
-    T_usec = 1e6*spike_recID/INFO.sFreq;
+    T_sec = double(spike_recID)/INFO.sFreq;
 end
-T_usec = T_usec*1e6;
+T_usec = T_sec*1e6;
 
 if any(diff(T_usec)<0)
     disp('WARNING: spike_seconds is not in the correct order. Will attempt to correct.')
@@ -120,8 +120,8 @@ for iG = 1:length(groups_to_load)
         SP(cnt).n_spikes = CI.n_spikes(row_ix);
         SP(cnt).fname = fullfile(data_dir,'spike_clusters.npy'); % legacy
         % Template
-        ix = find(TPLTind(1,:) == SP(cnt).template_index0);
-        SP(cnt).template = single(squeeze(TPLT(:,:,ix))); % not sure
+        IX = TPLTind(1,:) == SP(cnt).template_index0;
+        SP(cnt).template = single(squeeze(TPLT(:,:,IX))); % not sure
         % WV %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Since the WV are subsampled - find the overlapping waveforms with the
         % reciDs.

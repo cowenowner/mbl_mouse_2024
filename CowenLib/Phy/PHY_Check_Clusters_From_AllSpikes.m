@@ -37,7 +37,7 @@ for iF = 1:length(SP)
     axis off
   
     subplot (3,3,3)
-    [b,x] = AutoCorr(SP(iF).t_uS/100,4,100);
+    [b,x] = AutoCorr(double(SP(iF).t_uS)/100,4,100);
     plot(x,b)
     xlabel('ms')
     axis tight
@@ -46,7 +46,7 @@ for iF = 1:length(SP)
     title(sprintf('AC 4ms bin, clu %d nSpk %d',SP(iF).cluster_id,SP(iF).n_spikes))
 
     subplot (3,3,4)
-    HistISI(SP(iF).t_uS/100)
+    HistISI(double(SP(iF).t_uS)/100)
     box off
 
     title(sprintf('Dur = %2.2f hr, %d/%d < 2ms',(SP(iF).t_uS(end) - SP(iF).t_uS(1))/3600e6,sum(diff(SP(iF).t_uS/1000) < 2), length(SP(iF).t_uS)))
@@ -80,7 +80,7 @@ for iF = 1:length(SP)
     title(sprintf('Depth %1.1f uM',SP(iF).neuropixels_depth_uM))
 
     subplot(3,3,6)
-    [b,x] = AutoCorr(SP(iF).t_uS/100,20,100);
+    [b,x] = AutoCorr(double(SP(iF).t_uS)/100,20,100);
     plot(x,b)
     xlabel('ms')
     axis tight
