@@ -29,19 +29,24 @@ clearvars; close all; fclose all;
   %  C:\SGL_DATA\myRun8_crus2_g0\myRun8_crus2_g0_imec0
 %%DataDirs
 %D:\Data\M521_2024_07_04_R_fiber_lightstim_wheel_pixel1-0_g0
-PRM_RAT_ROOT='D:\Data\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
+PRM_RAT_ROOT='C:\SGL_DATA\Other 2-5 Test\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
 PRM_RAT_SUBDIRS={'M564_2024_07_06_NP2_Strobe_Light_Trial_01_g0' };%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0', 'myRun8_crus2_g0'
+<<<<<<< Updated upstream
 PRM_BAD_CHANNEL0_LIST = [373:383]; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
 PRM_TEMP_FOLDER_BASE = 'C:\Temp\kilosort'; % This needs to be a SSD.
+=======
+PRM_BAD_CHANNEL0_LIST = []; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
+PRM_TEMP_FOLDER_BASE = 'C:\Temp\kilosort2'; % This needs to be a SSD.
+>>>>>>> Stashed changes
 
 %PROBE Type Neuropixels 2.0 or 1.0
 
 %Functions to run
-PRM_CREATE_TCAT_FILE =true; % make false if you already created this file on a previous run to save some time.
-PRM_CREATE_LF_FILE=true; %make false if you don't want to run the LF files. Saves time
-PRM_COPY_FILES=false; %If you want a copy of the tcat files copied from the Base dir to denoising/kilosort dir
-PRM_CREATE_CHANNELMAP=true; %Will generate a new channel map if you are using a custom config
-PRM_SPLIT_SHANKS=false;% NP2 This will split the split the channel map into separate shanks
+PRM_CREATE_TCAT_FILE = true; % make false if you already created this file on a previous run to save some time.
+PRM_CREATE_LF_FILE = true; %make false if you don't want to run the LF files. Saves time
+PRM_COPY_FILES = false; %If you want a copy of the tcat files copied from the Base dir to denoising/kilosort dir
+PRM_CREATE_CHANNELMAP = true; %Will generate a new channel map if you are using a custom config
+PRM_SPLIT_SHANKS = false;% NP2 This will split the split the channel map into separate shanks
 
 PRM_RUN_DENOISE=false;
 PRM_RUN_KILOSORT=false; %DONNOT RUN
@@ -94,7 +99,7 @@ PRM_XA_THR2=0.5; %Secondary threshold for detetcting xa (in V) -keep lower than 
 %you will need to declare the variable in the command below (varargin) and
 %in the NPXL_Post_Process_SS file. 
 
-PRM_CatGT_dir = 'C:\CatGTWinApp';
+PRM_CatGT_dir = 'C:\CatGT-Win';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Run it.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
