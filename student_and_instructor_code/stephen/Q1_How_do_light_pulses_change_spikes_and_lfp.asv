@@ -12,6 +12,7 @@ data_folder = 'D:\Data\';
 npxl_top_dir_name = 'M521_2024_07_05_Odor_Wilson_Connor_Trial_01_g0';
 kilosort_dir_name = 'kilosort_rawbin';
 
+
 figures_dir = './Figures';
 SAVE_FIGURES = true;
 
@@ -19,14 +20,11 @@ if ~isfolder(figures_dir)
     mkdir(figures_dir)
 end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  Figure out directories and filenames
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Figure out directories and filenames
 [D] = NPXL_get_file_names(data_folder,npxl_top_dir_name,kilosort_dir_name );
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Load Data
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Load data
 NIDQ = NPXL_Extract_NIDQ(D.nidq_bin_file_path,1:4);
 
 LFP = NPXL_Extract_LFP(D.lfp_bin_file_path,1:20:385);
@@ -47,9 +45,7 @@ for ii = 1:length(D.event_files)
     EVT.t_sec{ii} = load(D.event_files{ii});
     EVT.name{ii} = 'dontknow';
 end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Depths along probe for double checking
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Depths
 figure
 plot(LFP.INFO.Ch,LFP.INFO.Depth_uM ,'o-')
 ylabel('depth uM');xlabel('ch')
@@ -90,15 +86,10 @@ ylabel('Neuron');xlabel('time (min)')
 colorbar
 title(sprintf('Original data binned at %d ms', big_binsize_ms))
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Event level analysis of the data.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if ~isempty(EVT)
-    % Event analysis: Spikes
-    % Choose the event you want to analyze here.
-    E_uS = EVT.t_sec{3}*1e6;
 
+    % Event analysis: Spikes
+    E_uS = EVT.t_sec{3}*1e6;
     d_ms = diff(E_uS)/1e3;
     cnt = 1; end_gix = [];
     for ii = 1:length(d_ms)-1

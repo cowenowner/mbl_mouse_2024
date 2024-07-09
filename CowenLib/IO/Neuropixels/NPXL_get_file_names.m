@@ -24,6 +24,9 @@ D.lfp_bin_file_path = fullfile(D.ap_data_dir,d(1).name);
 D.lfp_fname = [tmp '.bin'];
 D.meta_fname_lf = strrep(D.lfp_fname,'.lf.bin','.lf.meta');
 d = dir(fullfile(D.ni_data_dir,'synced*tcat.nidq*.txt'));
+if isempty(d)
+    d = dir(fullfile(D.ni_data_dir,'*tcat.nidq*.txt'));
+end
 cnt = 1;
 D.event_files = [];
 for ii = 1:length(d)
