@@ -60,20 +60,18 @@ plot_raster(TS_uS,[],'time_divisor',1e6)
 hold on
 if ~isempty(EVT)
     for ii = 1:length(EVT)
-        plot(EVT.t_sec{ii},(ii-1)*ones(size(EVT.t_sec{1})),'o')
-        hold on
-    end
+    plot(EVT.t_sec{ii},ones(size(EVT.t_sec{1})),'o')
+    hold 
+    plot(EVT.t_sec{2},2*ones(size(EVT.t_sec{2})),'ro')
+    plot(EVT.t_sec{3},3*ones(size(EVT.t_sec{3})),'go')
 end
 xlabel('min')
 
-LFP.data_uV_car = LFP.data_uV - mean(LFP.data_uV);
-
 ax(2) = subplot(3,1,2);
-plot_LFP(LFP.data_uV_car(1:4,1:10:end)',LFP.t_sec(1:10:end))
-title('LFP CAR')
+plot_LFP(LFP.data_uV(1:4,1:10:end)',LFP.t_sec(1:10:end))
 
 ax(3) = subplot(3,1,3);
-imagesc(LFP.t_sec(1:10:end),[],LFP.data_uV_car(:,1:10:end))
+imagesc(LFP.t_sec(1:10:end),[],LFP.data_uV(:,1:10:end))
 axis tight
 xlabel('sec')
 linkaxes(ax,'x')
@@ -98,13 +96,29 @@ title(sprintf('Original data binned at %d ms', big_binsize_ms))
 if ~isempty(EVT)
     % Event analysis: Spikes
     % Choose the event you want to analyze here.
-    E_uS = EVT.t_sec{2}*1e6;
+    E_uS = EVT.t_sec{3}*1e6;
+
+    d_ms = diff(E_uS)/1e3;
+    cnt = 1; end_gix = [];
+    for ii = 1:length(d_ms)-1
+        if d_ms(ii) > d_ms(ii+1) && d_ms(ii) > 100
+            end_gix(cnt) = ii;
+            cnt = cnt + 1;
+        end
+    end
+    start_gix = end_gix +1;
+    % Double check the timestamps to make sure the events are correct.
+    figure
+    plot(E_uS,zeros(size(E_uS)),'bo')
+    hold on
+    plot(E_uS(start_gix),zeros(size(E_uS(start_gix))),'g+')
+    plot(E_uS(end_gix),zeros(size(E_uS(end_gix))),'r*')
 
     % Plot some PETHS!
 
     for iC = 1:length(TS_uS)
         figure
-        PETH_raster(TS_uS{iC}/100,E_uS/100,100,2000,4000);
+        PETH_raster(TS_uS{iC}/100,E_uS(start_gix)/100,100,2000,4000);
         sgtitle(sprintf('Stim start, %1.2f uM',SP(iC).neuropixels_depth_uM ))
         if SAVE_FIGURES
             saveas(gca,fullfile(figures_dir,sprintf('PETH_%d.png',iC)));
@@ -116,7 +130,7 @@ if ~isempty(EVT)
 
     for iCh = 1:Rows(LFP.data_uV)
         figure
-        PETH_EEG([LFP.t_sec(:) LFP.data_uV_car(iCh,:)'],LFP.sFreq,E_uS/1e6, .5,3.2,{'sta_plot'})
+        PETH_EEG([LFP.t_sec(:) LFP.data_uV(iCh,:)'],LFP.sFreq,E_uS(start_gix)/1e6, .5,3.2,{'sta_plot'})
         sgtitle(sprintf('Depth %1.2f uM',LFP.INFO.Depth_uM(iCh)))
         if SAVE_FIGURES
             saveas(gca,fullfile(figures_dir,sprintf('LFP_%d.png',iC)));
@@ -124,9 +138,9 @@ if ~isempty(EVT)
     end
 
 
-    %
+    %%
     for iCh = 1:Rows(LFP.data_uV)
-        PETH_EEG([LFP.t_sec(:) LFP.data_uV_car(iCh,:)'],LFP.sFreq,E_uS/1e6, 2,2,{'power_spectrum'})
+        PETH_EEG([LFP.t_sec(:) LFP.data_uV(iCh,:)'],LFP.sFreq,E_uS(start_gix)/1e6, 2,2,{'power_spectrum'})
         sgtitle(sprintf('Depth %1.2f uM',LFP.INFO.Depth_uM(iCh)))
         if SAVE_FIGURES
             saveas(gca,fullfile(figures_dir,sprintf('LFP_%d.png',iC)));

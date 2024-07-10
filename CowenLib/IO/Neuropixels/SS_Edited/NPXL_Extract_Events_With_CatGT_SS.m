@@ -42,7 +42,20 @@ for ii = 1:length(PRM_EVENT_CHANNELS)
     %      chn_cmd = [chn_cmd sprintf('-xd=0,0,%d,0,10 ', PRM_EVENT_CHANNELS(ii))];
 end
 % Add in the digital sync pulse too
-chn_cmd = [chn_cmd ' -xd=0,0,384,6,500']; % this often has the sync pulse.
+% :: -xd js, ip, word, bit/channel, millisec
+% ::
+% :: js = 0 (it indicates the ni stream)
+% :: ip is always 0 for the ni channel so never change
+% :: word is the channel/bit which goes from 0 to 6??? I don't konw what this really means seems like it is 0 or 1 but don't know which to specify.
+% :: bit/channel - the channel to pull
+% :: millisec is the time the bit must be high to count. set to 0 for getting ALL edges
+chn_cmd = [chn_cmd ' -xd=0,0,-1,1,0']; 
+chn_cmd = [chn_cmd ' -xd=0,0,-1,2,0']; 
+chn_cmd = [chn_cmd ' -xd=0,0,-1,3,0']; 
+chn_cmd = [chn_cmd ' -xd=0,0,-1,4,0']; 
+chn_cmd = [chn_cmd ' -xd=0,0,-1,5,0']; 
+chn_cmd = [chn_cmd ' -xd=0,0,-1,6,0']; 
+chn_cmd = [chn_cmd ' -xd=0,0,-1,7,0']; 
 [top_folder,root_folder] = fileparts(PRM_ROOT_DATA_DIR);
 DATA_DIR = fullfile(PRM_ROOT_DATA_DIR, [root_folder '_imec0']);
 [~, specific_dir] = fileparts(DATA_DIR);
@@ -50,4 +63,5 @@ ix = strfind(specific_dir,'_g');
 run_name = specific_dir(1:ix-1);
 full_cmd = sprintf('%s/CatGT.exe -dir=%s -run=%s %s %s',PRM_CatGT_dir, top_folder, run_name, PRM_CatGT_params_ni, chn_cmd);
 [status,cmdout] = system(full_cmd,'-echo');
-
+% TODO Delete empty files.
+% d = dir(fullfile(top_folder,'*.x*.txt'));
