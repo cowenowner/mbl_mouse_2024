@@ -19,14 +19,28 @@ else
 end
 
 d = dir(fullfile(D.ap_data_dir,'*tcat*.lf.bin'));
-D.lfp_bin_file_path = fullfile(D.ap_data_dir,d(1).name);
-[path_name, tmp] = fileparts(D.lfp_bin_file_path);
-D.lfp_fname = [tmp '.bin'];
-D.meta_fname_lf = strrep(D.lfp_fname,'.lf.bin','.lf.meta');
+if isempty(d)
+    D.lfp_bin_file_path = [];
+    D.lfp_fname = [];
+    D.meta_fname_lf = [];
+    disp('No LFP data - possible the .lf.bin file was not created from the .ap.bin file.')
+else
+    D.lfp_bin_file_path = fullfile(D.ap_data_dir,d(1).name);
+    [path_name, tmp] = fileparts(D.lfp_bin_file_path);
+    D.lfp_fname = [tmp '.bin'];
+    D.meta_fname_lf = strrep(D.lfp_fname,'.lf.bin','.lf.meta');
+end
+
 d = dir(fullfile(D.ni_data_dir,'synced*tcat.nidq*.txt'));
 if isempty(d)
     d = dir(fullfile(D.ni_data_dir,'*tcat.nidq*.txt'));
 end
+if isempty(d)
+    d = dir(fullfile(D.ni_data_dir,'*.nidq*.txt'));
+    % 
+    disp('No tcat files found. Using the original data.')
+end
+
 cnt = 1;
 D.event_files = [];
 for ii = 1:length(d)
