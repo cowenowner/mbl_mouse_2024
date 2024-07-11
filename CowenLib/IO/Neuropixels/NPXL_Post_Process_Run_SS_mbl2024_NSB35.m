@@ -28,27 +28,26 @@ clearvars; close all; fclose all;
 % Change variables here for your analysis.
   %  C:\SGL_DATA\myRun8_crus2_g0\myRun8_crus2_g0_imec0
 %%DataDirs
-%D:\Data\M521_2024_07_04_R_fiber_lightstim_wheel_pixel1-0_g0
-PRM_RAT_ROOT='C:\SGL_DATA\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
-PRM_RAT_SUBDIRS={'M567_2024_07_09_NP2_4_Shanks_Anahat_Mario_Test_03_g0' };%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0', 'myRun8_crus2_g0'
+PRM_RAT_ROOT='C:\DATA\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
+PRM_RAT_SUBDIRS={'PhotoPixelsStrobe_g0'};%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0',
 PRM_BAD_CHANNEL0_LIST = []; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
-PRM_TEMP_FOLDER_BASE = 'C:\Temp\'; % This needs to be a SSD.
-PRM_NP2=true;%Default set to false if this is NP1.0
+PRM_TEMP_FOLDER_BASE = 'C:\Temp\kilosortrun2'; % This needs to be a SSD.
 
 %PROBE Type Neuropixels 2.0 or 1.0
 
 %Functions to run
-PRM_CREATE_TCAT_FILE = true; % make false if you already created this file on a previous run to save some time.
-PRM_CREATE_LF_FILE = true; %make false if you don't want to run the LF files. Saves time
-PRM_COPY_FILES = false; %If you want a copy of the tcat files copied from the Base dir to denoising/kilosort dir
-PRM_CREATE_CHANNELMAP = true; %Will generate a new channel map if you are using a custom config
-PRM_SPLIT_SHANKS = false;% NP2 This will split the split the channel map into separate shanks
+PRM_CREATE_TCAT_FILE =true; % make false if you already created this file on a previous run to save some time.
+PRM_CREATE_LF_FILE=true; %make false if you don't want to run the LF files. Saves time
+PRM_COPY_FILES=false; %If you want a copy of the tcat files copied from the Base dir to denoising/kilosort dir
+PRM_CREATE_CHANNELMAP=true; %Will generate a new channel map if you are using a custom config
+PRM_SPLIT_SHANKS=false;% NP2 This will split the split the channel map into separate shanks
 
 PRM_RUN_DENOISE=false;
 PRM_RUN_KILOSORT=false; %DONNOT RUN
 
 % NP2
 % FOLL TWO FUNCTIONS NP2 and STIM ONLY SS EDITS 
+PRM_NP2=false;%Default set to false if this is NP1.0
 
 %Note: if this is set to true and CREATE LF is set to True then it will not
 %run AP CATGT Separately. The LF_NP2 CatGT  runs both since it has to use
@@ -94,7 +93,7 @@ PRM_XA_THR2=0.5; %Secondary threshold for detetcting xa (in V) -keep lower than 
 %you will need to declare the variable in the command below (varargin) and
 %in the NPXL_Post_Process_SS file. 
 
-PRM_CatGT_dir = 'C:\CatGT-Win';
+PRM_CatGT_dir = 'C:\CatGT-win';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Run it.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -120,7 +119,8 @@ for ii=1:length(PRM_RAT_SUBDIRS) %Specify which subfolders here
         'PRM_NP2',PRM_NP2,...
         'PRM_RUN_OVERSTRIKE',PRM_RUN_OVERSTRIKE, ...
         'PRM_CAGE_TIMES',PRM_CAGE_TIMES,...
-        'PRM_RUN_REM_NOISE',PRM_RUN_REM_NOISE);
+        'PRM_RUN_REM_NOISE',PRM_RUN_REM_NOISE,...
+        'PRM_SPLIT_SHANKS',PRM_SPLIT_SHANKS);
 end
 
         

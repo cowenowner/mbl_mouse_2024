@@ -302,31 +302,41 @@ for ii = 1:length(option)
             case 'power_spectrum'
                 fh(figure_count) = figure;
                 figure_count = figure_count + 1;
-                
+                fqs = 4:.25:200;
                 % Plot a mean spectragram of all of the trials.
-                
-                [p,conf, fq] = pmtm(M(1,:),[],[],sFreq);
-                SPEC = zeros( size(M,1),length(p));
-                for rr = 1:size(M,1)
-                    fprintf('.')
-                    [tmp,conf,fq] = pmtm(M(rr,:),[],[],sFreq);
-                    SPEC(rr,:) = tmp';
+                MM{1} = M(:,x_axis < 0);
+                MM{2} = M(:,x_axis > 0);
+                win = round(sFreq/4);
+                SPEC = [];
+                for iInterval = 1:length(MM)
+                    % [p,conf, fq] = pmtm(MM{iInterval}(1,:),[],fqs,sFreq);
+                    [p,conf] = pwelch(MM{iInterval}(1,:),win,round(win/2),fqs,sFreq);
+                    SPEC{iInterval} = zeros( size(MM{iInterval},1),length(p));
+                    for rr = 1:size(MM{iInterval},1)
+                        fprintf('.')
+                        % [tmp,conf,fq] = pmtm(MM{iInterval}(rr,:),[],fqs,sFreq);
+                        [tmp,conf] = pwelch(MM{iInterval}(rr,:),win,round(win/2),fqs,sFreq);
+                        SPEC{iInterval}(rr,:) = tmp';
+                    end
+                    SPEC{iInterval} = 10*log10(SPEC{iInterval});
                 end
-                good_fq_idx = find(fq < 350);
-                SPEC = SPEC(:,good_fq_idx);
-                fq = fq(good_fq_idx);
                 
                 subplot(1,2,1)
-                imagesc(fq,[],SPEC)
-                caxis([0 mean(SPEC(:)) + 2*std(SPEC(:))])
+                imagesc(fqs,[],[SPEC{1};SPEC{2}])
+                plot_horiz_line_at_zero(Rows(SPEC{1}));
+                % caxis(sort([0 mean(SPEC{2}(:)) + 2*std(SPEC{2}(:))]))
                 pubify_figure_axis
+                colorbar
                 ylabel('Trial')
                 title('Power spectra using pmtm')
                 subplot(1,2,2)
-                plot(fq,mean(SPEC))
-                hold on
-                plot(fq,mean(SPEC) + Sem(SPEC),'r')
-                plot(fq,mean(SPEC) - Sem(SPEC),'r')
+                lns = lines(4);
+                for iS = 1:length(SPEC)
+                    plot(fqs,mean(SPEC{iS}),'Color',lns(iS,:))
+                    hold on
+                    plot(fqs,mean(SPEC{iS}) + Sem(SPEC{iS}),'Color',lns(iS,:))
+                    plot(fqs,mean(SPEC{iS}) - Sem(SPEC{iS}),'Color',lns(iS,:))
+                end
                 axis tight
                 xlabel('Frequency')
                 pubify_figure_axis
@@ -699,6 +709,4 @@ hold on
 for mc = 1:Rows(offsets)
     plot([offsets(mc,1) offsets(mc,1) ],[a(3) a(4)],colors{offsets(mc,2)},'LineWidth',2)
     plot([offsets(mc,1) offsets(mc,1) ],[a(3) a(4)],'k:','LineWidth',2)
-end
-
 end

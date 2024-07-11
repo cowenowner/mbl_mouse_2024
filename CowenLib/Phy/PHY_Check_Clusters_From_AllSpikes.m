@@ -1,13 +1,13 @@
 function PHY_Check_Clusters_From_AllSpikes(SP, save_png)
 % PHY_Check_Clusters_From_AllSpikes
-% Cowen 2021
+% Cowen 2024
 if nargin < 1
     load('AllSpikes.mat')
 end
 if nargin < 2
     save_png = false;
 end
-PKS = []; % For now.
+
 for iF = 1:length(SP)
     if any(diff(SP(iF).t_uS)<=0)
         error('There are some corrupted timestamps.')
@@ -18,32 +18,26 @@ for iF = 1:length(SP)
     % PLOT a subset of the 3 max amp waveforms.
     mx = max(SP(iF).WV.mWV);
     [~,six] = sort(mx,'descend');
-    %     mx(six(1:4))
     for ii = 1:3
         plot(SP(iF).WV.mWV(:,six(ii))+80*(ii-1),'-')
         hold on
     end
-    %     hold on
-    %     plot(SP(iF).WV.mWV(:) + SP(iF).WV.sWV(:),'r')
-    %     plot(SP(iF).WV.mWV(:) - SP(iF).WV.sWV(:),'r')
     title(sprintf('ID: %d, %s', SP(iF).cluster_id, SP(iF).PHYLabel))
     axis tight
     xlabel('sample')
     box off
 
     subplot (3,3,2)
-    gix = find(sum(abs(SP(iF).template),2)>.1);
-    plot(SP(iF).template(gix,:)'); 
+    template_v = sum(abs(SP(iF).template),2);
+    [~,six] = sort(template_v,'descend');
+    plot(SP(iF).template(six(1:6),:)'); 
     axis tight
-    legend(num2str(gix)); legend boxoff
-%     set(gca,'YTick',1:length(gix))
-%     set(gca,'YTickLabel',gix)
-    title('templates')
+    title('1st 6 templts')
     xlabel('sample')
     axis off
   
     subplot (3,3,3)
-    [b,x] = AutoCorr(SP(iF).t_uS/100,4,100);
+    [b,x] = AutoCorr(double(SP(iF).t_uS)/100,4,100);
     plot(x,b)
     xlabel('ms')
     axis tight
@@ -52,12 +46,13 @@ for iF = 1:length(SP)
     title(sprintf('AC 4ms bin, clu %d nSpk %d',SP(iF).cluster_id,SP(iF).n_spikes))
 
     subplot (3,3,4)
-    HistISI(SP(iF).t_uS/100)
+    HistISI(double(SP(iF).t_uS)/100)
     box off
 
     title(sprintf('Dur = %2.2f hr, %d/%d < 2ms',(SP(iF).t_uS(end) - SP(iF).t_uS(1))/3600e6,sum(diff(SP(iF).t_uS/1000) < 2), length(SP(iF).t_uS)))
     subplot(3,3,5)
-    if ~isempty(PKS)
+    if 0
+        PKS = SP(iF).template_features;
         dims = [2 1;2 3;4 3;4 1];
         signs = [1 1; 1 -1; -1 -1; -1 1];
         for iD = 1:Rows(dims)
@@ -75,11 +70,17 @@ for iF = 1:length(SP)
         set(gca,'YLim',[ymin ymax])
         plot_vert_line_at_zero
         plot_horiz_line_at_zero
-    else
+    end
+
+    if isfield(SP,'template_features')
+
+        plot(SP(iF).template_features(:,1),SP(iF).template_features(:,2),'.')
 
     end
+    title(sprintf('Depth %1.1f uM',SP(iF).neuropixels_depth_uM))
+
     subplot(3,3,6)
-    [b,x] = AutoCorr(SP(iF).t_uS/100,20,100);
+    [b,x] = AutoCorr(double(SP(iF).t_uS)/100,20,100);
     plot(x,b)
     xlabel('ms')
     axis tight
@@ -89,18 +90,8 @@ for iF = 1:length(SP)
 
 
     subplot (3,3,7:9)
-    %     if ~isempty(PKS_cell)
-    %         plot(SP(iF).t_uS/3600e6,PKS_cell(:,1),'.')
-    %         hold on
-    %         plot(SP(iF).t_uS/3600e6,PKS_cell(:,2),'.')
-    %         plot(SP(iF).t_uS/3600e6,PKS_cell(:,3),'.')
-    %         plot(SP(iF).t_uS/3600e6,PKS_cell(:,4),'.')
-    %         legend({'1' '2' '3' '4'});
-    %         legend boxoff
-    %     else
     plot(SP(iF).t_uS/3600e6,SP(iF).amp_all,'.')
     hold on
-    %     end
     xlabel('hours')
     ylabel('amp')
     axis tight

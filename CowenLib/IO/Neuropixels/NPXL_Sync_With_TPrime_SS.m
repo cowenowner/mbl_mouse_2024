@@ -1,10 +1,18 @@
 function [status,cmdout] = NPXL_Sync_With_TPrime_SS(varargin)
+% function [status,cmdout] = NPXL_Sync_With_TPrime_SS(varargin)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % For tprime: http://billkarsh.github.io/SpikeGLX/help/syncEdges/Sync_edges/
+% You must have tprime in C:\
+% 
+%
 % EXAMPLE CALL:
 % NPXL_Extract_Events_With_CatGT('PRM_ROOT_DATA_DIR','C:\Data\DANA_NAc_Acute\Rat411\1112022_DANA_REAL_g0','evt_files_extension',{'*nidq.x*_0.txt'})
+%
+% Another example:
+% (running in the root data folder)
+% NPXL_Sync_With_TPrime_SS('PRM_spike_sort_subfolder','kilosort_cowen','PRM_AlignSpikes',true)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Cowen 2022
+% Cowen 2022,2024
 % Sahana 2023
 PRM_ROOT_DATA_DIR = pwd; % assume you are running in the current directory. This directory should end in _g0.
 % for example: F:\Data\DANA_NAc_Acute\Rat411\1112022_DANA_REAL_g0
@@ -12,6 +20,7 @@ PRM_TPRIME_DIR = 'C:\TPrime-win';
 PRM_EVT_generate=true; %Generates EVT files for multiple event streams as a default.
 PRM_AlignSpikes=false; %This will realign the spikes to the xd stream - use ONLY IF YOU HAVE MULTIPLE PROBES
 PRM_evt_files_extension = {'*nidq.x*_0.txt'}; %This looks at all generated evt files with 0s pulse window limit
+PRM_spike_sort_subfolder = 'kilosort';
 EVT_Channels = [];
 
 Extract_varargin; % overrides the defaults specified above.
@@ -19,6 +28,7 @@ Extract_varargin; % overrides the defaults specified above.
 %Top level data folders
 [top_folder,root_folder] = fileparts(PRM_ROOT_DATA_DIR);
 DATA_DIR = fullfile(PRM_ROOT_DATA_DIR, [root_folder '_imec0']);
+SPIKE_SORT_FOLDER = fullfile(DATA_DIR, PRM_spike_sort_subfolder);
 
 %This calculates evt files for each extension type
 evt_files=dir('*qqqxxx'); %Initializing dir with nonsense basically 
@@ -30,7 +40,7 @@ end
 %The default sync files for the nidq and neural data 
 d = dir(fullfile(PRM_ROOT_DATA_DIR,'*_tcat.nidq.xa_0_500.txt')); 
 if isempty(d)
-    d = dir(fullfile(PRM_ROOT_DATA_DIR,'*tcat.nidq.xd_2_0_500.txt'));
+    d = dir(fullfile(PRM_ROOT_DATA_DIR,'*tcat.nidq.xd_*_0_500.txt'));
 end
 ni_sync_file = fullfile(PRM_ROOT_DATA_DIR,d(1).name);
 d = dir(fullfile(DATA_DIR,'*ap.xd_384_6_500.txt'));
@@ -55,15 +65,19 @@ end
 
 %Need to change the backslash to forward slash for T-Prime
 %Run TPrime
-full_cmd = sprintf('%s/TPrime.exe -syncperiod=1.0 -tostream=%s -fromstream=5,%s %s',...
-    strrep(PRM_TPRIME_DIR,'/','\'), strrep(tostream_file,'/','\'),...
-    strrep(fromstream_file,'/','\'), strrep(evt_str,'/','\'));
-[status,cmdout] = system(full_cmd,'-echo'); %
+if isempty(evt_files)
+    disp('No event files in this directory! Not running tprime on these files.')
+else
 
+    full_cmd = sprintf('%s/TPrime.exe -syncperiod=1.0 -tostream=%s -fromstream=5,%s %s',...
+        strrep(PRM_TPRIME_DIR,'/','\'), strrep(tostream_file,'/','\'),...
+        strrep(fromstream_file,'/','\'), strrep(evt_str,'/','\'));
+    [status,cmdout] = system(full_cmd,'-echo'); %
+end
 %This is if you want to align spikes -- ONLY RUN IF YOU HAVE MULTIPLE
 %PROBES or if you are syncing data to the NIDQ stream
 if PRM_AlignSpikes
-    spike_time_files = dir(fullfile(DATA_DIR,'spike_times.npy'));
+    spike_time_files = dir(fullfile(SPIKE_SORT_FOLDER,'spike_times.npy'));
     if ~isempty(spike_time_files)
         % load the meta and get the sampling rate.
         % Load the meta data...
@@ -77,24 +91,40 @@ if PRM_AlignSpikes
         % First, convert the file to a text file wiht TIMES. the studpid
         % spike_times.npy file is in record IDs.
         % Load the event records
-        T = readNPY(fullfile(DATA_DIR,'spike_times.npy')); % these are not (*$()*! times - they are records. Geez.
+        T = readNPY(fullfile(SPIKE_SORT_FOLDER,'spike_times.npy')); % these are not (*$()*! times - they are records. Geez.
         t_sec = double(T)/spike_sFreq;
         if any(diff(t_sec)<0)
             error('Timestamps are not in perfect ascending order. This should never happen.')
         end
         %     save(fullfile(DATA_DIR,'spike_seconds.mat'),'t_sec')
-        writeNPY(t_sec,fullfile(DATA_DIR,'spike_seconds.npy')); % these are not (*$()*! times - they are records. Geez.
-        %     te = readNPY(fullfile(DATA_DIR,'spike_seconds.npy')); % these are not (*$()*! times - they are records. Geez.
+        writeNPY(t_sec,fullfile(SPIKE_SORT_FOLDER,'spike_seconds.npy')); % these are not (*$()*! times - they are records. Geez.
+        %     te = readNPY(fullfile(SPIKE_SORT_FOLDER,'spike_seconds.npy')); % these are not (*$()*! times - they are records. Geez.
 
         % NOTE: In rare but regular occasions, the order of spikes will be switched
         % due to syncing - maybe 0.001% of the time. This violates a number of
         % assumptions and makes linking the timestamps to the original records
         % difficult. What is the solution?  I am not 100% sure.
-        event_file = fullfile(DATA_DIR, 'spike_seconds.npy'); % These are times you want to convert. Typically you will have a different file for every event class, such as all the spikes from probe zero, or all the nose_poke times from the NI stream. On the command line for each such file you will specify the stream index for the matching fromstream, an input file of native times, a new file path for the output time
+        event_file = fullfile(SPIKE_SORT_FOLDER, 'spike_seconds.npy'); % These are times you want to convert. Typically you will have a different file for every event class, such as all the spikes from probe zero, or all the nose_poke times from the NI stream. On the command line for each such file you will specify the stream index for the matching fromstream, an input file of native times, a new file path for the output time
         event_file_out = strrep(event_file,'spike_seconds.npy','synced_spike_seconds.npy'); % These are times you want to convert. Typically you will have a different file for every event class, such as all the spikes from probe zero, or all the nose_poke times from the NI stream. On the command line for each such file you will specify the stream index for the matching fromstream, an input file of native times, a new file path for the output time
         full_cmd = sprintf('%s/TPrime.exe -syncperiod=1.0 -tostream=%s -fromstream=5,%s -events=5,%s,%s',PRM_TPRIME_DIR, tostream_file, fromstream_file, event_file, event_file_out);
         [status,cmdout] = system(full_cmd,'-echo');
         disp('be aware that synced_spike_seconds.npy may not be in perfect ascending order anymore due to syncing.')
+        t_sec_sync = readNPY(fullfile(SPIKE_SORT_FOLDER,'synced_spike_seconds.npy')); % these are not (*$()*! times - they are records. Geez.
+        
+        figure;
+        subplot(2,2,1)
+        plot(t_sec(1:20:end)); hold on
+        plot(t_sec_sync(1:20:end))
+        ylabel('sec')
+        legend('orig','sync')
+
+        subplot(2,2,2)
+        histogram(t_sec(1:20:end) - t_sec_sync(1:20:end)); 
+        xlabel('diff sec between synced and orig')
+
+        subplot(2,2,3:4)
+        plot(t_sec(1:20:end) - t_sec_sync(1:20:end))
+        ylabel('sec')
     end
 end
 
@@ -110,7 +140,9 @@ if PRM_EVT_generate
         if ~isempty(EVT_Channels)
             T=table(EVT_Channels,EVT_Channel_Names);
         else
-            error('You must create a 3 col csv file called event_codes.csv that has in col 1 the event channel (1-7), the matlab-friendly variable name, and any notes. This goes in the top data folder (with the .nidq. file)')
+            disp('You must create a 3 col csv file called event_codes.csv that has in col 1 the event channel (1-7), the matlab-friendly variable name, and any notes. This goes in the top data folder (with the .nidq. file)')
+            disp('Because I am nice, I will create a default one for you.')
+            Create_default_event_codes_csv_file(PRM_ROOT_DATA_DIR)
         end
          
     end

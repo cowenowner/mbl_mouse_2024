@@ -49,6 +49,7 @@ time_divisor = 1;
 make_colorful = true;
 
 Extract_varargin;
+
 if make_colorful
     clrs = lines(row_id);
     Color = clrs(end,:);
