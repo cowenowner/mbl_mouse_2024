@@ -12,30 +12,37 @@
 % -----------------------------------------------------------------------
 % manually change file name. your processed data will be saved based on
 % this name. 
-file_name = 'M514_2024_07-01'; 
+file_name = ['C:\Users\Administrator\Documents\Smelly\M521\' ...
+    'M521_R_2024_07_05_Trial2_Preference2']; 
 
 % -----------------------------------------------------------------------
 % add the vandermeer codebase to your path.
-cd('C:\Users\mimia\Documents\Toolboxes\vandermeerlab-replay-da\code-matlab\shared'); % or, wherever your code is located -- NOTE \shared subfolder!
+cd('C:\Users\Administrator\Documents\GitHub\mbl_mouse_2024\vandermeerlab\code-matlab\shared'); % or, wherever your code is located -- NOTE \shared subfolder!
 p = genpath(pwd); % create list of all folders from here
 addpath(p);
 
 %% load CSV
 % folder where data is
-cd 'C:\Data\MBL\M514'
-data_table = readtable('M514_2024_06_29_Lhemi_pedestal.csv');
+cd 'Z:\NSB_2024\03_Mouse\Photometry-data\incoming\Smelly Mouse Buddies\M521\2024-07-05\Fibre.Photometry'
+data_table = readtable('M521_L_2024_07_05_Trial2_Preference2.csv');
 
 %% Save in structure that works for our code base 
 % sampling rate is x = samples / second 
 sampling_rate = 1/(table2array(data_table(2,1) - data_table(1,1))); 
 % 100 Hz or 100 samples/s
 
-% rename variables and store in a time series (ts) struct for manipulation without
-% manipulated raw files
-FP = ts;
+% rename variables and store in a empty MATLAB time series (timeseries()) 
+% struct for manipulation without manipulated raw files
+FP = struct;
+table = table2array(data_table(:,1));
+FP.tvec = table2array(data_table(:,1))-table(1,1); 
 FP.data = table2array(data_table(:,2));
-FP.tvec = table2array(data_table(:,1)); 
 FP.FS = sampling_rate;
+
+% FP = tsd;      % wasn't working so i just created an empty struct
+% FP.data = table2array(data_table(:,2));
+% FP.tvec = table2array(data_table(:,1)); 
+% FP.FS = sampling_rate;
 
 %% Start and End Buffer
 % consider adding a buffer
@@ -44,10 +51,11 @@ FP.FS = sampling_rate;
 % beginning and end of the recording file 
 % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7853640/
 
-% Start buffer
-% remove first 2 seconds; number of samples to remove = 2/0.0002;
-%FP(1:2/0.0002) = []; 
-%time(1:2/0.0002) = [];
+% % Start buffer
+% % remove first 2 seconds; number of samples to remove = 2/0.0002;
+% FP.data(1:3*sampling_rate) = []; 
+% FP.tvec(1:3*sampling_rate) = [];
+
 
 %% Raw Signal
 % This plots the raw data with different three different x-axis timescales.
@@ -118,6 +126,8 @@ xlabel('Time (s)')
 legend('median','butterworth','Location','northeast')
 xlim([5 inf])
 
+
+
 %%
 t = FP.tvec; 
 %% Windowed Detrend using Locdetrend
@@ -125,11 +135,24 @@ addpath(genpath('C:\Users\mimia\Documents\Toolboxes\vandermeerlab-replay-da'));
 
 FP_detrend_60s = locdetrend(FP_denoised,FP.FS,[60 0.5]);
 
+% Start and End Buffer
+% consider adding a buffer
+% Photobleaching is exponential and often greatest in the first few
+% seconds of recording. This paper recommends removing 2-5 seconds from the
+% beginning and end of the recording file 
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7853640/
+
+% Start buffer
+% remove first 2 seconds; number of samples to remove = 2/0.0002;
+% t(1:3*sampling_rate) = []; 
+% FP_detrend_60s(1:3*sampling_rate) = [];
+
 figure(6)
 plot(t,FP_detrend_60s)
 title('Detrended and Filtered FP Signal (10s)')
 ylabel('Signal (V)')
 xlabel('Time (s)')
+
 
 %% Normalization for Windowed Detrend (locdetrend)
 zF_win_60s = (FP_detrend_60s - mean(FP_detrend_60s))./std(FP_detrend_60s);
@@ -142,13 +165,24 @@ ylabel('Signal z-scored (V)')
 xlabel('Time (s)')
 
 %% Save Variables 
-filename = append(file_name, "processed.mat");
+filename = append(file_name, "_processed.mat");
 data.t = t;
-data.z = F_zscored; % detrended and z-scored | previously FP_z ... changed to z.
-data.dF = dF; % detrended dF (100.*FP_detrended./F_expfit;) 
-data.zdF = zdF; % dF , z-scored
+% data.z = F_zscored; % detrended and z-scored | previously FP_z ... changed to z.
+% data.dF = dF; % detrended dF (100.*FP_detrended./F_expfit;) 
+% data.zdF = zdF; % dF , z-scored
 
 data.detrend_60s = FP_detrend_60s; % locdetrend detrended F using 5s windows
 data.z_60s = zF_win_60s; % detrended and z-scored F 
 
 save(filename, '-struct','data')
+
+
+%% power spectrum frequency plot 
+FS = sampling_rate;
+wsize = FS * 4;
+[Pxx,F] = pwelch(zF_win_60s,hanning(wsize),wsize/2, [], FS);
+
+figure()
+plot(F, 10*log10(Pxx), 'k');
+xlim([0, 140]);
+% xlabel()
