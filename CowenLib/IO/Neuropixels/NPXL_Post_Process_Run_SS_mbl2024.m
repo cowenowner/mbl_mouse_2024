@@ -28,12 +28,13 @@ clearvars; close all; fclose all;
 % Change variables here for your analysis.
   %  C:\SGL_DATA\myRun8_crus2_g0\myRun8_crus2_g0_imec0
 %%DataDirs
+% C:\SGL_DATA\M21_2024_07_11_NP1_Left_Hemisphere_DorsalVental_02_g0
 %D:\Data\M521_2024_07_04_R_fiber_lightstim_wheel_pixel1-0_g0
 PRM_RAT_ROOT='C:\SGL_DATA\'; %'C:\SGL_DATA\'  - the root directory above all the individual data directories.
-PRM_RAT_SUBDIRS={'M567_2024_07_09_NP2_4_Shanks_Anahat_Mario_Test_03_g0' };%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0', 'myRun8_crus2_g0'
+PRM_RAT_SUBDIRS={'M21_2024_07_11_NP1_Left_Hemisphere_DorsalVental_02_g0' };%'mPFC_L5_bank0_g0','mPFC_L5_bank0_g0', 'myRun8_crus2_g0'
 PRM_BAD_CHANNEL0_LIST = []; % This is ZERO based as you would see in SpikeGLX so be sure the first channel is zero.
 PRM_TEMP_FOLDER_BASE = 'C:\Temp\'; % This needs to be a SSD.
-PRM_NP2=true;%Default set to false if this is NP1.0
+PRM_NP2=false;%Default set to false if this is NP1.0
 
 %PROBE Type Neuropixels 2.0 or 1.0
 
