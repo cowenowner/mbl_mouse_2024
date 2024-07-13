@@ -54,7 +54,7 @@ title('Time spent in each temp')
 ylabel('sec')
 
 %% 
-CHOOSE_MOVING_TIMES = false;
+CHOOSE_MOVING_TIMES = true;
 if CHOOSE_MOVING_TIMES
     figure
     plot(running_wheel_data(:,1), running_wheel_data(:,2))
@@ -63,7 +63,14 @@ if CHOOSE_MOVING_TIMES
 
     [x,y] = ginput_cowen;
     start_end_move_sec = [x(1:2:end) x(2:2:end)];
- 
+    [running_wheel_data_restricted ,BADINT] = Restrict(running_wheel_data, start_end_move_sec);
+        GOODINT = ~BADINT;
+    figure
+            plot(running_wheel_data(:,1), running_wheel_data(:,2))
+     hold on
+      plot(running_wheel_data(GOODINT,1), running_wheel_data(GOODINT,2),'r.')
+
+    plot(running_wheel_data_restricted(:,1), running_wheel_data_restricted(:,2),'r')
 
 else
     start_end_move_sec = [         0.969609783541756           12.604927186043
@@ -88,9 +95,6 @@ else
           951.833604176839          959.590482445173];
 
 end
-[running_wheel_data_restricted ,BADINT] = Restrict(running_wheel_data, start_end_move_sec);
-GOODINT = ~BADINT;
-
 IX2 = IX(GOODINT,:);
 time_in_temp_spots_good_sec = sum(IX2)/25000;
 figure
@@ -130,7 +134,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure
 ax(1) = subplot(2,1,1);
-plot_raster(TS_uS,[],'time_divisor',1e6,'make_colorful',false)
+plot_raster(TS_uS,[],'time_divisor',1e6)
 axis ij
 hold on
 if ~isempty(EVT)
@@ -143,7 +147,7 @@ xlabel('sec')
 ylabel('Neuron ID')
 title('Raster')
 
-% LFP.data_uV_car = LFP.data_uV - mean(LFP.data_uV);
+LFP.data_uV_car = LFP.data_uV - mean(LFP.data_uV);
 
 ax(2) = subplot(2,1,2);
 t_sec = running_wheel_data(1:10:end,1);
@@ -192,15 +196,8 @@ Qnew = [];
 for ii = 1:3
     [~,IXtemp] = Restrict(Q_good_sec,sortrows(running_wheel_start_end_sec{ii}));
     Qnew{ii} = Q_good(IXtemp,:);
-    QMn(ii,:) = mean(Qnew{ii});
+    Mn(ii,:) = mean(Qnew{ii});
 end
-MN_rates = mean(QMn,2);
-figure
-bar(MN_rates)
-
-% csvwrite('C:\Temp\junk2.csv',QMn)
-
-
 
 figure
 for ii = 1:3
@@ -208,8 +205,7 @@ for ii = 1:3
     imagesc(Qnew{ii}')
     title(wheel_hot_cold_neut_labs{ii})
 end
-figure
-bar(QMn')
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Occupancy at each position on the running wheel.
