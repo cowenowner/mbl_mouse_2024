@@ -25,7 +25,7 @@
 function SGLXMetaToCoords()
 
 % Output selection:
-outType = 3;
+outType = 1;
 
 % Plot shank view
 bPlot = 1;

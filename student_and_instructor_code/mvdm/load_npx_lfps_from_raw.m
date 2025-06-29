@@ -1,12 +1,12 @@
 %%
-addpath('C:\Users\mvdmlab\Documents\GitHub\neuropixel-utils');
+addpath('C:\Users\mattm\Documents\GitHub\neuropixel-utils');
 
 %setenv('NPIX_MAP_FILE', 'C:\Users\mvdmlab\Documents\GitHub\neuropixel-utils\map_files\neuropixPhase3B2_kilosortChanMap.mat') % wrong but works?
-setenv('NPIX_MAP_FILE', 'C:\data-temp\HC_2_Neuro2_g0\HC_2_Neuro2_g0_imec0\HC_2_Neuro2_g0_tcat.imec0.ap_kilosortChanMap.mat');
+setenv('NPIX_MAP_FILE', 'C:\data\nsb2024\M564\M564_2024_07_09_NP2_4_Shanks_Anahat_Mario_Test_01_g0_tcat.imec0.ap_kilosortChanMap.mat');
 imec = Neuropixel.ImecDataset(pwd);
 mmap = imec.memmapAP_full();
 
-load('HC_2_Neuro2_g0_tcat.imec0.ap_kilosortChanMap.mat');
+load('M564_2024_07_09_NP2_4_Shanks_Anahat_Mario_Test_01_g0_tcat.imec0.ap_kilosortChanMap.mat');
 
 %% load LFPs into MultiRaster format
 Fs = 30000;
